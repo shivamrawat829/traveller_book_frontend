@@ -105,11 +105,13 @@ class Profile extends React.Component{
                 <div class="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
                     <div class="row ">
                         <div class="col-md-12 col-md-12-sm-12 col-xs-12 user-image text-center">
-                            <img alt="" src={require('../../images/rajesh.png')} class="rounded-circle"/>
+                            <img alt="" src={require('../../images/team1.png')} class="rounded-circle"/>
                         </div>
                     </div>
                 </div>
+                
             </div>
+            
         </div>
     </div>
 
@@ -150,39 +152,36 @@ class Profile extends React.Component{
   <div className="card border-primary mb-3" >
     <div className="card-body">
     
-      {/* <h4 className="card-title text-center">Personal Information</h4>
-      <div className="row ">
-      <h5 className="card-text">Name : </h5>
-      <h5 className="card-text">Rajesh</h5>
-      </div>
-
-      <input type="text" class="first_name" name="firstName"  autocomplete="name" tabindex="1" >
-      </input>
-      <label for="firstName" class="label_name">First Name</label>
-
-      <div className="row ">
-      <h5 className="card-text">Email : </h5>
-      <h5 className="card-text">rajeshrawat5050@gmail.com</h5>
-      </div>
-      <div className="row ">
-      <h5 className="card-text">Phone no : </h5>
-      <h5 className="card-text">8700501017</h5>
-      </div> */}
-
-
-
-
       <div class="l022CW">
-   <div class="_2aK_Hc"><span class="_10it6k">Personal Information</span><span class="_1x4IU1">Edit</span></div>
+   <div class="_2aK_Hc">
+   <span class="_10it6k">Personal Information</span>
+   <span class="_1x4IU1">Edit</span>
+   </div>
    <form>
-      <div class="_2kN0A- row">
+
+     <div >
+    
+
+     <h6 class="_10it6k">About Me</h6>
+     <br/>
+   <span class="_10it6k">Love to Roam around the world. Endless Possiblities are there if you are eager enough to go beyond your limits...</span>
+
+
+
+   
+
+   
+     </div>
+     <br/>
+      <div class="_2kN0A- row" style={{margin: "auto"}}>
          <div class="_3wj6q3">
-            <div class="Th26Zc"><input type="text" class="_16qL6K _2pf-sU _366U7Q" name="firstName" required="" disabled="true" autocomplete="name" tabindex="1" value=""/>
+            <div class="Th26Zc">
+            <input type="text" class="_16qL6K _2pf-sU _366U7Q" name="firstName" required="" disabled="true" autocomplete="name" tabindex="1" value=""/>
             <label for="firstName" class="_20i8vs">First Name</label>
             </div>
          </div>
          <div class="_3wj6q3">
-            <div class="Th26Zc"><input type="text" class="_16qL6K _2pf-sU _366U7Q" name="lastName"  autocomplete="name" tabindex="2" />
+            <div class="Th26Zc"><input type="text" class="_16qL6K _2pf-sU _366U7Q" name="lastName" disabled="" autocomplete="name" tabindex="2" value=""/>
             <label for="lastName" class="_20i8vs">Last Name</label>
             </div>
          </div>
@@ -202,6 +201,25 @@ class Profile extends React.Component{
             <div class="_6ATDKp"></div>
             <div class="_2o59RR"><span disabled="" tabindex="4">Female</span></div>
          </label>
+        
+      </div>
+      <br/>
+
+      <div class="_2kN0A- row" style={{margin: "auto"}}>
+         <div class="_3wj6q3">
+            <div class="Th26Zc">
+            <input type="text" class="_16qL6K _2pf-sU _366U7Q" name="firstName" required="" disabled="true" autocomplete="name" tabindex="1" value=""/>
+            <label for="firstName" class="_20i8vs">First Name</label>
+            </div>
+         </div>
+         <div class="_3wj6q3">
+            <div class="Th26Zc"><input type="text" class="_16qL6K _2pf-sU _366U7Q" name="lastName" disabled="" autocomplete="name" tabindex="2" value=""/>
+            <label for="lastName" class="_20i8vs">Last Name</label>
+            </div>
+         </div>
+
+         <button class="_2AkmmA rAx-Sv" type="submit" tabindex="5">SAVE</button>
+
       </div>
    </form>
 </div>
