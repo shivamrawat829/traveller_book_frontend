@@ -9,6 +9,12 @@
     /* .main-secction{
       box-shadow: 10px 10px 10px;
     } */
+
+    .tab-content{
+line-height: 1.2;
+    }
+
+
 .l022CW{
   padding-bottom: 56px;
   
@@ -170,10 +176,6 @@ flex-flow: row wrap;
   cursor: pointer;
 }
 
-._2haq-9 {
-  visibility: hidden;
-  position: absolute;
-}
 
 ._2pmKiA>._6ATDKp {
   border-color: #c2c2c2!important;
