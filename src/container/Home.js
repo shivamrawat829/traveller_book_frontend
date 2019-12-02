@@ -233,6 +233,128 @@ class Home extends React.Component {
   </div>
 {/* model end */}
 
+
+{/* <nav id="menu" class="main-menu mm-menu mm-offcanvas mm-hasnavbar-bottom-1 mm-pagedim-black mm-opened"><div class="mm-panels"><div class="mm-panel mm-hasnavbar mm-opened" id="mm-1"><div class="mm-navbar"><a class="mm-title">MENU</a></div><ul class="mm-listview">
+				<li><em class="mm-counter">7</em><a class="mm-next mm-fullsubopen" href="#mm-2" aria-owns="mm-2" aria-haspopup="true"><span class="mm-sronly">Open submenu (Home)</span></a><span><a href="#0">Home</a></span>
+					
+				</li>
+				<li><em class="mm-counter">3</em><a class="mm-next mm-fullsubopen" href="#mm-3" aria-owns="mm-3" aria-haspopup="true"><span class="mm-sronly">Open submenu (Tours)</span></a><span><a href="#0">Tours</a></span>
+					
+				</li>
+				<li><em class="mm-counter">3</em><a class="mm-next mm-fullsubopen" href="#mm-6" aria-owns="mm-6" aria-haspopup="true"><span class="mm-sronly">Open submenu (Hotels)</span></a><span><a href="#0">Hotels</a></span>
+					
+				</li>
+				<li><em class="mm-counter">3</em><a class="mm-next mm-fullsubopen" href="#mm-9" aria-owns="mm-9" aria-haspopup="true"><span class="mm-sronly">Open submenu (Eat &amp; Drink)</span></a><span><a href="#0">Eat &amp; Drink</a></span>
+					
+				</li>
+				<li><span><a href="adventure.html">Adventure</a></span></li>
+				<li><em class="mm-counter">9</em><a class="mm-next mm-fullsubopen" href="#mm-12" aria-owns="mm-12" aria-haspopup="true"><span class="mm-sronly">Open submenu (Pages)</span></a><span><a href="#0">Pages</a></span>
+					
+				</li>
+				<li><em class="mm-counter">15</em><a class="mm-next mm-fullsubopen" href="#mm-13" aria-owns="mm-13" aria-haspopup="true"><span class="mm-sronly">Open submenu (Extra)</span></a><span><a href="#0">Extra</a></span>
+					
+				</li>
+				<li><span><a href="https://1.envato.market/DmbYj" target="_parent">Buy template</a></span></li>
+			</ul></div><div class="mm-panel mm-hidden mm-hasnavbar" id="mm-2" aria-hidden="true"><div class="mm-navbar"><a class="mm-btn mm-prev" href="#mm-1" aria-owns="mm-1" aria-haspopup="true"><span class="mm-sronly">Close submenu (Home)</span></a><a class="mm-title" href="#mm-1" aria-hidden="true">Home</a></div><ul class="mm-listview">
+						<li><a href="index.html">Home version 1</a></li>
+						<li><a href="index-2.html">Home version 2</a></li>
+						<li><a href="index-3.html">Home version 3</a></li>
+						<li><a href="index-4.html">Home version 4</a></li>
+						<li><a href="index-5.html">Home version 5</a></li>
+						<li><a href="index-6.html">With Cookie bar (EU law)</a></li>
+                        <li><a href="index-7.html">Home version 7</a></li>
+					</ul></div><div class="mm-panel mm-hidden mm-hasnavbar" id="mm-3" aria-hidden="true"><div class="mm-navbar"><a class="mm-btn mm-prev" href="#mm-1" aria-owns="mm-1" aria-haspopup="true"><span class="mm-sronly">Close submenu (Tours)</span></a><a class="mm-title" href="#mm-1" aria-hidden="true">Tours</a></div><ul class="mm-listview">
+						<li><em class="mm-counter">4</em>
+							<a class="mm-next mm-fullsubopen" href="#mm-4" aria-owns="mm-4" aria-haspopup="true"><span class="mm-sronly">Open submenu (Tours grid)</span></a><span><a href="#0">Tours grid</a></span>
+							
+						</li>
+						<li><em class="mm-counter">4</em>
+							<a class="mm-next mm-fullsubopen" href="#mm-5" aria-owns="mm-5" aria-haspopup="true"><span class="mm-sronly">Open submenu (Tours list)</span></a><span><a href="#0">Tours list</a></span>
+							
+						</li>
+						<li><a href="tour-detail.html">Tour detail</a></li>
+					</ul></div><div class="mm-panel mm-hidden mm-hasnavbar" id="mm-4" aria-hidden="true"><div class="mm-navbar"><a class="mm-btn mm-prev" href="#mm-3" aria-owns="mm-3" aria-haspopup="true"><span class="mm-sronly">Close submenu (Tours grid)</span></a><a class="mm-title" href="#mm-3" aria-hidden="true">Tours grid</a></div><ul class="mm-listview">
+								<li><a href="tours-grid-isotope.html">Tours grid isotope</a></li>
+								<li><a href="tours-grid-sidebar.html">Tours grid sidebar</a></li>
+								<li><a href="tours-grid-sidebar-2.html">Tours grid sidebar 2</a></li>
+								<li><a href="tours-grid.html">Tours grid simple</a></li>
+							</ul></div><div class="mm-panel mm-hidden mm-hasnavbar" id="mm-5" aria-hidden="true"><div class="mm-navbar"><a class="mm-btn mm-prev" href="#mm-3" aria-owns="mm-3" aria-haspopup="true"><span class="mm-sronly">Close submenu (Tours list)</span></a><a class="mm-title" href="#mm-3" aria-hidden="true">Tours list</a></div><ul class="mm-listview">
+								<li><a href="tours-list-isotope.html">Tours list isotope</a></li>
+								<li><a href="tours-list-sidebar.html">Tours list sidebar</a></li>
+								<li><a href="tours-list-sidebar-2.html">Tours list sidebar 2</a></li>
+								<li><a href="tours-list.html">Tours list simple</a></li>
+							</ul></div><div class="mm-panel mm-hidden mm-hasnavbar" id="mm-6" aria-hidden="true"><div class="mm-navbar"><a class="mm-btn mm-prev" href="#mm-1" aria-owns="mm-1" aria-haspopup="true"><span class="mm-sronly">Close submenu (Hotels)</span></a><a class="mm-title" href="#mm-1" aria-hidden="true">Hotels</a></div><ul class="mm-listview">
+						<li><em class="mm-counter">4</em>
+							<a class="mm-next mm-fullsubopen" href="#mm-7" aria-owns="mm-7" aria-haspopup="true"><span class="mm-sronly">Open submenu (Hotel grid)</span></a><span><a href="#0">Hotel grid</a></span>
+							
+						</li>
+						<li><em class="mm-counter">4</em>
+							<a class="mm-next mm-fullsubopen" href="#mm-8" aria-owns="mm-8" aria-haspopup="true"><span class="mm-sronly">Open submenu (Hotel list)</span></a><span><a href="#0">Hotel list</a></span>
+							
+						</li>
+						<li><a href="hotel-detail.html">Hotel detail</a></li>
+					</ul></div><div class="mm-panel mm-hidden mm-hasnavbar" id="mm-7" aria-hidden="true"><div class="mm-navbar"><a class="mm-btn mm-prev" href="#mm-6" aria-owns="mm-6" aria-haspopup="true"><span class="mm-sronly">Close submenu (Hotel grid)</span></a><a class="mm-title" href="#mm-6" aria-hidden="true">Hotel grid</a></div><ul class="mm-listview">
+								<li><a href="hotels-grid-isotope.html">Hotel grid isotope</a></li>
+								<li><a href="hotels-grid-sidebar.html">Hotel grid sidebar</a></li>
+								<li><a href="hotels-grid-sidebar-2.html">Hotel grid sidebar 2</a></li>
+								<li><a href="hotels-grid.html">Hotel grid simple</a></li>
+							</ul></div><div class="mm-panel mm-hidden mm-hasnavbar" id="mm-8" aria-hidden="true"><div class="mm-navbar"><a class="mm-btn mm-prev" href="#mm-6" aria-owns="mm-6" aria-haspopup="true"><span class="mm-sronly">Close submenu (Hotel list)</span></a><a class="mm-title" href="#mm-6" aria-hidden="true">Hotel list</a></div><ul class="mm-listview">
+								<li><a href="hotels-list-isotope.html">Hotel list isotope</a></li>
+								<li><a href="hotels-list-sidebar.html">Hotel list sidebar</a></li>
+								<li><a href="hotels-list-sidebar-2.html">Hotel list sidebar 2</a></li>
+								<li><a href="hotels-list.html">Hotel list simple</a></li>
+							</ul></div><div class="mm-panel mm-hidden mm-hasnavbar" id="mm-9" aria-hidden="true"><div class="mm-navbar"><a class="mm-btn mm-prev" href="#mm-1" aria-owns="mm-1" aria-haspopup="true"><span class="mm-sronly">Close submenu (Eat &amp; Drink)</span></a><a class="mm-title" href="#mm-1" aria-hidden="true">Eat &amp; Drink</a></div><ul class="mm-listview">
+						<li><em class="mm-counter">4</em>
+							<a class="mm-next mm-fullsubopen" href="#mm-10" aria-owns="mm-10" aria-haspopup="true"><span class="mm-sronly">Open submenu (Restaurant grid)</span></a><span><a href="#0">Restaurant grid</a></span>
+							
+						</li>
+						<li><em class="mm-counter">4</em>
+							<a class="mm-next mm-fullsubopen" href="#mm-11" aria-owns="mm-11" aria-haspopup="true"><span class="mm-sronly">Open submenu (Restaurant list)</span></a><span><a href="#0">Restaurant list</a></span>
+							
+						</li>
+						<li><a href="restaurant-detail.html">Restaurant detail</a></li>
+					</ul></div><div class="mm-panel mm-hidden mm-hasnavbar" id="mm-10" aria-hidden="true"><div class="mm-navbar"><a class="mm-btn mm-prev" href="#mm-9" aria-owns="mm-9" aria-haspopup="true"><span class="mm-sronly">Close submenu (Restaurant grid)</span></a><a class="mm-title" href="#mm-9" aria-hidden="true">Restaurant grid</a></div><ul class="mm-listview">
+								<li><a href="restaurants-grid-isotope.html">Restaurant grid isotope</a></li>
+								<li><a href="restaurants-grid-sidebar.html">Restaurant grid sidebar</a></li>
+								<li><a href="restaurants-grid-sidebar-2.html">Restaurant grid sidebar 2</a></li>
+								<li><a href="restaurants-grid.html">Restaurant grid simple</a></li>
+							</ul></div><div class="mm-panel mm-hidden mm-hasnavbar" id="mm-11" aria-hidden="true"><div class="mm-navbar"><a class="mm-btn mm-prev" href="#mm-9" aria-owns="mm-9" aria-haspopup="true"><span class="mm-sronly">Close submenu (Restaurant list)</span></a><a class="mm-title" href="#mm-9" aria-hidden="true">Restaurant list</a></div><ul class="mm-listview">
+								<li><a href="restaurants-list-isotope.html">Restaurant list isotope</a></li>
+								<li><a href="restaurants-list-sidebar.html">Restaurant list sidebar</a></li>
+								<li><a href="restaurants-list-sidebar-2.html">Restaurant list sidebar 2</a></li>
+								<li><a href="restaurants-list.html">Restaurant list simple</a></li>
+							</ul></div><div class="mm-panel mm-hidden mm-hasnavbar" id="mm-12" aria-hidden="true"><div class="mm-navbar"><a class="mm-btn mm-prev" href="#mm-1" aria-owns="mm-1" aria-haspopup="true"><span class="mm-sronly">Close submenu (Pages)</span></a><a class="mm-title" href="#mm-1" aria-hidden="true">Pages</a></div><ul class="mm-listview">
+						<li><a href="about.html">About</a></li>
+						<li><a href="media-gallery.html">Media gallery</a></li>
+						<li><a href="help.html">Help Section</a></li>
+						<li><a href="faq.html">Faq Section</a></li>
+						<li><a href="wishlist.html">Wishlist page</a></li>
+						<li><a href="contacts.html">Contacts</a></li>
+						<li><a href="login.html">Login</a></li>
+						<li><a href="register.html">Register</a></li>
+						<li><a href="blog.html">Blog</a></li>
+					</ul></div><div class="mm-panel mm-hidden mm-hasnavbar" id="mm-13" aria-hidden="true"><div class="mm-navbar"><a class="mm-btn mm-prev" href="#mm-1" aria-owns="mm-1" aria-haspopup="true"><span class="mm-sronly">Close submenu (Extra)</span></a><a class="mm-title" href="#mm-1" aria-hidden="true">Extra</a></div><ul class="mm-listview">
+						<li><a href="html_rtl/index.html">RTL Version <strong>New!</strong></a></li>
+                    	<li><a href="menu-options.html">Menu Position Options</a></li>
+                    	<li><a href="tour-detail-singlemonth-datepicker.html">Single month Datepicker</a></li>
+						<li><a href="404.html">404 Error page</a></li>
+						<li><a href="cart-1.html">Cart page 1</a></li>
+						<li><a href="cart-2.html">Cart page 2</a></li>
+						<li><a href="cart-3.html">Cart page 3</a></li>
+						<li><a href="pricing-tables.html">Responsive pricing tables</a></li>
+						<li><a href="coming_soon/index.html">Coming soon</a></li>
+						<li><a href="invoice.html">Invoice</a></li>
+						<li><a href="icon-pack-1.html">Icon pack 1</a></li>
+						<li><a href="icon-pack-2.html">Icon pack 2</a></li>
+						<li><a href="icon-pack-3.html">Icon pack 3</a></li>
+						<li><a href="icon-pack-4.html">Icon pack 4</a></li>
+                        <li><a href="hamburgers.html">Animated Hamburgers</a></li>
+					</ul></div></div>
+			
+		<div class="mm-navbars-bottom"><div class="mm-navbar mm-navbar-size-1"><a href="#0">© 2018 Panagea</a></div></div></nav>
+ */}
+
+
 <header className="header menu_fixed">
 		{/* <div id="preloader"><div data-loader="circle-side"></div></div> */}
 		<div id="logo">
@@ -290,6 +412,19 @@ class Home extends React.Component {
 			</ul>
 		</nav>
 	</header>
+
+	 {/* <div class='header-container'>
+		 <div class='video-container'>
+			 <video autoplay="autoplay" preload='true' loop='loop' volume='0' >
+
+				 <source src='../videos/clip.mp4' type='video/mp4'/>
+					 <source src='../videos/clip.webm' type='video/webm'/> 
+					 <source src='../videos/clip.ogv' type='video/ogv'/> 
+
+
+			 </video>
+		 </div>
+	 </div> */}
     <section className="header-video adventure">
 			<div id="hero_video">
 				<div className="wrapper">
@@ -304,8 +439,9 @@ class Home extends React.Component {
 		<img src="../images/background.png" alt="" className="header-video--media" data-video-src="video/adventure" data-teaser-source="video/adventure" data-provider="" data-video-width="1920" data-video-height="960"/>
 		<video autoplay="true" loop="loop" muted="" id="teaser-video" class="teaser-video">
 			<source src="../videos/clip.mp4" type="video/mp4"/>
-			<source src="../videos/adventure.ogv" type="video/ogg"/>
-			</video>
+			<source src='../videos/clip.webm' type='video/webm'/> 
+			<source src="../videos/clip.ogv" type="video/ogv"/>
+		</video>
 	</section>
 
 {/* main page */}

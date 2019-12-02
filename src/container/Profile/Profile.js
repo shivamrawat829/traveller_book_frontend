@@ -6,6 +6,8 @@ import {withRouter} from "react-router-dom";
 import {
     NavLink 
   } from "react-router-dom";
+  import axios from "axios";
+  
 
 
 const mapStateToProps = (state) => {
@@ -27,10 +29,37 @@ const mapStateToProps = (state) => {
 
 class Profile extends React.Component{
 
+  state={
+		data1 :[],
+		// title: '',
+		// description: '',
+		// place:'',
+		// rating:'',
+		// image: null
+	  }
+	  
+  show_posts = (event) =>
+	{
+    console.log("show posts Clicked...");
+
+    axios.get("http://127.0.1:8000/api/posts").then(
+          res =>{
+          this.setState({
+            data1: res.data
+          });
+          
+        })
+
+        console.log("this ioidonf", this.state.data1)
+
+
+  }
+
     render(){
         return(
 
 <div>
+  
 
 <header className="header menu_fixed">
 		{/* <div id="preloader"><div data-loader="circle-side"></div></div> */}
@@ -119,6 +148,33 @@ class Profile extends React.Component{
     <div className="row">
   <div className="col-sm-12 col-md-3 col-lg-3 col-xl-2 margin">
   {/* <img alt='' src={require( '../../images/background.png')} className='card-img-top' /> */}
+
+  {/* Space to show followers and no of posts */}
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+  <div className="card border-primary mb-3" >
+    <div className="card-body">
+
+        
+        <h4 className='text-center info_text_color'>747</h4>
+        <h6 className='text-center text_color'>Followers</h6>
+        
+        <h4 className='text-center info_text_color'>10</h4>
+        <h6 className='text-center text_color'>Posts</h6>
+
+        <button class="filepond--file-action-button filepond--action-edit-item" type="button" data-align="bottom center">
+          <svg width="26" height="26" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path d="M8.5 17h1.586l7-7L15.5 8.414l-7 7V17zm-1.707-2.707l8-8a1 1 0 0 1 1.414 0l3 3a1 1 0 0 1 0 1.414l-8 8A1 1 0 0 1 10.5 19h-3a1 1 0 0 1-1-1v-3a1 1 0 0 1 .293-.707z" fill="currentColor" fill-rule="nonzero">
+              </path></svg><span>edit</span></button>
+
+
+        </div>
+    </div>
+
+  
   </div>
   <div className="col-sm-12 col-md-9 col-lg-9 col-xl-10 margin" style={{margin: "auto"}}>
 
@@ -139,7 +195,7 @@ class Profile extends React.Component{
       <a class="nav-link" data-toggle="pill" href="#menu1">Setting</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="pill" href="#menu2">Posts</a>
+      <a class="nav-link" data-toggle="pill" onClick={this.show_posts} href="#menu2">Posts</a>
     </li>
   </ul>
 
@@ -204,20 +260,15 @@ class Profile extends React.Component{
         
       </div>
       <br/>
+      <br/>
 
       <div class="_2kN0A- row" style={{margin: "auto"}}>
          <div class="_3wj6q3">
             <div class="Th26Zc">
-            <input type="text" class="_16qL6K _2pf-sU _366U7Q" name="firstName" required="" disabled="true" autocomplete="name" tabindex="1" value=""/>
-            <label for="firstName" class="_20i8vs">First Name</label>
+            <input type="text" class="_16qL6K _2pf-sU _366U7Q" name="email" required="" disabled="true" autocomplete="email" tabindex="1" value=""/>
+            <label for="email" class="_20i8vs">Email</label>
             </div>
-         </div>
-         <div class="_3wj6q3">
-            <div class="Th26Zc"><input type="text" class="_16qL6K _2pf-sU _366U7Q" name="lastName" disabled="" autocomplete="name" tabindex="2" value=""/>
-            <label for="lastName" class="_20i8vs">Last Name</label>
             </div>
-         </div>
-
          <button class="_2AkmmA rAx-Sv" type="submit" tabindex="5">SAVE</button>
 
       </div>

@@ -9,9 +9,53 @@
     /* .main-secction{
       box-shadow: 10px 10px 10px;
     } */
+/* .header-container{
+
+  width: 100%;
+  height: 900px;
+  border-left: none;
+  border-right: none;
+  position: relative;
+  padding:20px;
+}
+.video-container{
+  position: absolute;
+  top:0%;
+  left: 0%;
+  height: 100%;
+  width: 100%;
+  overflow: hidden ;
+}
+
+video{
+  position: absolute;
+  z-index: -1;
+  opacity: 0.78;
+  width:100%;
+
+} */
+
+.video-background{
+  position: absolute;
+  width:100%;
+  min-height: 100vh;
+}
+
+    .filepond--file-action-button{
+      transform:translate3d(0px, 0px, 0) scale3d(1, 1, 1);
+      opacity:1;
+
+    }
+    .text_color{
+      color: #7b1fa2;
+    }
+
+    .info_text_color{
+      color: teal;
+    }
 
     .tab-content{
-line-height: 1.2;
+    line-height: 1.2;
     }
 
 
