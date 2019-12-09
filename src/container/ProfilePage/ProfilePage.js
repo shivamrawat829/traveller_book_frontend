@@ -14,6 +14,8 @@ import {
   UncontrolledTooltip
 } from "reactstrap";
 
+
+
 // core components
 
 import ExamplesNavbar from "../Navbars/ExamplesNavbar.js";
@@ -67,10 +69,7 @@ function ProfilePage() {
             </div>
             <h3 className="title">About me</h3>
             <h5 className="description">
-              An artist of considerable range, Ryan — the name taken by
-              Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
-              and records all of his own music, giving it a warm, intimate feel
-              with a solid groove structure. An artist of considerable range.
+            Roamer who loves to explore new places...
             </h5>
             <Row>
               <Col className="ml-auto mr-auto" md="6">
@@ -120,6 +119,7 @@ function ProfilePage() {
                   </Nav>
                 </div>
               </Col>
+              
               <TabContent className="gallery" activeTab={"pills" + pills}>
                 <TabPane tabId="pills1">
                   <Col className="ml-auto mr-auto" md="10">

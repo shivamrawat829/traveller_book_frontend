@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -14,10 +14,47 @@ import {
   NavLink,
   Nav,
   Container,
-  UncontrolledTooltip
+  UncontrolledTooltip,
+  Modal
 } from "reactstrap";
 
-function IndexNavbar() {
+import SignUp from '../../views/index-sections/SignUp';
+import axios from 'axios';
+import {withRouter} from "react-router-dom";
+
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/auth';
+
+
+
+const mapStateToProps = (state) => {
+  console.log("is authenticated", state.token)
+  return {
+      loading: state.loading,
+  error: state.error,
+  isAuthenticated: state.token !== null
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+  onAuth: (username, password) => dispatch(actions.authLogin(username, password)) ,
+  logout: () => dispatch(actions.logout()) 
+  }
+}
+
+function IndexNavbar(props) {
+
+  const {
+    buttonLabel,
+    className
+  } = props;
+
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
+
+
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   React.useEffect(() => {
@@ -58,11 +95,11 @@ function IndexNavbar() {
               target="_blank"
               id="navbar-brand"
             >
-              Now UI Kit React
+              About Us
             </NavbarBrand>
-            <UncontrolledTooltip target="#navbar-brand">
+            {/* <UncontrolledTooltip target="#navbar-brand">
               Designed by Invision. Coded by Creative Tim
-            </UncontrolledTooltip>
+            </UncontrolledTooltip> */}
             <button
               className="navbar-toggler navbar-toggler"
               onClick={() => {
@@ -83,6 +120,19 @@ function IndexNavbar() {
             navbar
           >
             <Nav navbar>
+
+            <NavItem>
+                <NavLink
+
+                href = 'landing-page'
+               
+                >
+                  <i className="now-ui-icons travel_info"></i>
+                  <p>About Us</p>
+                </NavLink>
+              </NavItem>
+
+{/* 
               <NavItem>
                 <NavLink
                   href="#pablo"
@@ -96,8 +146,8 @@ function IndexNavbar() {
                   <i className="now-ui-icons arrows-1_cloud-download-93"></i>
                   <p>Download</p>
                 </NavLink>
-              </NavItem>
-              <UncontrolledDropdown nav>
+              </NavItem> */}
+              {/* <UncontrolledDropdown nav>
                 <DropdownToggle
                   caret
                   color="default"
@@ -121,22 +171,54 @@ function IndexNavbar() {
                     Documentation
                   </DropdownItem>
                 </DropdownMenu>
-              </UncontrolledDropdown>
+              </UncontrolledDropdown> */}
+
+              {
+                    props.isAuthenticated ?
+                    <NavItem>
+                    <NavLink href = 'profilepage'>
+                      <i className="now-ui-icons ui-1_settings-gear-63"></i>
+                      <p>Settings</p>
+                    </NavLink>
+                  </NavItem>
+              :
+             
               <NavItem>
                 <Button
                   className="nav-link btn-neutral"
                   color="info"
                   href="#pablo"
                   id="upgrade-to-pro"
-                  onClick={e => e.preventDefault()}
+                  onClick={toggle}
                 >
                   <i className="now-ui-icons arrows-1_share-66 mr-1"></i>
-                  <p>Upgrade to PRO</p>
+                  <p>Login/Signup</p>
+
+                  <Modal isOpen={modal} toggle={toggle} className={className}>
+                      <SignUp/>
+                  </Modal>
+
+
                 </Button>
-                <UncontrolledTooltip target="#upgrade-to-pro">
+                {/* <UncontrolledTooltip target="#upgrade-to-pro">
                   Cooming soon!
-                </UncontrolledTooltip>
+                </UncontrolledTooltip> */}
               </NavItem>
+              }
+              {
+                    props.isAuthenticated ?
+              <NavItem>
+                    <NavLink onClick={props.logout}  href = "">
+                      <i className="now-ui-icons media-1_button-power"></i>
+                      <p>Logout</p>
+                    </NavLink>
+                  </NavItem>
+                  :
+                  <></>
+              }
+
+
+
               <NavItem>
                 <NavLink
                   href="https://twitter.com/CreativeTim?ref=creativetim"
@@ -165,7 +247,7 @@ function IndexNavbar() {
               </NavItem>
               <NavItem>
                 <NavLink
-                  href="https://www.instagram.com/CreativeTimOfficial?ref=creativetim"
+                  href="https://www.instagram.com/d_sarcastic_meme/"
                   target="_blank"
                   id="instagram-tooltip"
                 >
@@ -184,4 +266,4 @@ function IndexNavbar() {
   );
 }
 
-export default IndexNavbar;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(IndexNavbar));

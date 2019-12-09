@@ -1,4 +1,5 @@
 import React from "react";
+import {withRouter, NavLink} from "react-router-dom";
 
 // reactstrap components
 import {
@@ -15,14 +16,39 @@ import {
   Container,
   Col
 } from "reactstrap";
+import axios from "axios";
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/auth';
 
 // core components
 import ExamplesNavbar from "../../container/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "../../container/Footers/TransparentFooter.js";
 
-function LoginPage() {
+const mapStateToProps = (state) => {
+  console.log("is authenticated", state.token)
+  return {
+      loading: state.loading,
+  error: state.error,
+  isAuthenticated: state.token !== null
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+  onAuth: (username, password) => dispatch(actions.authLogin(username, password)) ,
+  logout: () => dispatch(actions.logout()) 
+  }
+}
+
+
+function LoginPage(props) {
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
+  const [emailFocus, setEmailFocus] = React.useState(false);
+
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
   React.useEffect(() => {
     document.body.classList.add("login-page");
     document.body.classList.add("sidebar-collapse");
@@ -34,6 +60,17 @@ function LoginPage() {
       document.body.classList.remove("sidebar-collapse");
     };
   });
+
+  const submitHandler = e => {
+
+    console.log("eeeeeeeeeeeeeeeeeeeeeeee", e, "ibfdijbfdskjbofb","email", email, "pasword", password)
+    props.onAuth(email, password);
+	  props.history.push('index');
+    e.preventDefault();
+  }
+
+
+
   return (
     <>
       <ExamplesNavbar />
@@ -41,14 +78,14 @@ function LoginPage() {
         <div
           className="page-header-image"
           style={{
-            backgroundImage: "url(" + require("../../assets/img/login.jpg") + ")"
+            backgroundImage: "url(" + require("../../assets/img/scene1.jpg") + ")"
           }}
         ></div>
         <div className="content">
           <Container>
             <Col className="ml-auto mr-auto" md="4">
               <Card className="card-login card-plain">
-                <Form action="" className="form" method="">
+                <Form onSubmit={submitHandler} action="" className="form" method="">
                   <CardHeader className="text-center">
                     <div className="logo-container">
                       <img
@@ -58,6 +95,27 @@ function LoginPage() {
                     </div>
                   </CardHeader>
                   <CardBody>
+
+                  <InputGroup
+                    className={
+                      "no-border input-lg" + (emailFocus ? " input-group-focus" : "")
+                    }
+                  >
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="now-ui-icons ui-1_email-85"></i>
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="Email..."
+                      type="text"
+                      onFocus={() => setEmailFocus(true)}
+                      onBlur={() => setEmailFocus(false)}
+                      value={email} onChange={e => setEmail(e.target.value)}
+
+                    ></Input>
+                  </InputGroup>
+                  
                     <InputGroup
                       className={
                         "no-border input-lg" +
@@ -70,41 +128,28 @@ function LoginPage() {
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input
-                        placeholder="First Name..."
-                        type="text"
+                        placeholder="Password..."
+                        type="password"
                         onFocus={() => setFirstFocus(true)}
                         onBlur={() => setFirstFocus(false)}
+                        value={password} onChange={e => setPassword(e.target.value)}
+
                       ></Input>
                     </InputGroup>
-                    <InputGroup
-                      className={
-                        "no-border input-lg" +
-                        (lastFocus ? " input-group-focus" : "")
-                      }
-                    >
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="now-ui-icons text_caps-small"></i>
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input
-                        placeholder="Last Name..."
-                        type="text"
-                        onFocus={() => setLastFocus(true)}
-                        onBlur={() => setLastFocus(false)}
-                      ></Input>
-                    </InputGroup>
+                  
+                   
+
                   </CardBody>
                   <CardFooter className="text-center">
                     <Button
                       block
                       className="btn-round"
                       color="info"
-                      href="#pablo"
-                      onClick={e => e.preventDefault()}
+                      // href="#pablo"
+                      // onClick={e => e.preventDefault()}
                       size="lg"
                     >
-                      Get Started
+                      Login
                     </Button>
                     <div className="pull-left">
                       <h6>
@@ -140,4 +185,5 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginPage));

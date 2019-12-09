@@ -17,15 +17,23 @@ import {
 
 // core components
 
-function PaginationSection() {
+function PaginationSection({ postsPerPage, totalPosts , paginate}) {
+  const pageNumbers = [];
+
+  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+
+    // let active = paginate === i ? 'active' : '';
+    pageNumbers.push(i);
+  }
+
   const [pills, setPills] = React.useState("2");
   return (
     <>
       <div className="section section-pagination">
         <Container>
-          <Row>
-            <Col md="6">
-              <h4>Progress Bars</h4>
+          <Row className="justify-content-center">
+            {/* <Col md="6"> */}
+              {/* <h4>Progress Bars</h4>
               <div className="progress-container">
                 <span className="progress-badge">Default</span>
                 <Progress max="100" value="25">
@@ -37,10 +45,10 @@ function PaginationSection() {
                 <Progress max="100" value="60">
                   <span className="progress-value">60%</span>
                 </Progress>
-              </div>
-              <br></br>
-              <h4>Navigation Pills</h4>
-              <Nav
+              </div> */}
+              {/* <br></br> */}
+              {/* <h4>Navigation Pills</h4> */}
+              {/* <Nav
                 className="nav-pills-info nav-pills-just-icons"
                 pills
                 role="tablist"
@@ -86,57 +94,21 @@ function PaginationSection() {
                     <i className="fa fa-exclamation"></i>
                   </NavLink>
                 </NavItem>
-              </Nav>
-            </Col>
-            <Col sm="6">
+              </Nav> */}
+            {/* </Col> */}
+            <Col xs='10' lg='3' md='8'>
               <h4>Pagination</h4>
+           
+
               <Pagination
                 className="pagination pagination-info"
                 listClassName="pagination-info"
               >
-                <PaginationItem className="active">
-                  <PaginationLink
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                  >
-                    1
-                  </PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                  >
-                    2
-                  </PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                  >
-                    3
-                  </PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                  >
-                    4
-                  </PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                  >
-                    5
-                  </PaginationLink>
-                </PaginationItem>
-              </Pagination>
-              <Pagination>
-                <PaginationItem>
+
+
+
+
+              <PaginationItem>
                   <PaginationLink
                     aria-label="Previous"
                     href="#pablo"
@@ -149,31 +121,22 @@ function PaginationSection() {
                       ></i>
                     </span>
                   </PaginationLink>
+
                 </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
+
+                {pageNumbers.map(number => (
+         
+
+                  <PaginationItem className='active' key={number}>
+                  <PaginationLink 
+                    onClick={() => paginate(number)}
                   >
-                    1
+                    {number}
                   </PaginationLink>
-                </PaginationItem>
-                <PaginationItem className="active">
-                  <PaginationLink
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                  >
-                    2
-                  </PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                  >
-                    3
-                  </PaginationLink>
-                </PaginationItem>
+                  </PaginationItem>
+
+              ))}
+
                 <PaginationItem>
                   <PaginationLink
                     aria-label="Next"
@@ -188,33 +151,14 @@ function PaginationSection() {
                     </span>
                   </PaginationLink>
                 </PaginationItem>
+                
               </Pagination>
-              <br></br>
-              <h4>Labels</h4>
-              <Badge color="default" className="mr-1">
-                Default
-              </Badge>
-              <Badge color="primary" className="mr-1">
-                Primary
-              </Badge>
-              <Badge color="success" className="mr-1">
-                Success
-              </Badge>
-              <Badge color="info" className="mr-1">
-                Info
-              </Badge>
-              <Badge color="warning" className="mr-1">
-                Warning
-              </Badge>
-              <Badge color="danger" className="mr-1">
-                Danger
-              </Badge>
-              <Badge color="neutral">Neutral</Badge>
+           
             </Col>
           </Row>
-          <br></br>
+          {/* <br></br> */}
           <div className="space"></div>
-          <h4>Notifications</h4>
+          {/* <h4>Notifications</h4> */}
         </Container>
       </div>
     </>

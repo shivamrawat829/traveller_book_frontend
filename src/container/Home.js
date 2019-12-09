@@ -64,13 +64,14 @@ class Home extends React.Component {
 
 	  handleFormSubmit = (e) => {
 		// e.preventDefault();
-		console.log('dataaaaaaaaaaaaaa111111111111111',this.state);
+		console.log('dataaaaaaaaaaaaaa111111111111111',this.state.image);
 		let form_data = new FormData();
 		form_data.append('image', this.state.image, this.state.image.name);
 		form_data.append('title', this.state.title);
 		form_data.append('description', this.state.description);
 		form_data.append('place', this.state.place);
 		form_data.append('rating', this.state.rating);
+		console.log("newwwwwwwwwwwwwwwwwwwww", this.state.image)
 		let url = 'http://127.0.0.1:8000/api/create/';
 		axios.post(url, form_data, {
 		  headers: {
@@ -81,6 +82,8 @@ class Home extends React.Component {
 			  console.log("SUCCESS", res);
 			})
 			.catch(err => console.log(err))
+
+			e.preventDefault();
 	  };
 
 

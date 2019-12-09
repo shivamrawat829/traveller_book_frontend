@@ -14,7 +14,7 @@ function Download() {
         id="download-section"
       >
         <Container>
-          <Row className="justify-content-md-center">
+          {/* <Row className="justify-content-md-center">
             <Col className="text-center" lg="8" md="12">
               <h3 className="title">Do you love this Bootstrap 4 UI Kit?</h3>
               <h5 className="description">
@@ -46,27 +46,18 @@ function Download() {
                 Download PSD/Sketch
               </Button>
             </Col>
-          </Row>
-          <br></br>
-          <br></br>
-          <br></br>
+          </Row> */}
+          {/* <br></br> */}
+          {/* <br></br> */}
+          {/* <br></br> */}
           <Row className="text-center mt-5">
             <Col className="ml-auto mr-auto" md="8">
-              <h2>Want more?</h2>
+              <h2>Want to Upload your own...?</h2>
               <h5 className="description">
-                We're going to launch{" "}
-                <a
-                  href="http://demos.creative-tim.com/now-ui-kit-pro-react/#/presentation?ref=nukr-index-page"
-                  onClick={e => e.preventDefault()}
-                >
-                  Now UI Kit PRO React
-                </a>
-                . It will have huge number of components, sections and example
-                pages so you can start your development with a badass Bootstrap
-                4 UI Kit.
+                Lets Start...
               </h5>
             </Col>
-            <Col md="12">
+            {/* <Col md="12">
               <Button
                 className="btn-neutral btn-round"
                 color="default"
@@ -77,10 +68,10 @@ function Download() {
                 <i className="now-ui-icons arrows-1_share-66 mr-1"></i>
                 Upgrade to PRO
               </Button>
-            </Col>
+            </Col> */}
           </Row>
-          <br></br>
-          <br></br>
+          {/* <br></br> */}
+          {/* <br></br> */}
           <Row className="justify-content-md-center sharing-area text-center">
             <Col className="text-center" lg="8" md="12">
               <h3>Thank you for supporting us!</h3>
@@ -138,6 +129,21 @@ function Download() {
               <UncontrolledTooltip delay={0} target="tooltip331904895">
                 Star on Github
               </UncontrolledTooltip>
+
+              <Button
+                className="btn-neutral btn-icon btn-round"
+                color="github"
+                href="https://github.com/creativetimofficial/now-ui-kit-react?ref=creativetim"
+                id="tooltip331904895"
+                size="lg"
+                target="_blank"
+              >
+                <i className="fab fa-instagram"></i>
+              </Button>
+              <UncontrolledTooltip delay={0} target="tooltip331904895">
+               Follow Us
+              </UncontrolledTooltip>
+
             </Col>
           </Row>
         </Container>

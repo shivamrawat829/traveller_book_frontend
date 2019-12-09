@@ -28,7 +28,7 @@ function IndexHeader() {
         <div
           className="page-header-image"
           style={{
-            backgroundImage: "url(" + require("../../assets/img/header.jpg") + ")"
+            backgroundImage: "url(" + require("../../assets/img/scene3.jpg") + ")"
           }}
           ref={pageHeader}
         ></div>
@@ -39,10 +39,10 @@ function IndexHeader() {
               className="n-logo"
               src={require("../../assets/img/now-logo.png")}
             ></img>
-            <h1 className="h1-seo">Now UI Kit.</h1>
-            <h3>A beautiful Bootstrap 4 UI kit. Yours free.</h3>
+            <h1 className="h1-seo">Traveller Book.</h1>
+            <h3>Start Your Journey Today.</h3>
           </div>
-          <h6 className="category category-absolute">
+          {/* <h6 className="category category-absolute">
             Designed by{" "}
             <a href="http://invisionapp.com/?ref=creativetim" target="_blank">
               <img
@@ -63,7 +63,7 @@ function IndexHeader() {
               ></img>
             </a>
             .
-          </h6>
+          </h6> */}
         </Container>
       </div>
     </>

@@ -26,13 +26,22 @@ import Index from "./views/Index.js";
 import NucleoIcons from "./views/NucleoIcons.js";
 import LoginPage from "./views/examples/LoginPage.js";
 import LandingPage from "./views/examples/LandingPage.js";
+import axios from "axios";
+import AddPosts from './views/examples/AddPosts';
+
 
 
 
 class App extends React.Component {
 
+  state = {
+    data : []
+  }
+
   componentDidMount() {
     this.props.onTryAutoSignup();
+
+  
   }
 
 
@@ -58,8 +67,9 @@ render(){
           render={props => <LandingPage {...props} />}
         />
         <Route path="/login-page" render={props => <LoginPage {...props} />} />
-        <Redirect to="/index" />
-        <Redirect from="/" to="/index" />
+        <Route path="/add-posts" render={props => <AddPosts {...props} />} />
+        {/* <Redirect to="/index" />
+        <Redirect from="/" to="/index" /> */}
 
     </div>
     </Router>

@@ -49,7 +49,7 @@ function ExamplesNavbar() {
           }}
         />
       ) : null}
-      <Navbar className={"fixed-top " + navbarColor} color="info" expand="lg">
+      <Navbar className={"fixed-top " + navbarColor} color="success" expand="lg">
         <Container>
           <UncontrolledDropdown className="button-dropdown">
             <DropdownToggle
@@ -120,14 +120,14 @@ function ExamplesNavbar() {
             <Nav navbar>
               <NavItem>
                 <NavLink to="/index" tag={Link}>
-                  Back to Kit
+                  Home Page
                 </NavLink>
               </NavItem>
-              <NavItem>
+              {/* <NavItem>
                 <NavLink href="https://github.com/creativetimofficial/now-ui-kit-react/issues?ref=creativetim">
                   Have an issue?
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
               <NavItem>
                 <NavLink
                   href="https://twitter.com/CreativeTim?ref=creativetim"

@@ -36,7 +36,7 @@ function ProfilePageHeader() {
         ></div>
         <Container>
           <div className="photo-container">
-            <img alt="..." src={require("../../assets/img/rajesh.png")}></img>
+            <img alt="..." src={require("../../assets/img/julie.jpg")}></img>
           </div>
           <h3 className="title">Rajesh Rawat</h3>
           <p className="category">Air Force Personal</p>

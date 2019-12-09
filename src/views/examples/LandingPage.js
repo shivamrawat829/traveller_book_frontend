@@ -40,11 +40,7 @@ function LandingPage() {
               <Col className="ml-auto mr-auto text-center" md="8">
                 <h2 className="title">Who we are?</h2>
                 <h5 className="description">
-                  According to the National Oceanic and Atmospheric
-                  Administration, Ted, Scambos, NSIDClead scentist, puts the
-                  potentially record low maximum sea ice extent tihs year down
-                  to low ice extent in the Pacific and a late drop in ice extent
-                  in the Barents Sea.
+                  We are a team of enthusiastic people who work passionately all the time because they love the work they do.  
                 </h5>
               </Col>
             </Row>
@@ -133,8 +129,8 @@ function LandingPage() {
                       className="rounded-circle img-fluid img-raised"
                       src={require("../../assets/img/avatar.jpg")}
                     ></img>
-                    <h4 className="title">Romina Hadid</h4>
-                    <p className="category text-info">Model</p>
+                    <h4 className="title">Trilok Sharma</h4>
+                    <p className="category text-info">CTO</p>
                     <p className="description">
                       You can write here details about one of your team members.
                       You can give more details about what they do. Feel free to
@@ -175,18 +171,17 @@ function LandingPage() {
                     <img
                       alt="..."
                       className="rounded-circle img-fluid img-raised"
-                      src={require("../../assets/img/ryan.jpg")}
+                      src={require("../../assets/img/shubham.png")}
                     ></img>
-                    <h4 className="title">Ryan Tompson</h4>
-                    <p className="category text-info">Designer</p>
+                    <h4 className="title">Shubham Rawat</h4>
+                    <p className="category text-info">CEO</p>
                     <p className="description">
-                      You can write here details about one of your team members.
-                      You can give more details about what they do. Feel free to
-                      add some{" "}
+                      Here I Present you the most Talentend Man of this group Mr.Shubham Rawat
+                      {" "}
                       <a href="#pablo" onClick={e => e.preventDefault()}>
-                        links
+                        see his profile
                       </a>{" "}
-                      for people to be able to follow them outside the site.
+                      for people to be able to follow him.
                     </p>
                     <Button
                       className="btn-icon btn-round"
@@ -199,11 +194,12 @@ function LandingPage() {
                     <Button
                       className="btn-icon btn-round"
                       color="info"
-                      href="#pablo"
-                      onClick={e => e.preventDefault()}
+                      href="https://www.linkedin.com/in/shubham-rawat-554586b2/"
+                    
                     >
                       <i className="fab fa-linkedin"></i>
                     </Button>
+                    
                   </div>
                 </Col>
                 <Col md="4">
@@ -213,8 +209,8 @@ function LandingPage() {
                       className="rounded-circle img-fluid img-raised"
                       src={require("../../assets/img/eva.jpg")}
                     ></img>
-                    <h4 className="title">Eva Jenner</h4>
-                    <p className="category text-info">Fashion</p>
+                    <h4 className="title">Ravi Sharma</h4>
+                    <p className="category text-info">C</p>
                     <p className="description">
                       You can write here details about one of your team members.
                       You can give more details about what they do. Feel free to

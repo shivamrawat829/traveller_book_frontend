@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState,useRef,  useEffect} from "react";
+import Datetime from "react-datetime";
 
 // reactstrap components
 // import {
@@ -24,9 +25,90 @@ import CompleteExamples from "./index-sections/CompleteExamples.js";
 import SignUp from "./index-sections/SignUp.js";
 import Examples from "./index-sections/Examples.js";
 import Download from "./index-sections/Download.js";
+import PostsTitle from "./index-sections/PostsTitle";
+import axios from 'axios';
+import {withRouter, NavLink} from "react-router-dom";
 
-function Index() {
+import { connect } from 'react-redux';
+import * as actions from '../store/actions/auth';
+
+
+
+import { Button, Container, Row, Col,ModalHeader,
+   ModalBody, ModalFooter,Label,
+     UncontrolledTooltip, Modal, FormGroup, InputGroupText, Input, InputGroup , InputGroupAddon} from "reactstrap";
+
+
+     const mapStateToProps = (state) => {
+      console.log("is authenticated", state.token)
+      return {
+          loading: state.loading,
+      error: state.error,
+      isAuthenticated: state.token !== null
+      }
+    }
+    
+    const mapDispatchToProps = dispatch => {
+      return {
+      onAuth: (username, password) => dispatch(actions.authLogin(username, password)) ,
+      logout: () => dispatch(actions.logout()) 
+      }
+    }
+    
+
+    
+const useForceUpdate = () => useState()[1];
+
+
+function Index(props) {
+
+  const forceUpdate = useForceUpdate();
+
+  const [firstFocus, setFirstFocus] = React.useState(false);
+  const [lastFocus, setLastFocus] = React.useState(false);
+  const [middleFocus, setmiddleFocus] = React.useState(false);
+  const [title, setTitle] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [rating, setRating] = React.useState("");
+  const [place, setPlace] = React.useState("");
+  const fileInput = useRef(null);
+
+  const {
+    buttonLabel,
+    className
+  } = props;
+
+ 
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
+
+  const submitHandler = e => {
+    let url = 'http://127.0.0.1:8000/api/create/';
+    console.log("eeeeeeeeeeeeeeeeeeeeeeee", e, "ibfdijbfdskjbofb", title,"image",  fileInput.current.files[0] , "des",description, 
+    "place",place,"rating", rating)
+    let form_data = new FormData();
+    form_data.append('image', fileInput.current.files[0], fileInput.current.files[0].name);
+		form_data.append('title', title);
+		form_data.append('description', description);
+		form_data.append('place', place);
+    form_data.append('rating', rating);
+  
+        axios.post(url, form_data, {
+          headers: {
+          'content-type': 'multipart/form-data'
+          }
+        })
+          .then(res => {
+            console.log("SUCCESS", res);
+          })
+          .catch(err => console.log(err))
+    e.preventDefault();
+  }
+
+
   React.useEffect(() => {
+
+    
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
@@ -43,25 +125,156 @@ function Index() {
       <div className="wrapper">
         <IndexHeader />
         <div className="main">
-          <Images />
-          <BasicElements />
-          <Navbars />
-          <Tabs />
-          <Pagination />
-          <Notifications />
-          <Typography />
-          <Javascript />
+          {/* <Images /> */}
+          {/* <BasicElements /> */}
+          {/* <Navbars /> */}
+          {/* <Tabs /> */}
+          
+          {/* <Notifications /> */}
+          {/* <Typography /> */}
+          {/* <Javascript /> */}
           <Carousel />
-          <NucleoIcons />
-          <CompleteExamples />
-          <SignUp />
-          <Examples />
+          <PostsTitle/>
+          {/* <NucleoIcons /> */}
+          {/* <CompleteExamples /> */}
+          {/* <SignUp /> */}
+          {/* <Examples /> */}
+          {/* <Pagination /> */}
           <Download />
+
         </div>
+
+                    {
+                    props.isAuthenticated ?
+    
+                    <Button onClick={toggle}
+                    className=" btn-icon btn-round btn-raised" color="#ffffff" id="tooltip331904899" size="lg"
+                    style={{position:'fixed',bottom:'20px',right:'10px',zIndex:'99',}}>
+                    <i className="fab fa-plus"></i>
+                    <UncontrolledTooltip delay={0} target="tooltip331904899">
+                    Add Post
+                    </UncontrolledTooltip>
+                    </Button>
+                    :
+                    <></>
+                    }
+
+        {/* <Button onClick={toggle}
+                className=" btn-icon btn-round btn-raised"
+                color="#ffffff"
+                // href="add-posts"We're going to launch Now UI Kit PRO React. It will have huge number of components, sections and example pages so you can start your development with a badass Bootstrap 4 UI Kit.
+
+                id="tooltip331904899"
+                size="lg"
+                target="_blank"
+                style={{
+                 position:'fixed',
+                 bottom:'20px',
+                 right:'10px',
+                 zIndex:'99',
+                 }}
+
+              >
+                <i className="fab fa-plus"></i>
+              </Button> */}
+             
+
+              <Modal isOpen={modal} toggle={toggle} className={className}>
+              <ModalHeader toggle={toggle}>Upload a Post...</ModalHeader>
+                <ModalBody>
+                <form onSubmit={submitHandler}> 
+                      <Row>
+                        <Col className="text-center ml-auto mr-auto" md="10" lg="10">
+                        <InputGroup
+                          className={
+                            "input-lg" + (firstFocus ? " input-group-focus" : "")
+                          }
+                        >
+                          <InputGroupAddon addonType="prepend">
+                            <InputGroupText>
+                              <i className="now-ui-icons location_pin"></i>
+                            </InputGroupText>
+                          </InputGroupAddon>
+                          <Input placeholder="Title For the Post..." type="text" onFocus={() => setFirstFocus(true)}
+                            onBlur={() => setFirstFocus(false)} value={title} onChange={e => setTitle(e.target.value)}
+                          >
+                          </Input>
+                        </InputGroup>
+
+                        <input type="file" ref={fileInput} onChange={forceUpdate}/>
+                        <br/>
+                        <InputGroup
+                          className={
+                            "input-lg" + (middleFocus ? " input-group-focus" : "")
+                          }
+                        >
+                          <InputGroupAddon addonType="prepend">
+                            <InputGroupText>
+                              <i className="now-ui-icons location_pin"></i>
+                            </InputGroupText>
+                          </InputGroupAddon>
+                            <Input
+                              placeholder="Place..." type="text" onFocus={() => setmiddleFocus(true)}
+                              onBlur={() => setmiddleFocus(false)} value={place} onChange={e => setPlace(e.target.value)}
+                            >
+                            </Input>
+                          </InputGroup>
+                          <InputGroup
+                            className={
+                              "input-lg" + (lastFocus ? " input-group-focus" : "")
+                            }
+                          >
+                            <InputGroupAddon addonType="prepend">
+                              <InputGroupText>
+                                <i className="now-ui-icons files_paper"></i>
+                              </InputGroupText>
+                              </InputGroupAddon>
+                              <Input
+                                placeholder="Description..." type="text" onFocus={() => setLastFocus(true)} onBlur={() => setLastFocus(false)}
+                                
+                              >
+                              </Input>
+                          </InputGroup>
+
+                          <Label for="exampleSelect">Rating</Label>
+                            <Input className='input-lg' value={rating} onChange={e => setRating(e.target.value)} 
+                            type="number" name="select" id="exampleSelect">
+                              {/* <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option> */}
+                            </Input>
+
+
+                          <div className="textarea-container">
+                            <Input cols="80" name="description" placeholder="Description..." rows="4" type="textarea"
+                              value={description} onChange={e => setDescription(e.target.value)}
+                            ></Input>
+                          </div>       
+                            <FormGroup className='input-lg'>
+                              <Datetime
+                                timeFormat={false}
+                                inputProps={{ placeholder: "Journey Date" }}
+                              />
+                            </FormGroup>
+                 
+                            <div className="send-button">
+                              <Button block className="btn-round" color="info" size="lg">Submit</Button>
+                            </div>
+
+                        </Col>
+                      </Row>
+                  </form>
+                </ModalBody>
+                {/* <ModalFooter>
+                  <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
+                  <Button color="secondary" onClick={toggle}>Cancel</Button>
+              </ModalFooter> */}
+            </Modal>
         <DarkFooter />
       </div>
     </>
   );
 }
-
-export default Index;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Index));

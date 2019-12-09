@@ -14,29 +14,15 @@ function DefaultFooter() {
           <nav>
             <ul>
               <li>
+              
                 <a
-                  href="https://www.creative-tim.com?ref=nukr-default-footer"
-                  target="_blank"
-                >
-                  Creative Tim
-                </a>
-              </li>
-              <li>
-                <a
-                  href="http://presentation.creative-tim.com?ref=nukr-default-footer"
+                  href="/landing-page"
                   target="_blank"
                 >
                   About Us
                 </a>
               </li>
-              <li>
-                <a
-                  href="http://blog.creative-tim.com?ref=nukr-default-footer"
-                  target="_blank"
-                >
-                  Blog
-                </a>
-              </li>
+            
             </ul>
           </nav>
           <div className="copyright" id="copyright">
@@ -45,14 +31,14 @@ function DefaultFooter() {
               href="https://www.invisionapp.com?ref=nukr-default-footer"
               target="_blank"
             >
-              Invision
+              Shubham
             </a>
             . Coded by{" "}
             <a
               href="https://www.creative-tim.com?ref=nukr-default-footer"
               target="_blank"
             >
-              Creative Tim
+              Shubham
             </a>
             .
           </div>
