@@ -187,16 +187,16 @@ function IndexNavbar(props) {
                 <Button
                   className="nav-link btn-neutral"
                   color="info"
-                  href="#pablo"
+                  href="/login-page"
                   id="upgrade-to-pro"
-                  onClick={toggle}
+                  // onClick={toggle}
                 >
                   <i className="now-ui-icons arrows-1_share-66 mr-1"></i>
                   <p>Login/Signup</p>
 
-                  <Modal isOpen={modal} toggle={toggle} className={className}>
+                  {/* <Modal isOpen={modal} toggle={toggle} className={className}>
                       <SignUp/>
-                  </Modal>
+                  </Modal> */}
 
 
                 </Button>

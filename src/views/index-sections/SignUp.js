@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -23,6 +23,19 @@ function SignUp() {
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
   const [emailFocus, setEmailFocus] = React.useState(false);
+
+  const googlesignin = async (e) => {
+     
+    console.log("googlesignin ENDD....", e)
+  };
+
+  
+  // useEffect(()  => {
+
+   
+    
+  // }, []);
+
   return (
     <>
       <div
@@ -64,7 +77,7 @@ function SignUp() {
                       className="btn-neutral btn-icon btn-round"
                       color="google"
                       href="#pablo"
-                      onClick={e => e.preventDefault()}
+                      onClick={() => googlesignin()}
                     >
                       <i className="fab fa-google-plus"></i>
                     </Button>

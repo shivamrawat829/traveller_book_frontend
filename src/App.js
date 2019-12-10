@@ -29,6 +29,10 @@ import LandingPage from "./views/examples/LandingPage.js";
 import axios from "axios";
 import AddPosts from './views/examples/AddPosts';
 
+import SignUp from './views/index-sections/SignUp';
+
+import Demo from './views/index-sections/demosignin';
+
 
 
 
@@ -67,7 +71,12 @@ render(){
           render={props => <LandingPage {...props} />}
         />
         <Route path="/login-page" render={props => <LoginPage {...props} />} />
+
+        <Route path="/signup-page" render={props => <SignUp {...props} />} />
+
         <Route path="/add-posts" render={props => <AddPosts {...props} />} />
+
+        <Route path="/demo" render={props => <Demo {...props} />} />
         {/* <Redirect to="/index" />
         <Redirect from="/" to="/index" /> */}
 

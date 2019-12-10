@@ -16,13 +16,14 @@ function PostsTitle() {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setpostsPerPage] = useState(12);
 
-
+  
   useEffect(()  => {
 
     const fetchPosts = async () => {
       setLoading(true);
       console.log("loading ....")
-      const res = await axios.get("http://127.0.1:8000/api/posts");
+      // const res = await axios.get("http://127.0.1:8000/api/posts");
+      const res = await axios.get("https://jsonplaceholder.typicode.com/photos");
       // .then(res =>{
       //   console.log(res)
       //   setPosts(res.data);
@@ -78,7 +79,7 @@ function PostsTitle() {
                       <img
                           alt="..."
                           className="img-raised"
-                          src={post.image}    
+                          src={post.url}    
                           key = {post.id}>
                       </img>
                       </Col>)
