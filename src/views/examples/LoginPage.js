@@ -14,7 +14,11 @@ import {
   InputGroupText,
   InputGroup,
   Container,
-  Col
+  Col,
+  FormFeedback,
+  FormGroup,
+  FormText,
+  Label
 } from "reactstrap";
 import axios from "axios";
 import { connect } from 'react-redux';
@@ -42,6 +46,9 @@ const mapDispatchToProps = dispatch => {
 
 
 function LoginPage(props) {
+  const [leftFocus, setLeftFocus] = React.useState(false);
+  const [rightFocus, setRightFocus] = React.useState(false);
+
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
   const [emailFocus, setEmailFocus] = React.useState(false);
@@ -96,6 +103,63 @@ function LoginPage(props) {
                   </CardHeader>
                   <CardBody>
 
+
+                    
+
+                  <FormGroup>
+                    <label htmlFor="exampleInputEmail1">Email address</label>
+                    <Input
+                      aria-describedby="emailHelp"
+                      id="exampleInputEmail1"
+                      placeholder="Enter email"
+                      type="email"
+                    ></Input>
+                    <FormText className="text-muted" color="default" id="emailHelp">
+                      We'll never share your email with anyone else.
+                    </FormText>
+                  </FormGroup>
+                  <FormGroup>
+                    <label htmlFor="exampleInputPassword1">Password</label>
+                    <Input
+                      id="exampleInputPassword1"
+                      placeholder="Password"
+                      type="password"
+                    ></Input>
+                  </FormGroup>
+                  {/* <FormGroup check>
+                    <Label check>
+                      <Input type="checkbox"></Input>
+                      <span className="form-check-sign"></span>
+                      Check me out
+                    </Label>
+                  </FormGroup> */}
+                  {/* <Button color="primary" type="submit">
+                    Submit
+                  </Button>
+
+
+
+
+                  <InputGroup className={leftFocus ? "input-group-focus" : ""}>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="fa fa-user-circle"></i>
+                    </InputGroupText>
+                  </InputGroupAddon>
+
+                  
+                  <Input
+                  className='form-control-danger'
+                    placeholder="Left Font Awesome Icon"
+                    type="text"
+                    onFocus={() => setLeftFocus(true)}
+                    onBlur={() => setLeftFocus(false)}
+                  ></Input>
+                 
+                </InputGroup>
+
+
+
                   <InputGroup
                     className={
                       "no-border input-lg" + (emailFocus ? " input-group-focus" : "")
@@ -106,14 +170,16 @@ function LoginPage(props) {
                         <i className="now-ui-icons ui-1_email-85"></i>
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input
+                    <Input invalid
                       placeholder="Email..."
                       type="text"
+                      
                       onFocus={() => setEmailFocus(true)}
                       onBlur={() => setEmailFocus(false)}
                       value={email} onChange={e => setEmail(e.target.value)}
 
                     ></Input>
+                     <FormFeedback>Oh noes! that name is already taken</FormFeedback>
                   </InputGroup>
                   
                     <InputGroup
@@ -135,7 +201,7 @@ function LoginPage(props) {
                         value={password} onChange={e => setPassword(e.target.value)}
 
                       ></Input>
-                    </InputGroup>
+                    </InputGroup> */}
                   
                    
 
@@ -147,7 +213,7 @@ function LoginPage(props) {
                       color="info"
                       // href="#pablo"
                       // onClick={e => e.preventDefault()}
-                      size="lg"
+                      size="md"
                     >
                       Login
                     </Button>

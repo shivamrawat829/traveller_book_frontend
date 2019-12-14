@@ -252,8 +252,8 @@ function LandingPage() {
         </div>
         <div className="section section-contact-us text-center">
           <Container>
-            <h2 className="title">Want to work with us?</h2>
-            <p className="description">Your project is very important to us.</p>
+            <h2 className="title">Want to Know more about us?</h2>
+            <p className="description">Just send us your query.</p>
             <Row>
               <Col className="text-center ml-auto mr-auto" lg="6" md="8">
                 <InputGroup
