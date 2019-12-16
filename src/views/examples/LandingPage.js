@@ -40,6 +40,7 @@ function LandingPage() {
               <Col className="ml-auto mr-auto text-center" md="8">
                 <h2 className="title">Who we are?</h2>
                 <h5 className="description">
+                  Techviour Solutions is a Startup Company which do not have many People but the People we have are Dedicated enough to handle any situation.
                   We are a team of enthusiastic people who work passionately all the time because they love the work they do.  
                 </h5>
               </Col>
@@ -52,7 +53,7 @@ function LandingPage() {
                     className="image-container image-left"
                     style={{
                       backgroundImage:
-                        "url(" + require("../../assets/img/login.jpg") + ")"
+                        "url(" + require("../../assets/img/scene3.jpg") + ")"
                     }}
                   >
                     <p className="blockquote blockquote-info">
@@ -67,7 +68,7 @@ function LandingPage() {
                     className="image-container"
                     style={{
                       backgroundImage:
-                        "url(" + require("../../assets/img/bg3.jpg") + ")"
+                        "url(" + require("../../assets/img/scene.jpg") + ")"
                     }}
                   ></div>
                 </Col>
@@ -76,7 +77,7 @@ function LandingPage() {
                     className="image-container image-right"
                     style={{
                       backgroundImage:
-                        "url(" + require("../../assets/img/bg1.jpg") + ")"
+                        "url(" + require("../../assets/img/scene1.jpg") + ")"
                     }}
                   ></div>
                   <h3>

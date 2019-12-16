@@ -56,6 +56,15 @@ function LoginPage(props) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
+  const[error, setError] = React.useState('')
+  // const[setError] = React.useState('')
+
+
+  const settingError = (event) =>{
+    console.log("error", event)
+    setError("password is incorrect");
+  };
+
   React.useEffect(() => {
     document.body.classList.add("login-page");
     document.body.classList.add("sidebar-collapse");
@@ -71,9 +80,22 @@ function LoginPage(props) {
   const submitHandler = e => {
 
     console.log("eeeeeeeeeeeeeeeeeeeeeeee", e, "ibfdijbfdskjbofb","email", email, "pasword", password)
-    props.onAuth(email, password);
-	  props.history.push('index');
-    e.preventDefault();
+
+    if (password.length < 5) {
+      e.preventDefault();
+      settingError();
+      
+    }
+
+    else{
+      e.preventDefault();
+      props.onAuth(email, password);
+      props.history.push('index');
+      
+    }
+    
+	  // props.history.push('index');
+    // e.preventDefault();
   }
 
 
@@ -112,7 +134,12 @@ function LoginPage(props) {
                       aria-describedby="emailHelp"
                       id="exampleInputEmail1"
                       placeholder="Enter email"
-                      type="email"
+                      type="text"
+                      
+                      onFocus={() => setEmailFocus(true)}
+                      onBlur={() => setEmailFocus(false)}
+                      value={email} onChange={e => setEmail(e.target.value)}
+
                     ></Input>
                     <FormText className="text-muted" color="default" id="emailHelp">
                       We'll never share your email with anyone else.
@@ -124,8 +151,44 @@ function LoginPage(props) {
                       id="exampleInputPassword1"
                       placeholder="Password"
                       type="password"
+                      onFocus={() => setFirstFocus(true)}
+                        onBlur={() => setFirstFocus(false)}
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+
                     ></Input>
+                    {/* <FormFeedback>{error}</FormFeedback> */}
+                    {/* <FormFeedback>Oh noes! that name is already taken</FormFeedback> */}
+                    <h6 style={{color:'red',}}>{error}</h6>
                   </FormGroup>
+                  <FormFeedback>ihbbjk{error}</FormFeedback>
+
+                  
+                  
+
+                  {/* <InputGroup
+                    className={
+                      "no-border input-lg" + (emailFocus ? " input-group-focus" : "")
+                    }
+                  >
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="now-ui-icons ui-1_email-85"></i>
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input invalid
+                      placeholder="Email..."
+                      type="text"
+                      
+                      onFocus={() => setEmailFocus(true)}
+                      onBlur={() => setEmailFocus(false)}
+                      value={email} onChange={e => setEmail(e.target.value)}
+
+                    ></Input>
+                    <FormFeedback>{error}</FormFeedback>
+                  </InputGroup> */}
+
+
                   {/* <FormGroup check>
                     <Label check>
                       <Input type="checkbox"></Input>
@@ -172,7 +235,7 @@ function LoginPage(props) {
                     </InputGroupAddon>
                     <Input invalid
                       placeholder="Email..."
-                      type="text"
+                      type="email"
                       
                       onFocus={() => setEmailFocus(true)}
                       onBlur={() => setEmailFocus(false)}
@@ -198,7 +261,8 @@ function LoginPage(props) {
                         type="password"
                         onFocus={() => setFirstFocus(true)}
                         onBlur={() => setFirstFocus(false)}
-                        value={password} onChange={e => setPassword(e.target.value)}
+                        value={password}
+                         onChange={e => setPassword(e.target.value)}
 
                       ></Input>
                     </InputGroup> */}
@@ -213,6 +277,7 @@ function LoginPage(props) {
                       color="info"
                       // href="#pablo"
                       // onClick={e => e.preventDefault()}
+                      // onClick={settingError}
                       size="md"
                     >
                       Login
@@ -221,7 +286,8 @@ function LoginPage(props) {
                       <h6>
                         <a
                           className="link"
-                          href="#pablo"
+                          to='/signup-page'
+                          href="http://localhost:3000/signup-page"
                           onClick={e => e.preventDefault()}
                         >
                           Create Account

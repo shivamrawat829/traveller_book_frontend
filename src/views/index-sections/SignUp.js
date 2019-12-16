@@ -95,29 +95,13 @@ function SignUp() {
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
-                      placeholder="First Name..."
+                      placeholder="Name..."
                       type="text"
                       onFocus={() => setFirstFocus(true)}
                       onBlur={() => setFirstFocus(false)}
                     ></Input>
                   </InputGroup>
-                  <InputGroup
-                    className={
-                      "no-border" + (lastFocus ? " input-group-focus" : "")
-                    }
-                  >
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="now-ui-icons text_caps-small"></i>
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      placeholder="Last Name..."
-                      type="text"
-                      onFocus={() => setLastFocus(true)}
-                      onBlur={() => setLastFocus(false)}
-                    ></Input>
-                  </InputGroup>
+            
                   <InputGroup
                     className={
                       "no-border" + (emailFocus ? " input-group-focus" : "")
@@ -130,11 +114,30 @@ function SignUp() {
                     </InputGroupAddon>
                     <Input
                       placeholder="Email..."
-                      type="text"
+                      type="email"
                       onFocus={() => setEmailFocus(true)}
                       onBlur={() => setEmailFocus(false)}
                     ></Input>
                   </InputGroup>
+
+                  <InputGroup
+                    className={
+                      "no-border" + (lastFocus ? " input-group-focus" : "")
+                    }
+                  >
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="now-ui-icons text_caps-small"></i>
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="Password..."
+                      type="password"
+                      onFocus={() => setLastFocus(true)}
+                      onBlur={() => setLastFocus(false)}
+                    ></Input>
+                  </InputGroup>
+
                 </CardBody>
                 <CardFooter className="text-center">
                   <Button
@@ -159,7 +162,7 @@ function SignUp() {
               size="lg"
               tag={Link}
             >
-              View Login Page
+              Already Have an Account? Login Now...
             </Button>
           </div>
         </Container>

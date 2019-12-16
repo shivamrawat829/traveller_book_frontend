@@ -36,7 +36,8 @@ import * as actions from '../store/actions/auth';
 
 import { Button, Container, Row, Col,ModalHeader,
    ModalBody, ModalFooter,Label,
-     UncontrolledTooltip, Modal, FormGroup, InputGroupText, Input, InputGroup , InputGroupAddon} from "reactstrap";
+     UncontrolledTooltip, Modal, FormGroup, InputGroupText, Input, InputGroup
+      , FormFeedback, InputGroupAddon, Popover, PopoverHeader, PopoverBody} from "reactstrap";
 
 
      const mapStateToProps = (state) => {
@@ -71,7 +72,28 @@ function Index(props) {
   const [description, setDescription] = React.useState("");
   const [rating, setRating] = React.useState("");
   const [place, setPlace] = React.useState("");
+
+  const [journey, setJourney] = React.useState("");
   const fileInput = useRef(null);
+
+  const[error, setError] = React.useState('')
+  const[journey_error, setJourneyError] = React.useState('')
+  // const[setError] = React.useState('')
+
+
+  const settingTitleError = (event) =>{
+    console.log("error", event)
+    setError("Title Must not be Empty...");
+  };
+
+
+
+  const setJourneyErrorM = (event) =>{
+    console.log("error", event)
+    setJourneyError("Journey Date Required...");
+  };
+
+
 
   const {
     buttonLabel,
@@ -83,25 +105,42 @@ function Index(props) {
   const toggle = () => setModal(!modal);
 
   const submitHandler = e => {
-    let url = 'http://127.0.0.1:8000/api/create/';
-    console.log("eeeeeeeeeeeeeeeeeeeeeeee", e, "ibfdijbfdskjbofb", title,"image",  fileInput.current.files[0] , "des",description, 
-    "place",place,"rating", rating)
-    let form_data = new FormData();
-    form_data.append('image', fileInput.current.files[0], fileInput.current.files[0].name);
-		form_data.append('title', title);
-		form_data.append('description', description);
-		form_data.append('place', place);
-    form_data.append('rating', rating);
-  
-        axios.post(url, form_data, {
-          headers: {
-          'content-type': 'multipart/form-data'
-          }
-        })
-          .then(res => {
-            console.log("SUCCESS", res);
+
+    if (title.length === 0)
+    {
+      console.log("eeeeeeeeeeeeeeeeeeeeeeee", e)
+      settingTitleError();
+
+    }
+    if (journey.length === 0)
+    {
+
+      setJourneyErrorM();
+
+    }
+    else{
+      let url = 'http://127.0.0.1:8000/api/create/';
+      console.log("eeeeeeeeeeeeeeeeeeeeeeee", e, "ibfdijbfdskjbofb", title,"image",  fileInput.current.files[0] , "des",description, 
+      "place",place,"rating", rating)
+      let form_data = new FormData();
+      form_data.append('image', fileInput.current.files[0], fileInput.current.files[0].name);
+      form_data.append('title', title);
+      form_data.append('description', description);
+      form_data.append('place', place);
+      form_data.append('rating', rating);
+    
+          axios.post(url, form_data, {
+            headers: {
+            'content-type': 'multipart/form-data'
+            }
           })
-          .catch(err => console.log(err))
+            .then(res => {
+              console.log("SUCCESS", res);
+            })
+            .catch(err => console.log(err))
+    }
+
+ 
     e.preventDefault();
   }
 
@@ -144,20 +183,20 @@ function Index(props) {
 
         </div>
 
-                    {
-                    props.isAuthenticated ?
-    
-                    <Button onClick={toggle}
-                    className=" btn-icon btn-round btn-raised" color="#ffffff" id="tooltip331904899" size="lg"
-                    style={{position:'fixed',bottom:'20px',right:'10px',zIndex:'99',}}>
-                    <i className="fab fa-plus"></i>
-                    <UncontrolledTooltip delay={0} target="tooltip331904899">
-                    Add Post
-                    </UncontrolledTooltip>
-                    </Button>
-                    :
-                    <></>
-                    }
+            {
+            props.isAuthenticated ?
+
+              <Button onClick={toggle}
+                className=" btn-icon btn-round btn-raised" color="#ffffff" id="tooltip331904899" size="lg"
+                style={{position:'fixed',bottom:'20px',right:'10px',zIndex:'99',}}>
+                <i className="fab fa-plus"></i>
+                <UncontrolledTooltip delay={0} target="tooltip331904899">
+                Add Post
+                </UncontrolledTooltip>
+              </Button>
+            :
+            <></>
+          }
 
         {/* <Button onClick={toggle}
                 className=" btn-icon btn-round btn-raised"
@@ -195,11 +234,36 @@ function Index(props) {
                               <i className="now-ui-icons location_pin"></i>
                             </InputGroupText>
                           </InputGroupAddon>
-                          <Input placeholder="Title For the Post..." type="text" onFocus={() => setFirstFocus(true)}
+                          <Input 
+                          placeholder="Title For the Post..." type="text" onFocus={() => setFirstFocus(true)}
                             onBlur={() => setFirstFocus(false)} value={title} onChange={e => setTitle(e.target.value)}
                           >
                           </Input>
+                        
+                          
                         </InputGroup>
+                        <h6 style={{color:'red',}}>{error}</h6>
+
+                        {/* <Popover
+                          placement="left"
+                          // isOpen={this.state.popover1}
+                          // target="popover1"
+                          className="popover-primary"
+                        ></Popover> */}
+                        
+                        {/* <Popover
+                          placement="left"
+                          isOpen={true}
+                          target="popover1"
+                          className="popover-primary"
+                        >
+                          <PopoverHeader>Popover On left</PopoverHeader>
+                          <PopoverBody>
+                            And here's some amazing content. It's very engaging. Right?
+                          </PopoverBody>
+                        </Popover> */}
+
+                        
 
                         <input type="file" ref={fileInput} onChange={forceUpdate}/>
                         <br/>
@@ -215,7 +279,9 @@ function Index(props) {
                           </InputGroupAddon>
                             <Input
                               placeholder="Place..." type="text" onFocus={() => setmiddleFocus(true)}
-                              onBlur={() => setmiddleFocus(false)} value={place} onChange={e => setPlace(e.target.value)}
+                              onBlur={() => setmiddleFocus(false)} 
+                              value={place} 
+                              onChange={e => setPlace(e.target.value)}
                             >
                             </Input>
                           </InputGroup>
@@ -256,11 +322,15 @@ function Index(props) {
                               <Datetime
                                 timeFormat={false}
                                 inputProps={{ placeholder: "Journey Date" }}
+                                value={journey} 
+                              onChange={e => setJourney(e.target.value)}
+
                               />
                             </FormGroup>
+                              <h6>{journey_error}</h6>
                  
                             <div className="send-button">
-                              <Button block className="btn-round" color="info" size="lg">Submit</Button>
+                              <Button id='popover1' block className="btn-round" color="info" size="lg">Submit</Button>
                             </div>
 
                         </Col>
