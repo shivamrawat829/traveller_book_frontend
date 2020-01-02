@@ -2,23 +2,8 @@ import React from "react";
 import {withRouter, NavLink} from "react-router-dom";
 
 // reactstrap components
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Container,
-  Col,
-  FormFeedback,
-  FormGroup,
-  FormText,
-  Label
+import {Button,Card,CardHeader,CardBody,CardFooter,Form,Input,InputGroupAddon,InputGroupText,InputGroup,
+  Container,Col,FormFeedback,FormGroup,FormText,Label,Spinner
 } from "reactstrap";
 import axios from "axios";
 import { connect } from 'react-redux';
@@ -30,6 +15,10 @@ import TransparentFooter from "../../container/Footers/TransparentFooter.js";
 
 const mapStateToProps = (state) => {
   console.log("is authenticated", state.token)
+
+  
+
+  
   return {
       loading: state.loading,
   error: state.error,
@@ -57,6 +46,9 @@ function LoginPage(props) {
   const [password, setPassword] = React.useState("");
 
   const[error, setError] = React.useState('')
+
+  const[loading, setLoading] = React.useState(false)
+
   // const[setError] = React.useState('')
 
 
@@ -65,7 +57,23 @@ function LoginPage(props) {
     setError("password is incorrect");
   };
 
+  const settingLoading = (event) =>{
+    console.log("loadingloadingloadingloadingloading", loading)
+    setLoading(true);
+    console.log("loadingloadingloadingloadingloading", loading)
+
+  };
+
+
   React.useEffect(() => {
+    console.log("LOdingggggggggggggggggggggg", props)
+
+    if (props.isAuthenticated === true)
+  {
+    console.log("yes it is")
+    props.history.push('index');
+  }
+
     document.body.classList.add("login-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
@@ -78,7 +86,8 @@ function LoginPage(props) {
   });
 
   const submitHandler = e => {
-
+    
+    
     console.log("eeeeeeeeeeeeeeeeeeeeeeee", e, "ibfdijbfdskjbofb","email", email, "pasword", password)
 
     if (password.length < 5) {
@@ -88,9 +97,12 @@ function LoginPage(props) {
     }
 
     else{
+      // settingLoading();
       e.preventDefault();
       props.onAuth(email, password);
-      props.history.push('index');
+      // setLoading(false);
+      // setLoading(false)
+      // props.history.push('index');
       
     }
     
@@ -112,6 +124,8 @@ function LoginPage(props) {
         ></div>
         <div className="content">
           <Container>
+  
+
             <Col className="ml-auto mr-auto" md="4">
               <Card className="card-login card-plain">
                 <Form onSubmit={submitHandler} action="" className="form" method="">
@@ -282,6 +296,8 @@ function LoginPage(props) {
                     >
                       Login
                     </Button>
+
+                    
                     <div className="pull-left">
                       <h6>
                         <a
