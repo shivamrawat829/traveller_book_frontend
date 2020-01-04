@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useEffect} from "react";
+import axios from 'axios';
 
 // reactstrap components
 import {
@@ -33,6 +34,32 @@ function ProfilePage() {
       document.body.classList.remove("sidebar-collapse");
     };
   });
+
+  useEffect(()  => {
+
+    const fetchPosts = async () => {
+      // setLoading(true);
+      console.log("loading ....")
+      const res = await axios.get("http://127.0.0.1:8000/users/posts/1/");
+      // const res = await axios.get("https://jsonplaceholder.typicode.com/photos");
+      // .then(res =>{
+      //   console.log(res)
+      //   setPosts(res.data);
+      // }
+      //   )
+      //   .catch(err => {
+      //     console.log(err)
+      //   });
+
+      // setPosts(res.data);
+   
+      console.log("userssssssssssssss...", res)
+    };
+
+    fetchPosts();}, []);
+
+
+
   return (
     <>
       <ExamplesNavbar />

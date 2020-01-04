@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 // reactstrap components
 import {
@@ -13,6 +13,8 @@ import {
   Col,
   UncontrolledTooltip
 } from "reactstrap";
+
+import axios from 'axios';
 
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
@@ -30,6 +32,9 @@ function ProfilePage() {
       document.body.classList.remove("sidebar-collapse");
     };
   });
+
+  
+
   return (
     <>
       <ExamplesNavbar />
