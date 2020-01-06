@@ -3,8 +3,7 @@ import './App.css';
 import Home from './container/Home'
 import {
   BrowserRouter as Router,
-  Route ,
-  Switch, Redirect
+  Route 
 } from "react-router-dom";
 import AdventureDetail from './container/AdventureDetail/AdventureDetail'
 // import PageNotFound from './components/PagNotFound';
@@ -26,12 +25,12 @@ import Index from "./views/Index.js";
 import NucleoIcons from "./views/NucleoIcons.js";
 import LoginPage from "./views/examples/LoginPage.js";
 import LandingPage from "./views/examples/LandingPage.js";
-import axios from "axios";
 import AddPosts from './views/examples/AddPosts';
 
 import SignUp from './views/index-sections/SignUp';
 
 import Demo from './views/index-sections/demosignin';
+import UserPosts from './views/examples/UserPost';
 
 
 
@@ -57,6 +56,8 @@ render(){
       <Route path='/adventure_detail' exact strict component={AdventureDetail}></Route>
       <Route path='/profile' exact strict component={Profile}></Route>
       <Route path='/profilepage' exact strict component={ProfilePage}></Route>
+
+      <Route path='/user_posts' exact strict component={UserPosts}></Route>
       {/* <Route component={PageNotFound}/> */}
       {/* <Home></Home> */}
 

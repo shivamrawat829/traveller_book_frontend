@@ -4,22 +4,17 @@ import { Link } from "react-router-dom";
 import {
   Button,
   Collapse,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
   NavbarBrand,
   Navbar,
   NavItem,
   NavLink,
   Nav,
   Container,
-  UncontrolledTooltip,
-  Modal
+  UncontrolledTooltip
 } from "reactstrap";
 
-import SignUp from '../../views/index-sections/SignUp';
-import axios from 'axios';
+// import SignUp from '../../views/index-sections/SignUp';
+// import axios from 'axios';
 import {withRouter} from "react-router-dom";
 
 import { connect } from 'react-redux';

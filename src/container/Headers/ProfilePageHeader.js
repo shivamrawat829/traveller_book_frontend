@@ -1,14 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 
 // reactstrap components
 import { Container } from "reactstrap";
 
 // core components
 
-function ProfilePageHeader() {
+function ProfilePageHeader(props) {
   let pageHeader = React.createRef();
 
+ 
+
+  const[noOfPosts, setnoOfPosts] = useState(0)
+
   React.useEffect(() => {
+
+    // console.log("this time", props.location.search, "and", props.location.hash)
+    const fetchUserData = async () => {
+      // console.log("userssssssssssssss.ijbfdsijbfbs..",props)
+      setnoOfPosts(156626)
+    };
+
+    fetchUserData();
+
     if (window.innerWidth > 991) {
       const updateScroll = () => {
         let windowScrollTop = window.pageYOffset / 3;
@@ -38,15 +51,16 @@ function ProfilePageHeader() {
           <div className="photo-container">
             <img alt="..." src={require("../../assets/img/julie.jpg")}></img>
           </div>
-          <h3 className="title">Rajesh Rawat</h3>
-          <p className="category">Air Force Personal</p>
+        <h3 className="title">{props.username}</h3>
+        <p className="category">Air Force Personal</p>
+        <p className="email">{props.email}</p>
           <div className="content">
             <div className="social-description">
               <h2>26</h2>
               <p>Followers</p>
             </div>
             <div className="social-description">
-              <h2>19</h2>
+              <h2>{noOfPosts}</h2>
               <p>Posts</p>
             </div>
             <div className="social-description">

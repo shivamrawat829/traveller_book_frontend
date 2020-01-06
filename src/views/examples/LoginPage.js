@@ -1,11 +1,11 @@
 import React from "react";
-import {withRouter, NavLink} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 
 // reactstrap components
-import {Button,Card,CardHeader,CardBody,CardFooter,Form,Input,InputGroupAddon,InputGroupText,InputGroup,
-  Container,Col,FormFeedback,FormGroup,FormText,Label,Spinner
+import {Button,Card,CardHeader,CardBody,CardFooter,Form,Input,
+  Container,Col,FormFeedback,FormGroup,FormText
 } from "reactstrap";
-import axios from "axios";
+// import axios from "axios";
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/auth';
 
@@ -35,11 +35,11 @@ const mapDispatchToProps = dispatch => {
 
 
 function LoginPage(props) {
-  const [leftFocus, setLeftFocus] = React.useState(false);
-  const [rightFocus, setRightFocus] = React.useState(false);
+  // const [leftFocus, setLeftFocus] = React.useState(false);
+  // const [rightFocus, setRightFocus] = React.useState(false);
 
   const [firstFocus, setFirstFocus] = React.useState(false);
-  const [lastFocus, setLastFocus] = React.useState(false);
+  // const [lastFocus, setLastFocus] = React.useState(false);
   const [emailFocus, setEmailFocus] = React.useState(false);
 
   const [email, setEmail] = React.useState("");
@@ -57,12 +57,12 @@ function LoginPage(props) {
     setError("password is incorrect");
   };
 
-  const settingLoading = (event) =>{
-    console.log("loadingloadingloadingloadingloading", loading)
-    setLoading(true);
-    console.log("loadingloadingloadingloadingloading", loading)
+  // const settingLoading = (event) =>{
+  //   console.log("loadingloadingloadingloadingloading", loading)
+  //   setLoading(true);
+  //   console.log("loadingloadingloadingloadingloading", loading)
 
-  };
+  // };
 
 
   React.useEffect(() => {

@@ -2,14 +2,9 @@ import React from "react";
 
 // reactstrap components
 import {
-  Badge,
-  NavItem,
-  NavLink,
-  Nav,
   Pagination,
   PaginationItem,
   PaginationLink,
-  Progress,
   Container,
   Row,
   Col
@@ -26,7 +21,7 @@ function PaginationSection({ postsPerPage, totalPosts , paginate}) {
     pageNumbers.push(i);
   }
 
-  const [pills, setPills] = React.useState("2");
+  // const [pills, setPills] = React.useState("2");
   return (
     <>
       <div className="section section-pagination">

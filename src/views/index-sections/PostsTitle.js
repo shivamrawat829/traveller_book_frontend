@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState} from "react";
 
 // reactstrap components
 import {
@@ -6,6 +6,10 @@ import {
   Row,
   Col
 } from "reactstrap";
+import {
+  NavLink
+} from "react-router-dom";
+
 
 import Pagination from './Pagination';
 import axios from "axios";
@@ -16,13 +20,14 @@ function PostsTitle() {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setpostsPerPage] = useState(9);
 
+
   
   useEffect(()  => {
 
     const fetchPosts = async () => {
       setLoading(true);
       console.log("loading ....")
-      const res = await axios.get("http://127.0.1:8000/api/posts");
+      const res = await axios.get("http://127.0.1:8000/api/posts1");
       // const res = await axios.get("https://jsonplaceholder.typicode.com/photos");
       // .then(res =>{
       //   console.log(res)
@@ -35,7 +40,7 @@ function PostsTitle() {
 
       setPosts(res.data);
       setLoading(false);
-      console.log("loading ENDD....")
+      console.log("loading ENDD....",res.data)
     };
 
     fetchPosts();}, []);
@@ -76,12 +81,21 @@ function PostsTitle() {
                   {
                     currentPosts.map(post => 
                       <Col md="4" key ={post.id}>
-                      <img
-                          alt="..."
-                          className="img-raised"
-                          src={post.image}    
-                          key = {post.id}>
-                      </img>
+                        <NavLink to={{pathname:"/user_posts",
+                                      search:`?id=${post.id}`,
+                                      hash:`#${post.place}`,
+                                  state:{
+                                      post_id:post.id
+                                  }}}>
+                        
+                          <img
+                              alt="..."
+                              className="img-raised"
+                              src={post.image}    
+                              key = {post.id}>
+                          </img>
+                        
+                      </NavLink>
                       </Col>)
                   }
                 </Row>
