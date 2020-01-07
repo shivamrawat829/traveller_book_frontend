@@ -34,7 +34,7 @@ import * as actions from '../store/actions/auth';
 
 
 
-import { Button, Row, Col,ModalHeader,
+import { Badge, Button, Row, Col,ModalHeader,
    ModalBody,Label,
      UncontrolledTooltip, Modal, FormGroup, InputGroupText, Input, InputGroup
       , InputGroupAddon} from "reactstrap";
@@ -59,6 +59,13 @@ import { Button, Row, Col,ModalHeader,
 
     
 const useForceUpdate = () => useState()[1];
+
+const _defaultPlace = [
+  {
+    place1: "",
+    description1: ""
+  },
+];
 
 
 function Index(props) {
@@ -102,9 +109,14 @@ function Index(props) {
 
  
   const [modal, setModal] = useState(false);
+  const [placeis, addPlace] = useState(false);
+
   const toggle = () => setModal(!modal);
 
   const submitHandler = e => {
+
+
+
 
     if (title.length === 0)
     {
@@ -144,6 +156,37 @@ function Index(props) {
     e.preventDefault();
   }
 
+  const [place_is, setPlacenew] = useState(_defaultPlace);
+
+  const handlePlaceChange = event => {
+    const _tempplace = [...place_is];
+    _tempplace[event.target.dataset.id][event.target.name] = event.target.value;
+
+    setPlacenew(_tempplace);
+
+    console.log("rgfdgdfg", _tempplace)
+  };
+
+  const addNewPlace = () => {
+    setPlacenew(prevPlace => [...prevPlace, { place1: "", description1: "" }]);
+  };
+
+  // const getTotalCosts = () => {
+  //   return place_is.reduce((total, item) => {
+  //     return total + Number(item.price);
+  //   }, 0);
+  // };
+
+  function handleRemove(i) {
+    const values = [...place_is];
+    values.splice(i, 1);
+    setPlacenew(values);
+  }
+
+
+
+  
+
 
   React.useEffect(() => {
 
@@ -160,6 +203,8 @@ function Index(props) {
   });
   return (
     <>
+
+    
       <IndexNavbar />
       <div className="wrapper">
         <IndexHeader />
@@ -222,6 +267,8 @@ function Index(props) {
               <ModalHeader toggle={toggle}>Upload a Post...</ModalHeader>
                 <ModalBody>
                 <form onSubmit={submitHandler}> 
+
+
                       <Row>
                         <Col className="text-center ml-auto mr-auto" md="10" lg="10">
                         <InputGroup
@@ -328,6 +375,99 @@ function Index(props) {
                               />
                             </FormGroup>
                               <h6>{journey_error}</h6>
+
+
+                              {/* <i id='add_place' 
+                              className="now-ui-icons ui-1_simple-add"
+                              onClick={e => {
+                                e.preventDefault();
+                                addPlace(!placeis);
+                              }}
+                              ></i> */}
+
+                            {/* <i id='add_place2' 
+                              className="now-ui-icons ui-1_simple-add"
+                              onClick={() => handleAdd()}
+                              ></i> */}
+                              <a id='add_place'  href='#'>
+                              <Badge onClick={addNewPlace} color="info" className="mr-1">
+                                  Add Place
+                                </Badge>
+                                </a>
+                                <UncontrolledTooltip target="#add_place">
+                              Add Place
+                            </UncontrolledTooltip>
+
+                              {place_is.map((item, index) => {
+                                      return (
+                                        <div key={index}>
+                                         
+
+                                          {/* <input type="file" ref={fileInput} onChange={forceUpdate}/> */}
+                                              <br/>
+                                              <InputGroup
+                                                className="input-lg"
+                                              >
+                                                <InputGroupAddon addonType="prepend">
+                                                  <InputGroupText>
+                                                    <i className="now-ui-icons location_pin"></i>
+                                                  </InputGroupText>
+                                                </InputGroupAddon>
+                                                  <Input
+                                                    placeholder="Place..." type="text" 
+                                                    // onFocus={() => setmiddleFocus(true)}
+                                                    // onBlur={() => setmiddleFocus(false)} 
+                                                    // value={fields.value}
+                                                    data-id={index}
+                                  
+                                                    value={item.place1}
+                                                    onChange={handlePlaceChange}
+                                                    // onChange={e => handleChange(idx, e)}
+                                                  >
+                                                  </Input>
+                                                </InputGroup>
+                                                <InputGroup
+                                                  className={
+                                                    "input-lg" + (lastFocus ? " input-group-focus" : "")
+                                                  }
+                                                >
+                                                  <InputGroupAddon addonType="prepend">
+                                                    <InputGroupText>
+                                                      <i className="now-ui-icons files_paper"></i>
+                                                    </InputGroupText>
+                                                    </InputGroupAddon>
+                                                    <Input
+                                                      data-id={index}
+                                  
+                                                      value={item.description1}
+                                                      onChange={handlePlaceChange}
+                                                      
+                                                    >
+                                                    </Input>
+                                                </InputGroup>
+
+                                               
+                                                <Button onClick={() => handleRemove(index)} color="danger">Remove</Button>
+
+
+
+                                        </div>
+                                      );
+                                    })}
+                                    
+
+
+                            
+
+                            { placeis ?
+                            <h1 className='f'>THIS ONLY SHOW ON TRUE</h1>
+                              :
+                              <br/>
+                            }
+
+
+                            
+
                  
                             <div className="send-button">
                               <Button id='popover1' block className="btn-round" color="info" size="lg">Submit</Button>

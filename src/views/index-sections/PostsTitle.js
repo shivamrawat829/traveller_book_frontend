@@ -81,6 +81,7 @@ function PostsTitle() {
                   {
                     currentPosts.map(post => 
                       <Col md="4" key ={post.id}>
+                      
                         <NavLink to={{pathname:"/user_posts",
                                       search:`?id=${post.id}`,
                                       hash:`#${post.place}`,
