@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 
 // reactstrap components
 import {
   Container,
   Row,
-  Col
+  Col, Spinner
 } from "reactstrap";
 import {
   NavLink
@@ -16,34 +16,45 @@ import axios from "axios";
 
 function PostsTitle() {
   const[posts, setPosts]= useState([])
-  const[loading, setLoading] = useState([false])
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setpostsPerPage] = useState(9);
-
-
+  const [postsPerPage, setpostsPerPage] = useState(100);
+  const [url, setUrl] = useState(
+    'http://127.0.1:8000/api/posts1',
+  );
   
-  useEffect(()  => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const unmounted = useRef(false)
+  let didCancel = false;
 
-    const fetchPosts = async () => {
-      setLoading(true);
-      console.log("loading ....")
-      const res = await axios.get("http://127.0.1:8000/api/posts1");
-      // const res = await axios.get("https://jsonplaceholder.typicode.com/photos");
-      // .then(res =>{
-      //   console.log(res)
-      //   setPosts(res.data);
-      // }
-      //   )
-      //   .catch(err => {
-      //     console.log(err)
-      //   });
 
-      setPosts(res.data);
-      setLoading(false);
-      console.log("loading ENDD....",res.data)
+  useEffect(() => {
+    const fetchData = async () => {
+      didCancel = true
+      setIsError(false);
+      setIsLoading(true);
+      unmounted.current = true
+      console.log("unmountedd111111", didCancel)
+     
+      try {
+        const result = await axios(url);
+        // setData(result.data);
+        setPosts(result.data);
+      } catch (error) {
+        setIsError(true);
+      }
+      setIsLoading(false);
+      didCancel = false
+      unmounted.current = false
+      console.log("unmountedd22222222222", didCancel)
+
     };
+    fetchData();
+  }, []);
 
-    fetchPosts();}, []);
+  // if(isLoading === true) return <Spinner />
+
+
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -75,8 +86,18 @@ function PostsTitle() {
             You will Love it
             </h5>
             <Row>
-                <Col className="ml-auto mr-auto" md="10">
-                <Row className="collections">
+                <Col className="ml-auto mr-auto" md="12">
+
+                {didCancel ? (
+                  <div>Loading ...</div>
+                ) : (
+                  <h1>not lodingggggggg</h1>
+                )}
+
+
+                {didCancel?
+                        <Spinner type="grow" color="success" />:
+                        <Row className="collections">
 
                   {
                     currentPosts.map(post => 
@@ -100,6 +121,10 @@ function PostsTitle() {
                       </Col>)
                   }
                 </Row>
+              
+              }
+
+                
                 </Col>
             </Row>
           </Container>

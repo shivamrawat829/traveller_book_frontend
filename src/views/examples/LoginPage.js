@@ -3,7 +3,7 @@ import {withRouter} from "react-router-dom";
 
 // reactstrap components
 import {Button,Card,CardHeader,CardBody,CardFooter,Form,Input,
-  Container,Col,FormFeedback,FormGroup,FormText
+  Container,Col,FormFeedback,FormGroup,FormText, Spinner
 } from "reactstrap";
 // import axios from "axios";
 import { connect } from 'react-redux';
@@ -14,13 +14,10 @@ import ExamplesNavbar from "../../container/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "../../container/Footers/TransparentFooter.js";
 
 const mapStateToProps = (state) => {
-  console.log("is authenticated", state.token)
-
-  
-
+  // console.log("is authenticated", state.token)
   
   return {
-      loading: state.loading,
+  loading: state.loading,
   error: state.error,
   isAuthenticated: state.token !== null
   }
@@ -41,36 +38,23 @@ function LoginPage(props) {
   const [firstFocus, setFirstFocus] = React.useState(false);
   // const [lastFocus, setLastFocus] = React.useState(false);
   const [emailFocus, setEmailFocus] = React.useState(false);
-
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-
   const[error, setError] = React.useState('')
-
   const[loading, setLoading] = React.useState(false)
-
   // const[setError] = React.useState('')
-
 
   const settingError = (event) =>{
     console.log("error", event)
     setError("password is incorrect");
   };
 
-  // const settingLoading = (event) =>{
-  //   console.log("loadingloadingloadingloadingloading", loading)
-  //   setLoading(true);
-  //   console.log("loadingloadingloadingloadingloading", loading)
-
-  // };
-
-
   React.useEffect(() => {
     console.log("LOdingggggggggggggggggggggg", props)
 
     if (props.isAuthenticated === true)
   {
-    console.log("yes it is")
+    // console.log("yes it is")
     props.history.push('index');
   }
 
@@ -97,17 +81,19 @@ function LoginPage(props) {
     }
 
     else{
-      // settingLoading();
       e.preventDefault();
-      props.onAuth(email, password);
+      setLoading(true)
+
+      setTimeout(() => {
+        props.onAuth(email, password);
+      }, 3000);
+      // props.onAuth(email, password);
+      setLoading(false)
+      console.log("loadinggg2222222222", loading)
       // setLoading(false);
-      // setLoading(false)
       // props.history.push('index');
       
     }
-    
-	  // props.history.push('index');
-    // e.preventDefault();
   }
 
 
@@ -321,6 +307,11 @@ function LoginPage(props) {
                         </a>
                       </h6>
                     </div>
+                        {loading?
+                        <Spinner type="grow" color="success" />:
+                        <br/>}
+                    
+
                   </CardFooter>
                 </Form>
               </Card>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -19,6 +19,7 @@ import {withRouter} from "react-router-dom";
 
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/auth';
+import axios from 'axios';
 
 
 
@@ -52,7 +53,16 @@ function IndexNavbar(props) {
 
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
+
+
+  const [url, setUrl] = useState(
+    'http://127.0.1:8000/api/get_user_data',
+  );
+
+  
+
   React.useEffect(() => {
+    console.log("prpsssssss in navbar", props)
     const updateNavbarColor = () => {
       if (
         document.documentElement.scrollTop > 399 ||
@@ -71,6 +81,23 @@ function IndexNavbar(props) {
       window.removeEventListener("scroll", updateNavbarColor);
     };
   });
+  
+  React.useEffect(() => {
+    console.log("prpsssssss 0000000000 navbar", props)
+    const fetchData = async () => {
+      try {
+        console.log("prpsssssss 1111111in navbar", props)
+        const result = await axios(url);
+       
+      } catch (error) {
+      }
+ 
+     
+
+    };
+    fetchData();
+  }, [url]);
+
   return (
     <>
       {collapseOpen ? (
@@ -85,16 +112,7 @@ function IndexNavbar(props) {
       <Navbar className={"fixed-top " + navbarColor} expand="lg" color="info">
         <Container>
           <div className="navbar-translate">
-            <NavbarBrand
-              href="https://demos.creative-tim.com/now-ui-kit-react/#/index?ref=nukr-index-navbar"
-              target="_blank"
-              id="navbar-brand"
-            >
-              About Us
-            </NavbarBrand>
-            {/* <UncontrolledTooltip target="#navbar-brand">
-              Designed by Invision. Coded by Creative Tim
-            </UncontrolledTooltip> */}
+            
             <button
               className="navbar-toggler navbar-toggler"
               onClick={() => {

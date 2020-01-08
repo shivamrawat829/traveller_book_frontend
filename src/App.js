@@ -3,7 +3,7 @@ import './App.css';
 import Home from './container/Home'
 import {
   BrowserRouter as Router,
-  Route 
+  Route , Link, Switch
 } from "react-router-dom";
 import AdventureDetail from './container/AdventureDetail/AdventureDetail'
 // import PageNotFound from './components/PagNotFound';
@@ -31,7 +31,7 @@ import SignUp from './views/index-sections/SignUp';
 
 import Demo from './views/index-sections/demosignin';
 import UserPosts from './views/examples/UserPost';
-
+import PagNotFound from './views/examples/PageNotFound';
 
 
 
@@ -52,6 +52,7 @@ render(){
   return (
     <Router>
     <div className="App">
+    <Switch>
       <Route path='/' exact strict component={Home}{...this.props}></Route>
       <Route path='/adventure_detail' exact strict component={AdventureDetail}></Route>
       <Route path='/profile' exact strict component={Profile}></Route>
@@ -78,8 +79,10 @@ render(){
         <Route path="/add-posts" render={props => <AddPosts {...props} />} />
 
         <Route path="/demo" render={props => <Demo {...props} />} />
+        <Route component={PagNotFound} />
         {/* <Redirect to="/index" />
         <Redirect from="/" to="/index" /> */}
+        </Switch>
 
     </div>
     </Router>
@@ -89,7 +92,8 @@ render(){
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.token !== null
+    isAuthenticated: state.token !== null,
+    token_is : state.token
   }
 }
 

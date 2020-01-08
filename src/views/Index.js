@@ -43,9 +43,10 @@ import { Badge, Button, Row, Col,ModalHeader,
      const mapStateToProps = (state) => {
       console.log("is authenticated", state.token)
       return {
-          loading: state.loading,
+      loading: state.loading,
       error: state.error,
-      isAuthenticated: state.token !== null
+      isAuthenticated: state.token !== null,
+      user_token : state.token
       }
     }
     
@@ -62,16 +63,45 @@ const useForceUpdate = () => useState()[1];
 
 const _defaultPlace = [
   {
-    place1: "",
-    description1: ""
+    place1: "dfsdfs",
+    description1: "sdfsdf"
   },
+  {
+    place1: "12345",
+    description1: "67890"
+  },
+
 ];
 
 
 function Index(props) {
 
-  const forceUpdate = useForceUpdate();
+ 
+  
 
+
+
+  const [place_is, setPlacenew] = useState(_defaultPlace);
+
+  const handlePlaceChange = event => {
+    const _tempplace = [...place_is];
+    console.log("2342342423423", event.target, event.target.name)
+    _tempplace[event.target.dataset.id][event.target.place1] = event.target.value;
+    setPlacenew(_tempplace);
+    console.log("rgfdgdfg", _tempplace)
+  };
+
+  const addNewPlace = () => {
+    setPlacenew(prevPlace => [...prevPlace, { place1: "", description1: "" }]);
+  };
+
+  function handleRemove(i) {
+    const values = [...place_is];
+    values.splice(i, 1);
+    setPlacenew(values);
+  }
+
+  const forceUpdate = useForceUpdate();
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
   const [middleFocus, setmiddleFocus] = React.useState(false);
@@ -86,27 +116,20 @@ function Index(props) {
   const[error, setError] = React.useState('')
   const[journey_error, setJourneyError] = React.useState('')
   // const[setError] = React.useState('')
-
-
   const settingTitleError = (event) =>{
     console.log("error", event)
     setError("Title Must not be Empty...");
   };
-
-
 
   const setJourneyErrorM = (event) =>{
     console.log("error", event)
     setJourneyError("Journey Date Required...");
   };
 
-
-
   const {
     buttonLabel,
     className
   } = props;
-
  
   const [modal, setModal] = useState(false);
   const [placeis, addPlace] = useState(false);
@@ -124,12 +147,12 @@ function Index(props) {
       settingTitleError();
 
     }
-    if (journey.length === 0)
-    {
+    // if (journey.length === 0)
+    // {
 
-      setJourneyErrorM();
+    //   setJourneyErrorM();
 
-    }
+    // }
     else{
       let url = 'http://127.0.0.1:8000/api/create/';
       console.log("eeeeeeeeeeeeeeeeeeeeeeee", e, "ibfdijbfdskjbofb", title,"image",  fileInput.current.files[0] , "des",description, 
@@ -156,34 +179,6 @@ function Index(props) {
     e.preventDefault();
   }
 
-  const [place_is, setPlacenew] = useState(_defaultPlace);
-
-  const handlePlaceChange = event => {
-    const _tempplace = [...place_is];
-    _tempplace[event.target.dataset.id][event.target.name] = event.target.value;
-
-    setPlacenew(_tempplace);
-
-    console.log("rgfdgdfg", _tempplace)
-  };
-
-  const addNewPlace = () => {
-    setPlacenew(prevPlace => [...prevPlace, { place1: "", description1: "" }]);
-  };
-
-  // const getTotalCosts = () => {
-  //   return place_is.reduce((total, item) => {
-  //     return total + Number(item.price);
-  //   }, 0);
-  // };
-
-  function handleRemove(i) {
-    const values = [...place_is];
-    values.splice(i, 1);
-    setPlacenew(values);
-  }
-
-
 
   
 
@@ -205,7 +200,7 @@ function Index(props) {
     <>
 
     
-      <IndexNavbar />
+      <IndexNavbar {...props}/>
       <div className="wrapper">
         <IndexHeader />
         <div className="main">
@@ -389,14 +384,12 @@ function Index(props) {
                               className="now-ui-icons ui-1_simple-add"
                               onClick={() => handleAdd()}
                               ></i> */}
-                              <a id='add_place'  href='#'>
+                              <a   href='#'>
                               <Badge onClick={addNewPlace} color="info" className="mr-1">
                                   Add Place
                                 </Badge>
                                 </a>
-                                <UncontrolledTooltip target="#add_place">
-                              Add Place
-                            </UncontrolledTooltip>
+                     
 
                               {place_is.map((item, index) => {
                                       return (
@@ -419,8 +412,9 @@ function Index(props) {
                                                     // onBlur={() => setmiddleFocus(false)} 
                                                     // value={fields.value}
                                                     data-id={index}
-                                  
-                                                    value={item.place1}
+                                                   
+                                                    defaultValue ={item.place1}
+                                                   
                                                     onChange={handlePlaceChange}
                                                     // onChange={e => handleChange(idx, e)}
                                                   >
@@ -438,8 +432,8 @@ function Index(props) {
                                                     </InputGroupAddon>
                                                     <Input
                                                       data-id={index}
-                                  
-                                                      value={item.description1}
+                                                      
+                                                      defaultValue={item.description1}
                                                       onChange={handlePlaceChange}
                                                       
                                                     >
