@@ -1,11 +1,9 @@
 import React from 'react';
 import './App.css';
-import Home from './container/Home'
 import {
   BrowserRouter as Router,
-  Route , Link, Switch
+  Route , Switch
 } from "react-router-dom";
-import AdventureDetail from './container/AdventureDetail/AdventureDetail'
 // import PageNotFound from './components/PagNotFound';
 // styles for this kit
 import "./assets/css/bootstrap.min.css";
@@ -17,7 +15,6 @@ import "./assets/demo/nucleo-icons-page-styles.css";
 import { connect } from 'react-redux';
 //import BaseRouter from './routes';push
 import * as actions from './store/actions/auth';
-import Profile from './container/Profile/Profile';
 import ProfilePage from './container/ProfilePage/ProfilePage';
 
 // pages for this kit
@@ -53,16 +50,8 @@ render(){
     <Router>
     <div className="App">
     <Switch>
-      <Route path='/' exact strict component={Home}{...this.props}></Route>
-      <Route path='/adventure_detail' exact strict component={AdventureDetail}></Route>
-      <Route path='/profile' exact strict component={Profile}></Route>
       <Route path='/profilepage' exact strict component={ProfilePage}></Route>
-
       <Route path='/user_posts' exact strict component={UserPosts}></Route>
-      {/* <Route component={PageNotFound}/> */}
-      {/* <Home></Home> */}
-
-
       <Route path="/index" render={props => <Index {...props} />} />
         <Route
           path="/nucleo-icons"
@@ -73,11 +62,8 @@ render(){
           render={props => <LandingPage {...props} />}
         />
         <Route path="/login-page" render={props => <LoginPage {...props} />} />
-
         <Route path="/signup-page" render={props => <SignUp {...props} />} />
-
         <Route path="/add-posts" render={props => <AddPosts {...props} />} />
-
         <Route path="/demo" render={props => <Demo {...props} />} />
         <Route component={PagNotFound} />
         {/* <Redirect to="/index" />

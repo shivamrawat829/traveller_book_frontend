@@ -4,7 +4,7 @@ import Datetime from "react-datetime";
 // reactstrap components
 // import {
 // } from "reactstrap";
-
+import { connect } from 'react-redux';
 // core components
 import IndexNavbar from "../container/Navbars/IndexNavbar.js";
 import IndexHeader from "../container/Headers/IndexHeader.js";
@@ -29,7 +29,7 @@ import PostsTitle from "./index-sections/PostsTitle";
 import axios from 'axios';
 import {withRouter} from "react-router-dom";
 
-import { connect } from 'react-redux';
+
 import * as actions from '../store/actions/auth';
 
 
@@ -37,7 +37,7 @@ import * as actions from '../store/actions/auth';
 import { Badge, Button, Row, Col,ModalHeader,
    ModalBody,Label,
      UncontrolledTooltip, Modal, FormGroup, InputGroupText, Input, InputGroup
-      , InputGroupAddon} from "reactstrap";
+      , InputGroupAddon, CustomInput} from "reactstrap";
 
 
      const mapStateToProps = (state) => {
@@ -307,7 +307,12 @@ function Index(props) {
 
                         
 
-                        <input type="file" ref={fileInput} onChange={forceUpdate}/>
+                        {/* <input type="file" ref={fileInput} onChange={forceUpdate}/> */}
+                        <InputGroup>
+        {/* <Label for="exampleCustomFileBrowser">File Browser with Custom Label</Label> */}
+        <CustomInput  type="file"  ref={fileInput} onChange={forceUpdate}  label="Choose Cover Pic...!" />
+      </InputGroup>
+
                         <br/>
                         <InputGroup
                           className={
@@ -327,22 +332,7 @@ function Index(props) {
                             >
                             </Input>
                           </InputGroup>
-                          <InputGroup
-                            className={
-                              "input-lg" + (lastFocus ? " input-group-focus" : "")
-                            }
-                          >
-                            <InputGroupAddon addonType="prepend">
-                              <InputGroupText>
-                                <i className="now-ui-icons files_paper"></i>
-                              </InputGroupText>
-                              </InputGroupAddon>
-                              <Input
-                                placeholder="Description..." type="text" onFocus={() => setLastFocus(true)} onBlur={() => setLastFocus(false)}
-                                
-                              >
-                              </Input>
-                          </InputGroup>
+                          
 
                           <Label for="exampleSelect">Rating</Label>
                             <Input className='input-lg' value={rating} onChange={e => setRating(e.target.value)} 

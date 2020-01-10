@@ -41,7 +41,7 @@ function LoginPage(props) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const[error, setError] = React.useState('')
-  const[loading, setLoading] = React.useState(false)
+ 
   // const[setError] = React.useState('')
 
   const settingError = (event) =>{
@@ -69,11 +69,10 @@ function LoginPage(props) {
     };
   });
 
+  const[loading, setLoading] = React.useState(false)
   const submitHandler = e => {
-    
-    
-    console.log("eeeeeeeeeeeeeeeeeeeeeeee", e, "ibfdijbfdskjbofb","email", email, "pasword", password)
-
+    setLoading(true)
+    // console.log("eeeeeeeeeeeeeeeeeeeeeeee", e, "ibfdijbfdskjbofb","email", email, "pasword", password)
     if (password.length < 5) {
       e.preventDefault();
       settingError();
@@ -82,21 +81,19 @@ function LoginPage(props) {
 
     else{
       e.preventDefault();
-      setLoading(true)
-
+      
+      console.log("loadinggg11111111111111", loading)
       setTimeout(() => {
         props.onAuth(email, password);
-      }, 3000);
+      }, 2000);
       // props.onAuth(email, password);
-      setLoading(false)
-      console.log("loadinggg2222222222", loading)
+      // setLoading(false)
+      // console.log("loadinggg2222222222", loading)
       // setLoading(false);
       // props.history.push('index');
       
     }
   }
-
-
 
   return (
     <>
@@ -110,8 +107,6 @@ function LoginPage(props) {
         ></div>
         <div className="content">
           <Container>
-  
-
             <Col className="ml-auto mr-auto" md="4">
               <Card className="card-login card-plain">
                 <Form onSubmit={submitHandler} action="" className="form" method="">
@@ -124,9 +119,6 @@ function LoginPage(props) {
                     </div>
                   </CardHeader>
                   <CardBody>
-
-
-                    
 
                   <FormGroup>
                     <label htmlFor="exampleInputEmail1">Email address</label>
@@ -161,113 +153,7 @@ function LoginPage(props) {
                     {/* <FormFeedback>Oh noes! that name is already taken</FormFeedback> */}
                     <h6 style={{color:'red',}}>{error}</h6>
                   </FormGroup>
-                  <FormFeedback>ihbbjk{error}</FormFeedback>
-
-                  
-                  
-
-                  {/* <InputGroup
-                    className={
-                      "no-border input-lg" + (emailFocus ? " input-group-focus" : "")
-                    }
-                  >
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="now-ui-icons ui-1_email-85"></i>
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input invalid
-                      placeholder="Email..."
-                      type="text"
-                      
-                      onFocus={() => setEmailFocus(true)}
-                      onBlur={() => setEmailFocus(false)}
-                      value={email} onChange={e => setEmail(e.target.value)}
-
-                    ></Input>
-                    <FormFeedback>{error}</FormFeedback>
-                  </InputGroup> */}
-
-
-                  {/* <FormGroup check>
-                    <Label check>
-                      <Input type="checkbox"></Input>
-                      <span className="form-check-sign"></span>
-                      Check me out
-                    </Label>
-                  </FormGroup> */}
-                  {/* <Button color="primary" type="submit">
-                    Submit
-                  </Button>
-
-
-
-
-                  <InputGroup className={leftFocus ? "input-group-focus" : ""}>
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="fa fa-user-circle"></i>
-                    </InputGroupText>
-                  </InputGroupAddon>
-
-                  
-                  <Input
-                  className='form-control-danger'
-                    placeholder="Left Font Awesome Icon"
-                    type="text"
-                    onFocus={() => setLeftFocus(true)}
-                    onBlur={() => setLeftFocus(false)}
-                  ></Input>
-                 
-                </InputGroup>
-
-
-
-                  <InputGroup
-                    className={
-                      "no-border input-lg" + (emailFocus ? " input-group-focus" : "")
-                    }
-                  >
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="now-ui-icons ui-1_email-85"></i>
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input invalid
-                      placeholder="Email..."
-                      type="email"
-                      
-                      onFocus={() => setEmailFocus(true)}
-                      onBlur={() => setEmailFocus(false)}
-                      value={email} onChange={e => setEmail(e.target.value)}
-
-                    ></Input>
-                     <FormFeedback>Oh noes! that name is already taken</FormFeedback>
-                  </InputGroup>
-                  
-                    <InputGroup
-                      className={
-                        "no-border input-lg" +
-                        (firstFocus ? " input-group-focus" : "")
-                      }
-                    >
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>
-                          <i className="now-ui-icons users_circle-08"></i>
-                        </InputGroupText>
-                      </InputGroupAddon>
-                      <Input
-                        placeholder="Password..."
-                        type="password"
-                        onFocus={() => setFirstFocus(true)}
-                        onBlur={() => setFirstFocus(false)}
-                        value={password}
-                         onChange={e => setPassword(e.target.value)}
-
-                      ></Input>
-                    </InputGroup> */}
-                  
-                   
+                  <FormFeedback>ihbbjk{error}</FormFeedback>         
 
                   </CardBody>
                   <CardFooter className="text-center">
@@ -277,13 +163,11 @@ function LoginPage(props) {
                       color="info"
                       // href="#pablo"
                       // onClick={e => e.preventDefault()}
-                      // onClick={settingError}
+                      // onClick={() => setFirstFocus(true)}
                       size="md"
                     >
                       Login
                     </Button>
-
-                    
                     <div className="pull-left">
                       <h6>
                         <a
@@ -307,11 +191,6 @@ function LoginPage(props) {
                         </a>
                       </h6>
                     </div>
-                        {loading?
-                        <Spinner type="grow" color="success" />:
-                        <br/>}
-                    
-
                   </CardFooter>
                 </Form>
               </Card>

@@ -10,7 +10,10 @@ import {
   NavLink,
   Nav,
   Container,
-  UncontrolledTooltip
+  UncontrolledTooltip,
+  Form, 
+  FormGroup,
+  Input
 } from "reactstrap";
 
 // import SignUp from '../../views/index-sections/SignUp';
@@ -56,7 +59,7 @@ function IndexNavbar(props) {
 
 
   const [url, setUrl] = useState(
-    'http://127.0.1:8000/api/get_user_data',
+    'http://127.0.1:8000/api/get_user_data/',
   );
 
   
@@ -272,6 +275,14 @@ function IndexNavbar(props) {
                 </UncontrolledTooltip>
               </NavItem>
             </Nav>
+
+            <Form className="form-inline ml-auto" data-background-color="">
+              <FormGroup className="has-white">
+                <Input placeholder="Search" type="text"></Input>
+              </FormGroup>
+            </Form>
+
+
           </Collapse>
         </Container>
       </Navbar>
