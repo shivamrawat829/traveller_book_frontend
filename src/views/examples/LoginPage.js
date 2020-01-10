@@ -14,7 +14,7 @@ import ExamplesNavbar from "../../container/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "../../container/Footers/TransparentFooter.js";
 
 const mapStateToProps = (state) => {
-  // console.log("is authenticated", state.token)
+  console.log("is authenticateddddddddddddddddddddd", state)
   
   return {
   loading: state.loading,
@@ -70,7 +70,9 @@ function LoginPage(props) {
   });
 
   const[loading, setLoading] = React.useState(false)
+  const[valid_error, setValidError] = React.useState(false)
   const submitHandler = e => {
+    e.preventDefault();
     setLoading(true)
     // console.log("eeeeeeeeeeeeeeeeeeeeeeee", e, "ibfdijbfdskjbofb","email", email, "pasword", password)
     if (password.length < 5) {
@@ -80,18 +82,19 @@ function LoginPage(props) {
     }
 
     else{
-      e.preventDefault();
+   
       
       console.log("loadinggg11111111111111", loading)
       setTimeout(() => {
-        props.onAuth(email, password);
+      const data =  props.onAuth(email, password);
+      console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaa11111a", data, props)
       }, 2000);
       // props.onAuth(email, password);
       // setLoading(false)
       // console.log("loadinggg2222222222", loading)
       // setLoading(false);
       // props.history.push('index');
-      
+      e.preventDefault();
     }
   }
 
@@ -151,6 +154,7 @@ function LoginPage(props) {
                     ></Input>
                     {/* <FormFeedback>{error}</FormFeedback> */}
                     {/* <FormFeedback>Oh noes! that name is already taken</FormFeedback> */}
+                    <h6 style={{color:'red',}}>{error}</h6>
                     <h6 style={{color:'red',}}>{error}</h6>
                   </FormGroup>
                   <FormFeedback>ihbbjk{error}</FormFeedback>         

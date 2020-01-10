@@ -267,7 +267,7 @@ class PostsTitle extends React.Component {
                  <Row>
                    {/* md={{ size: 6, offset: 4 }} */}
                   <Col sm="12" className="text-center" >
-                  <h1>YESSSSSSSSSSSSSS</h1>
+                
                         <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" color="primary" />
                         <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" color="secondary" />
                         <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" color="success" />
