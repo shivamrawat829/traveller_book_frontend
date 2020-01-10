@@ -17,13 +17,12 @@ import {
   Nav,
   FormGroup,
   Label,
-  Input
-
+  Input,
 } from "reactstrap";
 import {
   NavLink as NewNav
 } from "react-router-dom";
-
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import Pagination from './Pagination';
 import axios from "axios";
@@ -35,50 +34,23 @@ class PostsTitle extends React.Component {
     this.state = {
       collapseOpen: false,
       posts:[],
-      currentPage:1,
-      postsPerPage:50,
       url:'http://127.0.1:8000/api/posts1',
       isLoading:false,
-      indexOfLastPost:1,
-      indexOfFirstPost:1,
       currentPosts:[],
-      paginate:2
+      count: 30,
+      start: 1
+
     };
   }
 
-//   componentDidMount() {
-//     this.fetchData();
-//     this.state.indexOfLastPost = this.state.currentPage * this.state.postsPerPage;
-//     this.state.indexOfFirstPost = this.state.indexOfLastPost - this.state.postsPerPage;
-//     this.state.currentPosts = this.state.posts.slice(this.state.indexOfFirstPost, this.state.indexOfLastPost);
-//   }
-
-//   fetchData = async () => {
-    
-
-// this.state.isLoading = true
-// console.log("fetch data 1111111111111111", this.state.isLoading)
-       
-//         try {
-//           const result = await axios(this.state.url);
-//           // setData(result.data);
-//           this.state.posts = result.data;
-//           this.state.isLoading = false
-//           console.log("fetch data 1111111111111111", this.state.isLoading)
-//         } catch (error) {
-
-//         }
-
-  
-      // };
 
       componentDidMount()
       {
-        // console.log("fetch data 1111111111111111", this.state.currentPage,  this.state.indexOfFirstPost, this.state.postsPerPage)
-        // this.setState({indexOfLastPost: this.state.currentPage * this.state.postsPerPage});
-        // this.setState({indexOfFirstPost: this.state.indexOfLastPost - this.state.postsPerPage});
-        // this.setState({currentPosts: this.state.posts.slice(this.state.indexOfFirstPost, this.state.indexOfLastPost)});
-        // this.state.currentPosts = this.state.posts.slice(this.state.indexOfFirstPost, this.state.indexOfLastPost);
+        const { count, start } = this.state;
+        // axios
+        //   .get(`http://127.0.1:8000/api/posts1?count=10&start=1`)
+        //   .then(res => this.setState({ images: res.data }));
+        // .get(`/api/photos?count=${count}&start=${start}`)
 
         this.state.isLoading = true
         console.log("fetch data 1111111111111111", this.state.isLoading)
@@ -87,19 +59,24 @@ class PostsTitle extends React.Component {
             res =>{
             this.state.isLoading = false
             console.log("fetch data 22222222222222222", this.state.isLoading)
+            console.log("fetch data 65+6++", this.state.currentPosts)
             this.setState({
               posts: res.data
             });
           }
           )
-        }, 10000);
-        // console.log("fetch data 1111111111111111", this.state.currentPage,  this.state.indexOfFirstPost, this.state.postsPerPage)
-        // this.setState({indexOfLastPost: this.state.currentPage * this.state.postsPerPage});
-        // this.setState({indexOfFirstPost: this.state.indexOfLastPost - this.state.postsPerPage});
-        // this.setState({currentPosts: this.state.posts.slice(this.state.indexOfFirstPost, this.state.indexOfLastPost)});
-        // this.state.isLoading = false
-        // console.log("fetch data 222222222222222222", this.state.indexOfLastPost, this.state.indexOfFirstPost)
+        }, 5000);
       }
+
+      fetchImages = () => {
+        const { count, start } = this.state;
+        this.setState({ start: this.state.start + count });
+        axios
+          .get(`http://127.0.1:8000/api/posts1`)
+          .then(res =>
+            this.setState({ posts: this.state.posts.concat(res.data) })
+          );
+      };
 
   componentDidUpdate() {
     document.body.classList.add("profile-page");
@@ -112,63 +89,6 @@ class PostsTitle extends React.Component {
     document.body.classList.remove("sidebar-collapse");
   }
 
-
-  // const [collapseOpen, setCollapseOpen] = React.useState(false);
-  // const[posts, setPosts]= useState([])
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [postsPerPage, setpostsPerPage] = useState(20);
-  // const [url, setUrl] = useState(
-  //   'http://127.0.1:8000/api/posts1',
-  // );
-  
-  // const [isLoading, setIsLoading] = useState(false);
-
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     didCancel = true
-  //     setIsError(false);
-  //     setIsLoading(true);
-  //     unmounted.current = true
-  //     console.log("unmountedd111111", didCancel)
-     
-  //     try {
-  //       const result = await axios(url);
-  //       // setData(result.data);
-  //       setPosts(result.data);
-  //     } catch (error) {
-  //       setIsError(true);
-  //     }
-  //     setIsLoading(false);
-  //     didCancel = false
-  //     unmounted.current = false
-  //     console.log("unmountedd22222222222", didCancel)
-
-  //   };
-  //   fetchData();
-  // }, []);
-
-  // if(isLoading === true) return <Spinner />
-
-
-
-  
-
-  //  // Change page
-  //  const paginate = pageNumber => setCurrentPage(pageNumber);
-
-  
-
-  // React.useEffect(() => {
-    
-  //   document.body.classList.add("profile-page");
-  //   document.body.classList.add("sidebar-collapse");
-  //   document.documentElement.classList.remove("nav-open");
-  //   return function cleanup() {
-  //     document.body.classList.remove("profile-page");
-  //     document.body.classList.remove("sidebar-collapse");
-  //   };
-  // });
   render(){
   return (
     <>
@@ -198,25 +118,6 @@ class PostsTitle extends React.Component {
                   </button>
                   <Collapse isOpen={this.state.collapseOpen} navbar>
                     <Nav navbar >
-                      {/* <NavItem className="active">
-
-                      
-
-                        <NavLink
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <p>Link</p>
-                        </NavLink>
-                      </NavItem>
-                      <NavItem>
-                        <NavLink
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
-                          <p>Link</p>
-                        </NavLink>
-                      </NavItem> */}
                       <UncontrolledDropdown nav>
                         <DropdownToggle
                           aria-haspopup={true}
@@ -240,18 +141,6 @@ class PostsTitle extends React.Component {
                             </Label>
                           </FormGroup>
                           </DropdownItem>
-                          {/* <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Another action
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Something else here
-                          </DropdownItem> */}
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </Nav>
@@ -279,16 +168,19 @@ class PostsTitle extends React.Component {
                         <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" color="primary" />
                   </Col>
                         </Row>:
+                         <InfiniteScroll
+                         dataLength={this.state.posts.length}
+                         next={this.fetchImages}
+                         hasMore={true}
+                         loader={ <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" color="primary" />}
+                       >
                         <Row className="collections">
                        
-
+              
                   {
-                    
                     this.state.posts.map(post => 
-                      <Col md="4" key ={post.id}>
-                      
-                      
-                        <NewNav  to={{pathname:"/user_posts",
+                      <Col md="4" key ={post.id}> 
+                       <NewNav  to={{pathname:"/user_posts",
                                       search:`?id=${post.id}`,
                                       hash:`#${post.place}`,
                                   state:{
@@ -305,17 +197,16 @@ class PostsTitle extends React.Component {
                       </NewNav>
                       </Col>)
                   }
+                 
+                
                 </Row>
-              
+                </InfiniteScroll>
               }
                 </Col>
             </Row>
           </Container>
         </div>
       </div>
-      <Pagination postsPerPage={this.state.postsPerPage}
-        totalPosts={this.state.posts.length} paginate={this.state.paginate}
-        />
     </>
   );
 }
