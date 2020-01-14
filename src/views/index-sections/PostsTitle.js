@@ -30,11 +30,11 @@ import axios from "axios";
 class PostsTitle extends React.Component {
 
   constructor(props) {
+    console.log("propssssssssssssssssssssssssssssssssssssss566666666666666666666666666666666666666442", props)
     super(props);
     this.state = {
       collapseOpen: false,
       posts:[],
-      url:'http://127.0.1:8000/api/posts1',
       isLoading:false,
       currentPosts:[],
       count: 30,
@@ -53,26 +53,35 @@ class PostsTitle extends React.Component {
         // .get(`/api/photos?count=${count}&start=${start}`)
 
         this.state.isLoading = true
-        console.log("fetch data 1111111111111111", this.state.isLoading)
+        // console.log("propssssssssssssssssssssssssssssssssssssssss234234234234242", this.props)
+        const parts = this.props.location.search.split('=', 2);
+        const the_num  = parts[1];
+       
+
         setTimeout(() => {
-          axios.get(this.state.url).then(
+          // axios.get(`http://127.0.1:8000/api/posts1?count=${the_num}&start=${this.state.start}`).then(
+            axios.get(`http://127.0.1:8000/api/posts1/${this.state.start}/${the_num}`).then(
             res =>{
             this.state.isLoading = false
-            console.log("fetch data 22222222222222222", this.state.isLoading)
-            console.log("fetch data 65+6++", this.state.currentPosts)
+            // console.log("fetch data 22222222222222222", this.state.isLoading)
+            // console.log("fetch data 65+6++", this.state.currentPosts)
+            console.log("tdataaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", res.data)
             this.setState({
               posts: res.data
             });
           }
           )
-        }, 5000);
+        }, 2000);
       }
 
       fetchImages = () => {
         const { count, start } = this.state;
-        this.setState({ start: this.state.start + count });
+        const parts = this.props.location.search.split('=', 2);
+        const the_num  = parts[1];
+        this.setState({ start: this.state.start + parseInt(the_num) });
+        console.log("fetch images called", this.state.start, the_num)
         axios
-          .get(`http://127.0.1:8000/api/posts1`)
+          .get(`http://127.0.1:8000/api/posts1/${this.state.start}/${the_num}`)
           .then(res =>
             this.setState({ posts: this.state.posts.concat(res.data) })
           );
@@ -157,15 +166,15 @@ class PostsTitle extends React.Component {
                    {/* md={{ size: 6, offset: 4 }} */}
                   <Col sm="12" className="text-center" >
                 
-                        <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" color="primary" />
-                        <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" color="secondary" />
-                        <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" color="success" />
-                        <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" color="danger" />
-                        <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" color="warning" />
-                        <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" color="info" />
+                        <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="primary" />
+                        <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="secondary" />
+                        <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="success" />
+                        <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="danger" />
+                        <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="warning" />
+                        <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="info" />
                         {/* <Spinner type="grow" color="light" /> */}
-                        <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" color="dark" />
-                        <Spinner style={{ width: '3rem', height: '3rem' }} type="grow" color="primary" />
+                        <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="dark" />
+                        <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="primary" />
                   </Col>
                         </Row>:
                          <InfiniteScroll

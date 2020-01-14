@@ -52,7 +52,8 @@ render(){
     <Switch>
       <Route path='/profilepage' exact strict component={ProfilePage}></Route>
       <Route path='/user_posts' exact strict component={UserPosts}></Route>
-      <Route path="/index" render={props => <Index {...props} />} />
+      {/* <Route path="/index" render={props => <Index {...props} />} /> */}
+      <Route path="/index" exact strict component={Index}></Route>
         <Route
           path="/nucleo-icons"
           render={props => <NucleoIcons {...props} />}

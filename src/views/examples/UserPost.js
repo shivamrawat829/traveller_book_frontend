@@ -33,7 +33,7 @@ function UserPosts(props) {
     const parts = props.location.search.split('=', 2);
     const the_num  = parts[1];
 
-    console.log("userpostsssssssss",the_num)
+    // console.log("userpostsssssssss",the_num)
 
 
     const fetchUsers = async () => {
@@ -46,7 +46,7 @@ function UserPosts(props) {
       setUserPost(res.data)
   
 
-      console.log("userpostpksmdkls...", res.data)
+      // console.log("userpostpksmdkls...", res.data)
 
     };
 

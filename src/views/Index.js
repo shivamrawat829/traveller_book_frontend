@@ -117,12 +117,12 @@ function Index(props) {
   const[journey_error, setJourneyError] = React.useState('')
   // const[setError] = React.useState('')
   const settingTitleError = (event) =>{
-    console.log("error", event)
+    // console.log("error", event)
     setError("Title Must not be Empty...");
   };
 
   const setJourneyErrorM = (event) =>{
-    console.log("error", event)
+    // console.log("error", event)
     setJourneyError("Journey Date Required...");
   };
 
@@ -143,7 +143,7 @@ function Index(props) {
 
     if (title.length === 0)
     {
-      console.log("eeeeeeeeeeeeeeeeeeeeeeee", e)
+      // console.log("eeeeeeeeeeeeeeeeeeeeeeee", e)
       settingTitleError();
 
     }
@@ -155,8 +155,8 @@ function Index(props) {
     // }
     else{
       let url = 'http://127.0.0.1:8000/api/create/';
-      console.log("eeeeeeeeeeeeeeeeeeeeeeee", e, "ibfdijbfdskjbofb", title,"image",  fileInput.current.files[0] , "des",description, 
-      "place",place,"rating", rating)
+      // console.log("eeeeeeeeeeeeeeeeeeeeeeee", e, "ibfdijbfdskjbofb", title,"image",  fileInput.current.files[0] , "des",description, 
+      // "place",place,"rating", rating)
       let form_data = new FormData();
       form_data.append('image', fileInput.current.files[0], fileInput.current.files[0].name);
       form_data.append('title', title);
@@ -213,13 +213,13 @@ function Index(props) {
           {/* <Typography /> */}
           {/* <Javascript /> */}
           <Carousel />
-          <PostsTitle/>
+          <PostsTitle {...props}/>
           {/* <NucleoIcons /> */}
           {/* <CompleteExamples /> */}
           {/* <SignUp /> */}
           {/* <Examples /> */}
           {/* <Pagination /> */}
-          <Download />
+          {/* <Download /> */}
 
         </div>
 
@@ -238,26 +238,7 @@ function Index(props) {
             <></>
           }
 
-        {/* <Button onClick={toggle}
-                className=" btn-icon btn-round btn-raised"
-                color="#ffffff"
-                // href="add-posts"We're going to launch Now UI Kit PRO React. It will have huge number of components, sections and example pages so you can start your development with a badass Bootstrap 4 UI Kit.
-
-                id="tooltip331904899"
-                size="lg"
-                target="_blank"
-                style={{
-                 position:'fixed',
-                 bottom:'20px',
-                 right:'10px',
-                 zIndex:'99',
-                 }}
-
-              >
-                <i className="fab fa-plus"></i>
-              </Button> */}
-             
-
+        
               <Modal isOpen={modal} toggle={toggle} className={className}>
               <ModalHeader toggle={toggle}>Upload a Post...</ModalHeader>
                 <ModalBody>
@@ -285,29 +266,6 @@ function Index(props) {
                           
                         </InputGroup>
                         <h6 style={{color:'red',}}>{error}</h6>
-
-                        {/* <Popover
-                          placement="left"
-                          // isOpen={this.state.popover1}
-                          // target="popover1"
-                          className="popover-primary"
-                        ></Popover> */}
-                        
-                        {/* <Popover
-                          placement="left"
-                          isOpen={true}
-                          target="popover1"
-                          className="popover-primary"
-                        >
-                          <PopoverHeader>Popover On left</PopoverHeader>
-                          <PopoverBody>
-                            And here's some amazing content. It's very engaging. Right?
-                          </PopoverBody>
-                        </Popover> */}
-
-                        
-
-                        {/* <input type="file" ref={fileInput} onChange={forceUpdate}/> */}
                         <InputGroup>
         {/* <Label for="exampleCustomFileBrowser">File Browser with Custom Label</Label> */}
         <CustomInput  type="file"  ref={fileInput} onChange={forceUpdate}  label="Choose Cover Pic...!" />
@@ -360,26 +318,11 @@ function Index(props) {
                               />
                             </FormGroup>
                               <h6>{journey_error}</h6>
-
-
-                              {/* <i id='add_place' 
-                              className="now-ui-icons ui-1_simple-add"
-                              onClick={e => {
-                                e.preventDefault();
-                                addPlace(!placeis);
-                              }}
-                              ></i> */}
-
-                            {/* <i id='add_place2' 
-                              className="now-ui-icons ui-1_simple-add"
-                              onClick={() => handleAdd()}
-                              ></i> */}
                               <a   href='#'>
                               <Badge onClick={addNewPlace} color="info" className="mr-1">
                                   Add Place
                                 </Badge>
                                 </a>
-                     
 
                               {place_is.map((item, index) => {
                                       return (
@@ -398,13 +341,8 @@ function Index(props) {
                                                 </InputGroupAddon>
                                                   <Input
                                                     placeholder="Place..." type="text" 
-                                                    // onFocus={() => setmiddleFocus(true)}
-                                                    // onBlur={() => setmiddleFocus(false)} 
-                                                    // value={fields.value}
                                                     data-id={index}
-                                                   
                                                     defaultValue ={item.place1}
-                                                   
                                                     onChange={handlePlaceChange}
                                                     // onChange={e => handleChange(idx, e)}
                                                   >
@@ -422,26 +360,17 @@ function Index(props) {
                                                     </InputGroupAddon>
                                                     <Input
                                                       data-id={index}
-                                                      
                                                       defaultValue={item.description1}
                                                       onChange={handlePlaceChange}
-                                                      
                                                     >
                                                     </Input>
                                                 </InputGroup>
 
                                                
                                                 <Button onClick={() => handleRemove(index)} color="danger">Remove</Button>
-
-
-
                                         </div>
                                       );
                                     })}
-                                    
-
-
-                            
 
                             { placeis ?
                             <h1 className='f'>THIS ONLY SHOW ON TRUE</h1>
@@ -466,7 +395,7 @@ function Index(props) {
                   <Button color="secondary" onClick={toggle}>Cancel</Button>
               </ModalFooter> */}
             </Modal>
-        <DarkFooter />
+
       </div>
     </>
   );
