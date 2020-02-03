@@ -17,18 +17,50 @@ import {
   Row
 } from "reactstrap";
 
-// core components
+// authentication related
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/auth';
 
-function SignUp() {
+// core components
+const mapStateToProps = (state) => {
+  return {
+      loading: state.loading,
+      error: state.error
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+      onAuth: (username, email, password1, password2) => dispatch(actions.authSignup(username, email, password1, password2)) 
+  }
+}
+
+function SignUp(props) {
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
   const [emailFocus, setEmailFocus] = React.useState(false);
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [username, setUsername] = React.useState("");
+  const [confirm_password, setConfirmPassword] = React.useState("");
 
   const googlesignin = async (e) => {
      
     console.log("googlesignin ENDD....", e)
   };
 
+
+   const submitHandler = e => {
+    // e.preventDefault();
+  
+      console.log("signupppppppppppppppppppp", username, email, password, confirm_password)
+      setTimeout(() => {
+        const data =  props.onAuth(username,email, password, confirm_password);
+        console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaa11111a", data, props)
+        }, 2000);
+        e.preventDefault();
+    
+  }
   
   // useEffect(()  => {
 
@@ -44,13 +76,13 @@ function SignUp() {
           backgroundImage: "url(" + require("../../assets/img/bg11.jpg") + ")",
           backgroundSize: "cover",
           backgroundPosition: "top center",
-          minHeight: "700px"
+          minHeight: "500px"
         }}
       >
         <Container>
           <Row>
             <Card className="card-signup" data-background-color="blue">
-              <Form action="" className="form" method="">
+              <Form onSubmit={submitHandler} action="" className="form" method="">
                 <CardHeader className="text-center">
                   <CardTitle className="title-up" tag="h3">
                     Sign Up
@@ -60,11 +92,12 @@ function SignUp() {
                       className="btn-neutral btn-icon btn-round"
                       color="facebook"
                       href="#pablo"
+                      size="lg"
                       onClick={e => e.preventDefault()}
                     >
                       <i className="fab fa-facebook-square"></i>
                     </Button>
-                    <Button
+                    {/* <Button
                       className="btn-neutral btn-icon btn-round"
                       color="twitter"
                       href="#pablo"
@@ -72,11 +105,12 @@ function SignUp() {
                       size="lg"
                     >
                       <i className="fab fa-twitter"></i>
-                    </Button>
+                    </Button> */}
                     <Button
                       className="btn-neutral btn-icon btn-round"
                       color="google"
                       href="#pablo"
+                      size="lg"
                       onClick={() => googlesignin()}
                     >
                       <i className="fab fa-google-plus"></i>
@@ -99,6 +133,8 @@ function SignUp() {
                       type="text"
                       onFocus={() => setFirstFocus(true)}
                       onBlur={() => setFirstFocus(false)}
+                      value={username}
+                      onChange={e => setUsername(e.target.value)}
                     ></Input>
                   </InputGroup>
             
@@ -117,6 +153,8 @@ function SignUp() {
                       type="email"
                       onFocus={() => setEmailFocus(true)}
                       onBlur={() => setEmailFocus(false)}
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
                     ></Input>
                   </InputGroup>
 
@@ -135,6 +173,28 @@ function SignUp() {
                       type="password"
                       onFocus={() => setLastFocus(true)}
                       onBlur={() => setLastFocus(false)}
+                      value={password}
+                      onChange={e => setPassword(e.target.value)}
+                    ></Input>
+                  </InputGroup>
+
+                  <InputGroup
+                    className={
+                      "no-border" + (lastFocus ? " input-group-focus" : "")
+                    }
+                  >
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="now-ui-icons text_caps-small"></i>
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="Confirm Password..."
+                      type="confirm_password"
+                      onFocus={() => setLastFocus(true)}
+                      onBlur={() => setLastFocus(false)}
+                      value={confirm_password}
+                      onChange={e => setConfirmPassword(e.target.value)}
                     ></Input>
                   </InputGroup>
 
@@ -143,8 +203,8 @@ function SignUp() {
                   <Button
                     className="btn-neutral btn-round"
                     color="info"
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
+                    // href="#pablo"
+                    // onClick={e => e.preventDefault()}
                     size="lg"
                   >
                     Get Started
@@ -171,4 +231,8 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+
+

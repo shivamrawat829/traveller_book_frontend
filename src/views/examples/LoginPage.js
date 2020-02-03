@@ -1,5 +1,6 @@
 import React from "react";
 import {withRouter} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // reactstrap components
 import {Button,Card,CardHeader,CardBody,CardFooter,Form,Input,
@@ -136,9 +137,7 @@ function LoginPage(props) {
                       value={email} onChange={e => setEmail(e.target.value)}
 
                     ></Input>
-                    <FormText className="text-muted" color="default" id="emailHelp">
-                      We'll never share your email with anyone else.
-                    </FormText>
+                   
                   </FormGroup>
                   <FormGroup>
                     <label htmlFor="exampleInputPassword1">Password</label>
@@ -152,9 +151,9 @@ function LoginPage(props) {
                         onChange={e => setPassword(e.target.value)}
 
                     ></Input>
-                    {/* <FormFeedback>{error}</FormFeedback> */}
-                    {/* <FormFeedback>Oh noes! that name is already taken</FormFeedback> */}
-                    <h6 style={{color:'red',}}>{error}</h6>
+                     <FormText className="text-muted" color="default" id="emailHelp">
+                      We'll never share your email and password with anyone else.
+                    </FormText>
                     <h6 style={{color:'red',}}>{error}</h6>
                   </FormGroup>
                   <FormFeedback>ihbbjk{error}</FormFeedback>         
@@ -172,29 +171,18 @@ function LoginPage(props) {
                     >
                       Login
                     </Button>
-                    <div className="pull-left">
-                      <h6>
-                        <a
-                          className="link"
-                          to='/signup-page'
-                          href="http://localhost:3000/signup-page"
-                          onClick={e => e.preventDefault()}
-                        >
-                          Create Account
-                        </a>
-                      </h6>
-                    </div>
-                    <div className="pull-right">
-                      <h6>
-                        <a
-                          className="link"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                        >
-                          Need Help?
-                        </a>
-                      </h6>
-                    </div>
+
+                    <Button
+                      block
+                      className="btn-round btn-white"
+                      color="default"
+                      to="/signup-page"
+                      outline
+                      size="md"
+                      tag={Link}    
+                    >
+                      Don't Have an Account? Create one now...
+                    </Button>
                   </CardFooter>
                 </Form>
               </Card>
