@@ -152,7 +152,7 @@ function LoginPage(props) {
 
                     ></Input>
                      <FormText className="text-muted" color="default" id="emailHelp">
-                      We'll never share your email and password with anyone else.
+                      We'll never share your email or password with anyone else.
                     </FormText>
                     <h6 style={{color:'red',}}>{error}</h6>
                   </FormGroup>

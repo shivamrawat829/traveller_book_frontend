@@ -60,7 +60,7 @@ class PostsTitle extends React.Component {
 
         setTimeout(() => {
           // axios.get(`http://127.0.1:8000/api/posts1?count=${the_num}&start=${this.state.start}`).then(
-            axios.get(`http://127.0.1:8000/api/postss/${this.state.start}/${the_num}`).then(
+            axios.get(`http://127.0.1:8000/api/posts/${this.state.start}/${the_num}`).then(
             res =>{
             this.state.isLoading = false
             // console.log("fetch data 22222222222222222", this.state.isLoading)
@@ -81,7 +81,7 @@ class PostsTitle extends React.Component {
         this.setState({ start: this.state.start + parseInt(the_num) });
         console.log("fetch images called", this.state.start, the_num)
         axios
-          .get(`http://127.0.1:8000/api/postss/${this.state.start}/${the_num}`)
+          .get(`http://127.0.1:8000/api/posts/${this.state.start}/${the_num}`)
           .then(res =>
             this.setState({ posts: this.state.posts.concat(res.data) })
           );

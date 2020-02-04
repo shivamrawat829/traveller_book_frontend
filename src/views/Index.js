@@ -64,11 +64,13 @@ const useForceUpdate = () => useState()[1];
 const _defaultPlace = [
   {
     place1: "dfsdfs",
-    description1: "sdfsdf"
+    description1: "sdfsdf",
+    place_pic: null,
   },
   {
     place1: "12345",
-    description1: "67890"
+    description1: "67890",
+    place_pic: null,
   },
 
 ];
@@ -86,13 +88,13 @@ function Index(props) {
   const handlePlaceChange = event => {
     const _tempplace = [...place_is];
     console.log("2342342423423", event.target, event.target.name)
-    _tempplace[event.target.dataset.id][event.target.place1] = event.target.value;
+    _tempplace[event.target.dataset.id][event.target.name] = event.target.value;
     setPlacenew(_tempplace);
     console.log("rgfdgdfg", _tempplace)
   };
 
   const addNewPlace = () => {
-    setPlacenew(prevPlace => [...prevPlace, { place1: "", description1: "" }]);
+    setPlacenew(prevPlace => [...prevPlace, { place1: "", description1: "", place_pic:[] }]);
   };
 
   function handleRemove(i) {
@@ -133,31 +135,23 @@ function Index(props) {
  
   const [modal, setModal] = useState(false);
   const [placeis, addPlace] = useState(false);
-
   const toggle = () => setModal(!modal);
 
   const submitHandler = e => {
-
-
-
-
     if (title.length === 0)
     {
-      // console.log("eeeeeeeeeeeeeeeeeeeeeeee", e)
+
       settingTitleError();
 
     }
-    // if (journey.length === 0)
-    // {
 
-    //   setJourneyErrorM();
-
-    // }
     else{
       let url = 'http://127.0.0.1:8000/api/create/';
       // console.log("eeeeeeeeeeeeeeeeeeeeeeee", e, "ibfdijbfdskjbofb", title,"image",  fileInput.current.files[0] , "des",description, 
       // "place",place,"rating", rating)
+      e.preventDefault();
       let form_data = new FormData();
+      console.log('placeeeeeeeeeee ',place_is, fileInput)
       form_data.append('image', fileInput.current.files[0], fileInput.current.files[0].name);
       form_data.append('title', title);
       form_data.append('description', description);
@@ -175,7 +169,7 @@ function Index(props) {
             .catch(err => console.log(err))
     }
 
- 
+
     e.preventDefault();
   }
 
@@ -229,7 +223,7 @@ function Index(props) {
               <Button onClick={toggle}
                 className=" btn-icon btn-round btn-raised" color="#ffffff" id="tooltip331904899" size="lg"
                 style={{position:'fixed',bottom:'20px',right:'10px',zIndex:'99',}}>
-                <i className="fab fa-plus"></i>
+                <i className="fa fa-plus"></i>
                 <UncontrolledTooltip delay={0} target="tooltip331904899">
                 Add Post
                 </UncontrolledTooltip>
@@ -267,9 +261,10 @@ function Index(props) {
                         </InputGroup>
                         <h6 style={{color:'red',}}>{error}</h6>
                         <InputGroup>
-        {/* <Label for="exampleCustomFileBrowser">File Browser with Custom Label</Label> */}
-        <CustomInput  type="file"  ref={fileInput} onChange={forceUpdate}  label="Choose Cover Pic...!" />
-      </InputGroup>
+                    {/* <Label for="exampleCustomFileBrowser">File Browser with Custom Label</Label> */}
+                    {/* <CustomInput  type="file"  ref={fileInput} onChange={forceUpdate}  label="Choose Cover Pic...!" /> */}
+                    <input type="file" ref={fileInput} onChange={forceUpdate}/> 
+                  </InputGroup>
 
                         <br/>
                         <InputGroup
@@ -344,6 +339,7 @@ function Index(props) {
                                                     data-id={index}
                                                     defaultValue ={item.place1}
                                                     onChange={handlePlaceChange}
+                                                    name="place1"
                                                     // onChange={e => handleChange(idx, e)}
                                                   >
                                                   </Input>
@@ -360,11 +356,19 @@ function Index(props) {
                                                     </InputGroupAddon>
                                                     <Input
                                                       data-id={index}
+                                                      placeholder="Description..."
                                                       defaultValue={item.description1}
                                                       onChange={handlePlaceChange}
+                                                      name="description1"
                                                     >
                                                     </Input>
                                                 </InputGroup>
+
+                                                <InputGroup>
+                                              <CustomInput onChange={handlePlaceChange} data-id={index}
+                                               name="place_pic" defaultValue={item.place_pic} type="file" 
+                                                label="Choose Picture of the Place...!" />
+                                            </InputGroup>
 
                                                
                                                 <Button onClick={() => handleRemove(index)} color="danger">Remove</Button>

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
+import demo from '../index-sections/demosignin';
 // reactstrap components
 import {
   Button,
@@ -111,7 +112,8 @@ function SignUp(props) {
                       color="google"
                       href="#pablo"
                       size="lg"
-                      onClick={() => googlesignin()}
+                      // onClick={() => demo.googleSDK()}
+                      ref={demo.googleLoginBtn}
                     >
                       <i className="fab fa-google-plus"></i>
                     </Button>

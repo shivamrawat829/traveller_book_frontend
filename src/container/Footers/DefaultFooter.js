@@ -25,7 +25,7 @@ function DefaultFooter() {
             
             </ul>
           </nav>
-          <div className="copyright" id="copyright">
+          {/* <div className="copyright" id="copyright">
             © {new Date().getFullYear()}, Designed by{" "}
             <a
               href="https://www.invisionapp.com?ref=nukr-default-footer"
@@ -41,7 +41,7 @@ function DefaultFooter() {
               Shubham
             </a>
             .
-          </div>
+          </div> */}
         </Container>
       </footer>
     </>
