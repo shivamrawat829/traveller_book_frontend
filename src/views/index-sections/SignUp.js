@@ -15,7 +15,8 @@ import {
   InputGroupText,
   InputGroup,
   Container,
-  Row
+  Row,
+  Spinner
 } from "reactstrap";
 
 // authentication related
@@ -45,29 +46,49 @@ function SignUp(props) {
   const [username, setUsername] = React.useState("");
   const [confirm_password, setConfirmPassword] = React.useState("");
 
+  const [do_not_match_error, setPasswordDoNotMatch] = React.useState(false);
+  const [min_len_error, setMinimumLengthError] = React.useState(false);
+  const[loading, setLoading] = React.useState(false)
+
+
   const googlesignin = async (e) => {
      
     console.log("googlesignin ENDD....", e)
   };
 
+  // useEffect(()  => {
+  //   console.log("passseodf....", do_not_match_error)
+  //   setPasswordDoNotMatch(false)
+   
+    
+  // }, [setPasswordDoNotMatch]);
 
    const submitHandler = e => {
     // e.preventDefault();
+
+    if (password != confirm_password){
+      setPasswordDoNotMatch(true)
+    }
+
+    else if(password.length < 8 ){
+      setMinimumLengthError(true)
+    }
+
+    else{
+      setLoading(true)
+      setPasswordDoNotMatch(false)
   
       console.log("signupppppppppppppppppppp", username, email, password, confirm_password)
       setTimeout(() => {
         const data =  props.onAuth(username,email, password, confirm_password);
         console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaa11111a", data, props)
+        setLoading(false)
         }, 2000);
+      }
         e.preventDefault();
     
   }
   
-  // useEffect(()  => {
-
-   
-    
-  // }, []);
 
   return (
     <>
@@ -92,7 +113,7 @@ function SignUp(props) {
                     <Button
                       className="btn-neutral btn-icon btn-round"
                       color="facebook"
-                      href="#pablo"
+                      href="#"
                       size="lg"
                       onClick={e => e.preventDefault()}
                     >
@@ -110,7 +131,7 @@ function SignUp(props) {
                     <Button
                       className="btn-neutral btn-icon btn-round"
                       color="google"
-                      href="#pablo"
+                      href="#"
                       size="lg"
                       // onClick={() => demo.googleSDK()}
                       ref={demo.googleLoginBtn}
@@ -199,24 +220,34 @@ function SignUp(props) {
                       onChange={e => setConfirmPassword(e.target.value)}
                     ></Input>
                   </InputGroup>
+                  {min_len_error ? <label>Password Must be 8 or more Character's Long...</label> : <></>}
+
+                  {do_not_match_error ? <label>Password Does not Match...</label> : <></>}
 
                 </CardBody>
                 <CardFooter className="text-center">
-                  <Button
-                    className="btn-neutral btn-round"
-                    color="info"
-                    // href="#pablo"
-                    // onClick={e => e.preventDefault()}
-                    size="lg"
-                  >
-                    Get Started
-                  </Button>
+
+                      {
+                        loading ?  <Spinner color="primary" /> :
+                        <Button
+                            className="btn-neutral btn-round"
+                            color="info"
+                            size="lg">
+                            Get Started
+                      </Button>
+
+                      }
+              
                 </CardFooter>
               </Form>
             </Card>
           </Row>
+      
+
           <div className="col text-center">
-            <Button
+          {
+              loading ?  <></> : 
+              <Button
               className="btn-round btn-white"
               color="default"
               to="/login-page"
@@ -226,6 +257,8 @@ function SignUp(props) {
             >
               Already Have an Account? Login Now...
             </Button>
+          }
+            
           </div>
         </Container>
       </div>

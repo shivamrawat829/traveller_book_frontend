@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 // reactstrap components
 import {Button,Card,CardHeader,CardBody,CardFooter,Form,Input,
-  Container,Col,FormFeedback,FormGroup,FormText, Spinner
+  Container,Col,FormFeedback,FormGroup,FormText, Spinner, InputGroup, InputGroupAddon, InputGroupText
 } from "reactstrap";
 // import axios from "axios";
 import { connect } from 'react-redux';
@@ -42,20 +42,24 @@ function LoginPage(props) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const[error, setError] = React.useState('')
+  const [lastFocus, setLastFocus] = React.useState(false);
  
   // const[setError] = React.useState('')
 
   const settingError = (event) =>{
-    console.log("error", event)
-    setError("password is incorrect");
+    setError("Password or Email cannot be Empty...");
   };
 
   React.useEffect(() => {
-    console.log("LOdingggggggggggggggggggggg", props)
+    console.log("yes it is")
+    if (password.length >= 1 & email.length >= 1)
+    {
+      setError("")
+    }
 
     if (props.isAuthenticated === true)
   {
-    // console.log("yes it is")
+    
     props.history.push('index');
   }
 
@@ -71,29 +75,23 @@ function LoginPage(props) {
   });
 
   const[loading, setLoading] = React.useState(false)
-  const[valid_error, setValidError] = React.useState(false)
   const submitHandler = e => {
     e.preventDefault();
-    setLoading(true)
-    // console.log("eeeeeeeeeeeeeeeeeeeeeeee", e, "ibfdijbfdskjbofb","email", email, "pasword", password)
-    if (password.length < 5) {
+
+    console.log("eeeeeeeeeeeeeee", error)
+    if (password.length === 0 || email.length ===0) {
       e.preventDefault();
       settingError();
-      
     }
 
     else{
-   
-      
-      console.log("loadinggg11111111111111", loading)
+      setLoading(true)
       setTimeout(() => {
       const data =  props.onAuth(email, password);
       console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaa11111a", data, props)
+      setLoading(false)
+
       }, 2000);
-      // props.onAuth(email, password);
-      // setLoading(false)
-      // console.log("loadinggg2222222222", loading)
-      // setLoading(false);
       // props.history.push('index');
       e.preventDefault();
     }
@@ -124,8 +122,29 @@ function LoginPage(props) {
                   </CardHeader>
                   <CardBody>
 
-                  <FormGroup>
-                    <label htmlFor="exampleInputEmail1">Email address</label>
+                  {/* <FormGroup> */}
+
+                  <InputGroup
+                    className={
+                      "no-border" + (emailFocus ? " input-group-focus" : "")
+                    }
+                  >
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="now-ui-icons ui-1_email-85"></i>
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="Email..."
+                      type="email"
+                      onFocus={() => setEmailFocus(true)}
+                      onBlur={() => setEmailFocus(false)}
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                    ></Input>
+                  </InputGroup>
+
+                    {/* <label htmlFor="exampleInputEmail1">Email address</label>
                     <Input
                       aria-describedby="emailHelp"
                       id="exampleInputEmail1"
@@ -136,10 +155,32 @@ function LoginPage(props) {
                       onBlur={() => setEmailFocus(false)}
                       value={email} onChange={e => setEmail(e.target.value)}
 
+                    ></Input> */}
+
+                    <InputGroup
+                        className={
+                          "no-border" + (lastFocus ? " input-group-focus" : "")
+                        }>
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="now-ui-icons text_caps-small"></i>
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="Password..."
+                      type="password"
+                      onFocus={() => setLastFocus(true)}
+                      onBlur={() => setLastFocus(false)}
+                      value={password}
+                      onChange={e => setPassword(e.target.value)}
                     ></Input>
+                  </InputGroup>
+                  <label style={{color:'red',}} htmlFor="emptypasserror">{error}</label>
+
+
                    
-                  </FormGroup>
-                  <FormGroup>
+                  {/* </FormGroup> */}
+                  {/* <FormGroup>
                     <label htmlFor="exampleInputPassword1">Password</label>
                     <Input
                       id="exampleInputPassword1"
@@ -154,35 +195,24 @@ function LoginPage(props) {
                      <FormText className="text-muted" color="default" id="emailHelp">
                       We'll never share your email or password with anyone else.
                     </FormText>
-                    <h6 style={{color:'red',}}>{error}</h6>
+                    <label style={{color:'red',}} htmlFor="emptypasserror">{error}</label>
                   </FormGroup>
-                  <FormFeedback>ihbbjk{error}</FormFeedback>         
+      */}
 
                   </CardBody>
-                  <CardFooter className="text-center">
-                    <Button
-                      block
-                      className="btn-round"
-                      color="info"
-                      // href="#pablo"
-                      // onClick={e => e.preventDefault()}
-                      // onClick={() => setFirstFocus(true)}
-                      size="md"
-                    >
-                      Login
-                    </Button>
 
-                    <Button
-                      block
-                      className="btn-round btn-white"
-                      color="default"
-                      to="/signup-page"
-                      outline
-                      size="md"
-                      tag={Link}    
-                    >
-                      Don't Have an Account? Create one now...
+                  <CardFooter className="text-center">
+                    {loading ?
+                    <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="primary" />
+                       : 
+                       <>
+                      <Button block className="btn-round" color="info" size="md">Login</Button> 
+                      <Button block className="btn-round btn-white" color="default" to="/signup-page" outline size="md" tag={Link}>
+                        Don't Have an Account? Create one now...
                     </Button>
+                    </>
+                    }
+                    
                   </CardFooter>
                 </Form>
               </Card>

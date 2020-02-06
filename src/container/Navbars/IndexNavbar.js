@@ -250,7 +250,7 @@ function IndexNavbar(props) {
               </NavItem>
               <NavItem>
                 <NavLink
-                  href="https://www.facebook.com/CreativeTim?ref=creativetim"
+                  href="https://www.facebook.com/shivam.rawat.961"
                   target="_blank"
                   id="facebook-tooltip"
                 >
