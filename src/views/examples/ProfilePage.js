@@ -46,7 +46,7 @@ function ProfilePage() {
               <Button className="btn-round" color="info" size="lg">
                 Follow
               </Button>
-              <Button
+              {/* <Button
                 className="btn-round btn-icon"
                 color="default"
                 id="tooltip515203352"
@@ -67,7 +67,7 @@ function ProfilePage() {
               </Button>
               <UncontrolledTooltip delay={0} target="tooltip340339231">
                 Follow me on Instagram
-              </UncontrolledTooltip>
+              </UncontrolledTooltip> */}
             </div>
             <h3 className="title">About me</h3>
             <h5 className="description">

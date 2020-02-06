@@ -50,8 +50,8 @@ render(){
     <Router>
     <div className="App">
     <Switch>
-      <Route path='/profilepage' exact strict component={ProfilePage}></Route>
-      <Route path='/user_posts' exact strict component={UserPosts}></Route>
+      <Route path='/profile' exact strict component={ProfilePage}></Route>
+      <Route path='/user-post' exact strict component={UserPosts}></Route>
       {/* <Route path="/index" render={props => <Index {...props} />} /> */}
       <Route path="/index" exact strict component={Index}></Route>
         <Route
@@ -62,13 +62,11 @@ render(){
           path="/landing-page"
           render={props => <LandingPage {...props} />}
         />
-        <Route path="/login-page" render={props => <LoginPage {...props} />} />
-        <Route path="/signup-page" render={props => <SignUp {...props} />} />
+        <Route path="/login" render={props => <LoginPage {...props} />} />
+        <Route path="/signup" render={props => <SignUp {...props} />} />
         <Route path="/add-posts" render={props => <AddPosts {...props} />} />
         <Route path="/demo" render={props => <Demo {...props} />} />
         <Route component={PagNotFound} />
-        {/* <Redirect to="/index" />
-        <Redirect from="/" to="/index" /> */}
         </Switch>
 
     </div>
