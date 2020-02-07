@@ -204,7 +204,7 @@ function LoginPage(props) {
                        : 
                        <>
                       <Button block className="btn-round" color="info" size="md">Login</Button> 
-                      <Button block className="btn-round btn-white" color="default" to="/signup-page" outline size="md" tag={Link}>
+                      <Button block className="btn-round btn-white" color="default" to="/signup" outline size="md" tag={Link}>
                         Don't Have an Account? Create one now...
                     </Button>
                     </>

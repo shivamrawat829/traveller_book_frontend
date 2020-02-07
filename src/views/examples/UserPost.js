@@ -27,6 +27,7 @@ function UserPosts(props) {
   const [pills, setPills] = React.useState("2");
 
   const[post, setUserPost] = useState([]);
+  const[places, setUserPlaces] = useState([]);
 
   useEffect(()  => {
     console.log("user postsss",props)
@@ -39,11 +40,12 @@ function UserPosts(props) {
     const fetchUsers = async () => {
       // setLoading(true);
       // console.log("loading ....")
-      const res = await axios.get(`http://127.0.1:8000/api/posts1/${the_num}`);
+      const res = await axios.get(`http://127.0.1:8000/api/posts/${the_num}`);
 
    
-      // console.log("userssssssssssssss...", res)
+      console.log("userssssssssssssss...", res.data)
       setUserPost(res.data)
+      setUserPlaces(res.data.places)
   
 
       // console.log("userpostpksmdkls...", res.data)
@@ -74,47 +76,59 @@ function UserPosts(props) {
         <div className="section">
           <Container>
            
-            <h3 className="title">About this Place</h3>
+           
+            <Row>
+              <Col className="ml-auto mr-auto" md="6">
+                <h4 className="title text-center">{post.title}</h4> 
+                <h4 className="title text-center">{post.place}</h4> 
+                <h3 className="title">About this Place</h3>
             <h5 className="description">
            {post.description}
             </h5>
-            <Row>
-              <Col className="ml-auto mr-auto" md="6">
-                <h4 className="title text-center">My Portfolio</h4>
-                
               </Col>
               
              
                   <Col className="ml-auto mr-auto" md="10">
-                    <Row className="collections">
-                      <Col md="6">
-                        <img
+
+                  {
+                    places.map(place => 
+                      <Row key={place.id} className="justify-content-center">
+                      <Col lg="12" md="12">
+                      <img
                           alt="..."
                           className="img-raised"
-                          src={require("../../assets/img/bg1.jpg")}
+                          src={place.image}
                         ></img>
+                      <h4 className="title text-center">{place.place}</h4> 
+                      <h5 className="description">
+                      {place.description}
+                      </h5>
+
+                       
+                        </Col>
+                        {/* <Col lg="8" md="12">
+                        <br/>
+                        <br/>
                         <img
                           alt="..."
                           className="img-raised"
                           src={require("../../assets/img/bg3.jpg")}
-                        ></img>
-                      </Col>
-                      <Col md="6">
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("../../assets/img/bg8.jpg")}
-                        ></img>
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("../../assets/img/bg7.jpg")}
-                        ></img>
-                      </Col>
-                    </Row>
+                          >
+                        </img>
+                      </Col> */}
+                      </Row>
+
+
+
+
+                      
+                      )
+                  }
+
+                  
                   </Col>
                
-              
+{/*               
                   <Col className="ml-auto mr-auto" md="10">
                     <Row className="collections">
                       <Col md="6">
@@ -171,7 +185,7 @@ function UserPosts(props) {
                         ></img>
                       </Col>
                     </Row>
-                  </Col>
+                  </Col> */}
               
             </Row>
           </Container>

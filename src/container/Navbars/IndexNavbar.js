@@ -203,7 +203,7 @@ function IndexNavbar(props) {
                 <Button
                   className="nav-link btn-neutral"
                   color="info"
-                  href="/login-page"
+                  href="/login"
                   id="upgrade-to-pro"
                   // onClick={toggle}
                 >

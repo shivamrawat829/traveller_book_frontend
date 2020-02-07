@@ -250,7 +250,7 @@ function SignUp(props) {
               <Button
               className="btn-round btn-white"
               color="default"
-              to="/login-page"
+              to="/login"
               outline
               size="lg"
               tag={Link}
