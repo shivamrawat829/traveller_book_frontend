@@ -50,7 +50,7 @@ render(){
     <Router>
     <div className="App">
     <Switch>
-      <Route path='/profile' exact strict component={ProfilePage}></Route>
+      <Route path='/myprofile' exact strict component={ProfilePage}></Route>
       <Route path='/user-post' exact strict component={UserPosts}></Route>
       {/* <Route path="/index" render={props => <Index {...props} />} /> */}
       <Route path="/index" exact strict component={Index}></Route>
