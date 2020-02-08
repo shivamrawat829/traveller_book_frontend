@@ -174,7 +174,7 @@ class PostsTitle extends React.Component {
                   {
                     this.state.posts.map(post => 
                       <Col md="4" key ={post.id}> 
-                       <NewNav  to={{pathname:"/user_posts",
+                       <NewNav  to={{pathname:"/user-post",
                                       search:`?id=${post.id}`,
                                       hash:`#${post.place}`,
                                   state:{
