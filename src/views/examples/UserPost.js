@@ -3,16 +3,9 @@ import axios from 'axios';
 
 // reactstrap components
 import {
-  Button,
-  NavItem,
-  NavLink,
-  Nav,
-  TabContent,
-  TabPane,
   Container,
   Row,
   Col,
-  UncontrolledTooltip
 } from "reactstrap";
 
 
@@ -24,8 +17,6 @@ import SinglePostHeader from "../../container/Headers/SinglePostHeader";
 import DefaultFooter from "../../container/Footers/DefaultFooter.js";
 
 function UserPosts(props) {
-  const [pills, setPills] = React.useState("2");
-
   const[post, setUserPost] = useState([]);
   const[places, setUserPlaces] = useState([]);
 
@@ -33,23 +24,11 @@ function UserPosts(props) {
     console.log("user postsss",props)
     const parts = props.location.search.split('=', 2);
     const the_num  = parts[1];
-
-    // console.log("userpostsssssssss",the_num)
-
-
     const fetchUsers = async () => {
-      // setLoading(true);
-      // console.log("loading ....")
       const res = await axios.get(`http://127.0.1:8000/api/posts/${the_num}`);
-
-   
       console.log("userssssssssssssss...", res.data)
       setUserPost(res.data)
       setUserPlaces(res.data.places)
-  
-
-      // console.log("userpostpksmdkls...", res.data)
-
     };
 
     fetchUsers();

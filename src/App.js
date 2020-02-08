@@ -4,20 +4,16 @@ import {
   BrowserRouter as Router,
   Route , Switch
 } from "react-router-dom";
-// import PageNotFound from './components/PagNotFound';
-// styles for this kit
+
 import "./assets/css/bootstrap.min.css";
 import "./assets/scss/now-ui-kit.scss";
 import "./assets/demo/demo.css";
 import "./assets/demo/nucleo-icons-page-styles.css";
 
-// newly added
 import { connect } from 'react-redux';
-//import BaseRouter from './routes';push
 import * as actions from './store/actions/auth';
-import ProfilePage from './container/ProfilePage/ProfilePage';
+import ProfilePage from './views/examples/ProfilePage';
 
-// pages for this kit
 import Index from "./views/Index.js";
 import NucleoIcons from "./views/NucleoIcons.js";
 import LoginPage from "./views/examples/LoginPage.js";
@@ -53,7 +49,7 @@ render(){
       <Route path='/myprofile' exact strict component={ProfilePage}></Route>
       <Route path='/user-post' exact strict component={UserPosts}></Route>
       {/* <Route path="/index" render={props => <Index {...props} />} /> */}
-      <Route path="/index" exact strict component={Index}></Route>
+      <Route path="/" exact strict component={Index}></Route>
         <Route
           path="/nucleo-icons"
           render={props => <NucleoIcons {...props} />}

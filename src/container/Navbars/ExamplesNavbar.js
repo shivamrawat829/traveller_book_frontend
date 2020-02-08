@@ -114,7 +114,7 @@ function ExamplesNavbar() {
           >
             <Nav navbar>
               <NavItem>
-                <NavLink to="/index" tag={Link}>
+                <NavLink to="/" tag={Link}>
                   Home Page
                 </NavLink>
               </NavItem>

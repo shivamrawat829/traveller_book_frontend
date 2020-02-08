@@ -37,7 +37,7 @@ function IndexHeader() {
             <img
               alt="..."
               className="n-logo"
-              src={require("../../assets/img/now-logo.png")}
+              src={require("../../assets/img/logos/logo.png")}
             ></img>
             <h1 className="h1-seo">Traveller Book.</h1>
             <h3>Start Your Journey Today.</h3>

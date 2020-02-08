@@ -192,7 +192,7 @@ function IndexNavbar(props) {
               {
                     props.isAuthenticated ?
                     <NavItem>
-                    <NavLink href = 'profilepage'>
+                    <NavLink href = 'myprofile'>
                       <i className="now-ui-icons ui-1_settings-gear-63"></i>
                       <p>Settings</p>
                     </NavLink>

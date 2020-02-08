@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 // reactstrap components
 import {Button,Card,CardHeader,CardBody,CardFooter,Form,Input,
-  Container,Col,FormFeedback,FormGroup,FormText, Spinner, InputGroup, InputGroupAddon, InputGroupText
+  Container,Col, Spinner, InputGroup, InputGroupAddon, InputGroupText
 } from "reactstrap";
 // import axios from "axios";
 import { connect } from 'react-redux';
@@ -15,7 +15,6 @@ import ExamplesNavbar from "../../container/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "../../container/Footers/TransparentFooter.js";
 
 const mapStateToProps = (state) => {
-  console.log("is authenticateddddddddddddddddddddd", state)
   
   return {
   loading: state.loading,
@@ -33,16 +32,12 @@ const mapDispatchToProps = dispatch => {
 
 
 function LoginPage(props) {
-  const [firstFocus, setFirstFocus] = React.useState(false);
-  // const [lastFocus, setLastFocus] = React.useState(false);
   const [emailFocus, setEmailFocus] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const[error, setError] = React.useState('')
   const [lastFocus, setLastFocus] = React.useState(false);
- 
   // const[setError] = React.useState('')
-
   const settingError = (event) =>{
     setError("Password or Email cannot be Empty...");
   };
@@ -57,7 +52,7 @@ function LoginPage(props) {
     if (props.isAuthenticated === true)
   {
     
-    props.history.push('index');
+    props.history.push('/');
   }
 
     document.body.classList.add("login-page");
@@ -74,8 +69,6 @@ function LoginPage(props) {
   const[loading, setLoading] = React.useState(false)
   const submitHandler = e => {
     e.preventDefault();
-
-    console.log("eeeeeeeeeeeeeee", error)
     if (password.length === 0 || email.length ===0) {
       e.preventDefault();
       settingError();
@@ -85,9 +78,7 @@ function LoginPage(props) {
       setLoading(true)
       setTimeout(() => {
       const data =  props.onAuth(email, password);
-      console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaa11111a", data, props)
       setLoading(false)
-
       }, 2000);
       // props.history.push('index');
       e.preventDefault();

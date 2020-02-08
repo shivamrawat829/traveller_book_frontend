@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from "react";
+import React from "react";
 
 // reactstrap components
 import {
@@ -12,8 +12,6 @@ import {
   UncontrolledDropdown,
   NavbarBrand,
   Navbar,
-  NavItem,
-  NavLink,
   Nav,
   FormGroup,
   Label,
@@ -23,14 +21,10 @@ import {
   NavLink as NewNav
 } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
-
-import Pagination from './Pagination';
 import axios from "axios";
 
 class PostsTitle extends React.Component {
-
   constructor(props) {
-    console.log("propssssssssssssssssssssssssssssssssssssss566666666666666666666666666666666666666442", props)
     super(props);
     this.state = {
       collapseOpen: false,
@@ -46,15 +40,16 @@ class PostsTitle extends React.Component {
 
       componentDidMount()
       {
-        const { count, start } = this.state;
-        this.state.isLoading = true
+        // const { count, start } = this.state;
+        this.setState({ isLoading: true });
+        
         const parts = this.props.location.search.split('=', 2);
         const the_num  = parts[1];
         setTimeout(() => {
           // axios.get(`http://127.0.1:8000/api/posts1?count=${the_num}&start=${this.state.start}`).then(
             axios.get(`http://127.0.1:8000/api/posts/${this.state.start}/${the_num}`).then(
             res =>{
-            this.state.isLoading = false
+              this.setState({ isLoading: false });
             console.log("tdataaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", res.data)
             this.setState({
               posts: res.data
@@ -65,7 +60,7 @@ class PostsTitle extends React.Component {
       }
 
       fetchImages = () => {
-        const { count, start } = this.state;
+        // const { count, start } = this.state;
         const parts = this.props.location.search.split('=', 2);
         const the_num  = parts[1];
         this.setState({ start: this.state.start + parseInt(the_num) });
@@ -91,7 +86,6 @@ class PostsTitle extends React.Component {
   render(){
   return (
     <>
-
       <div className="wrapper">
         <div className="section">
           <Container>

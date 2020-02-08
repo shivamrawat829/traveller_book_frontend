@@ -3,17 +3,11 @@ import { Link } from "react-router-dom";
 // reactstrap components
 import {
   Collapse,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  NavbarBrand,
   Navbar,
   NavItem,
   NavLink,
   Nav,
   Container,
-  UncontrolledTooltip
 } from "reactstrap";
 
 function SinglePageNavbar() {
@@ -75,7 +69,7 @@ function SinglePageNavbar() {
           >
             <Nav navbar>
               <NavItem>
-                <NavLink to="/index" tag={Link}>
+                <NavLink to="/" tag={Link}>
                   Home Page
                 </NavLink>
               </NavItem>     

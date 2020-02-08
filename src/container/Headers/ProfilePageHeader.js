@@ -2,10 +2,9 @@ import React, {useState, useRef} from "react";
 
 // reactstrap components
 
-import {Container, Badge, Button, Row, Col,ModalHeader,
-  ModalBody,Label,
-    UncontrolledTooltip, Modal, FormGroup, InputGroupText, Input, InputGroup
-     , InputGroupAddon, CustomInput} from "reactstrap";
+import {Container, Button, Row, Col,ModalHeader,
+  ModalBody, Modal, InputGroupText, Input, InputGroup
+     , InputGroupAddon} from "reactstrap";
 
 import axios from 'axios';
 
