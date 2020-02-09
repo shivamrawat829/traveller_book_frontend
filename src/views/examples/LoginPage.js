@@ -124,7 +124,7 @@ function LoginPage(props) {
                     </InputGroupAddon>
                     <Input
                       placeholder="Email..."
-                      type="email"
+                      type="text"
                       onFocus={() => setEmailFocus(true)}
                       onBlur={() => setEmailFocus(false)}
                       value={email}
