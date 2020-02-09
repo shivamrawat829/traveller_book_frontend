@@ -47,9 +47,11 @@ export const authLogin = (username, password) => {
         .then(res => {
             console.log("id isssssssssssssssssss", res)
             const token = res.data.key;
+            const id = res.data.user_id;
             const expirationDate = new Date(new Date().getTime() + 36000 * 1000);
             localStorage.setItem('token', token);
             localStorage.setItem('expirationDate', expirationDate);
+            localStorage.setItem('id',id )
             dispatch(authSuccess(token));
             dispatch(checkAuthTimeout(3600));
         })
