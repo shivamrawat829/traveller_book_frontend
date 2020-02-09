@@ -73,16 +73,7 @@ function ProfilePageHeader(props) {
 
   React.useEffect(() => {
 
-    
-
-    // console.log("this time", props.location.search, "and", props.location.hash)
-    const fetchUserData = async () => {
-      // console.log("userssssssssssssss.ijbfdsijbfbs..",props)
-      setnoOfPosts(152)
-    };
-
-    fetchUserData();
-
+    console.log("PROFILE PAGE HEADER ", props)
     if (window.innerWidth > 991) {
       const updateScroll = () => {
         let windowScrollTop = window.pageYOffset / 3;
@@ -112,14 +103,17 @@ function ProfilePageHeader(props) {
           <div className="photo-container">
             <img alt="..." src={require("../../assets/img/julie.jpg")}></img>
           </div>
-        <h3 className="title">{props.username}</h3>
-        <Button className="btn-round mr-1" color="info" role="button" size="md" onClick={toggle}>
+        <h3 className="title">{props.first_name}</h3>
+
+        {props.my_profile ? <Button className="btn-round mr-1" color="info" role="button" size="md" onClick={toggle}>
         Edit Profile
-        </Button> 
+        </Button> :
+        <></>}
+        
         
 
             
-        <p className="category">Air Force Personal</p>
+        <p className="category">{props.username}</p>
         <p className="email">{props.email}</p>
           <div className="content">
             <div className="social-description">
@@ -127,7 +121,7 @@ function ProfilePageHeader(props) {
               <p>Followers</p>
             </div>
             <div className="social-description">
-              <h2>{noOfPosts}</h2>
+              <h2>{props.total_posts}</h2>
               <p>Posts</p>
             </div>
             <div className="social-description">

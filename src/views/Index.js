@@ -63,11 +63,6 @@ const _defaultPlace = [
 
 function Index(props) {
 
- 
-  
-
-
-
   const [place_is, setPlacenew] = useState(_defaultPlace);
 
   const handlePlaceChange = event => {

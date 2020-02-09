@@ -43,7 +43,7 @@ function LoginPage(props) {
   };
 
   React.useEffect(() => {
-    console.log("yes it is")
+    // console.log("yes it is")
     if (password.length >= 1 & email.length >= 1)
     {
       setError("")

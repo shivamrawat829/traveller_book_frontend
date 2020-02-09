@@ -49,31 +49,39 @@ function ProfilePage(props) {
   const [pills, setPills] = React.useState("1");
 
   const[user, setUser] = useState([]);
+  const[user_posts, setUserPosts] = useState([]);
+  const[my_profile, isMyProfile] = useState(false);
 
   
   
   useEffect(()  => {
     console.log("PRORRRRRRRRRRRRRRRRRRRRRRR",props.location.search)
     const parts = props.location.search.split('=', 2);
-    const the_num  = parts[1];
+    const user_id  = parts[1];
 
-    console.log("PRORRRRRRRRRRRRRRRRRRRRRRR22222",localStorage.token)
+    console.log("token and id",localStorage.token, localStorage.user_id)
+
+    if (user_id === localStorage.user_id){
+
+      isMyProfile(true)
+
+    }
+    else{
+      isMyProfile(false)
+    }
 
 
     const fetchUsers = async () => {
       // setLoading(true);
       // console.log("loading ....")
-      const res = await axios.get(`http://127.0.0.1:8000/users/posts/${the_num}`);
+      const user_info = await axios.get(`http://127.0.0.1:8000/info/user/${user_id}`);
 
-      const user_info = await axios.get(`http://127.0.0.1:8000/users/posts/${localStorage.token}`);
-
-
-   
-      // console.log("userssssssssssssss...", res)
-      setUser(res.data)
+      // const user_info = await axios.get(`http://127.0.0.1:8000/info/user/${localStorage.user_id}`);
+      setUser(user_info.data)
+      setUserPosts(user_info.data.blog_posts)
   
 
-      console.log("setuserrrrrrrrrrrrrrr...", res.data)
+      console.log("setuserrrrrrrrrrrrrrr...", user_info.data)
 
     };
 
@@ -97,14 +105,19 @@ function ProfilePage(props) {
     <>
       {/* <ExamplesNavbar /> */}
       <div className="wrapper">
-        <ProfilePageHeader {...user}/>
+        <ProfilePageHeader {...user} my_profile={my_profile}/>
         <div className="section">
           <Container>
             <div className="button-container">
-              <Button className="btn-round" color="info" size="lg">
-                Follow
-              </Button>
 
+              {my_profile ? <></>:
+
+              <Button className="btn-round" color="info" size="lg">
+              Follow
+            </Button>
+
+              }
+              
               
               {/* <Button
                 className="btn-round btn-icon"
@@ -135,7 +148,7 @@ function ProfilePage(props) {
             </h5>
             <Row>
               <Col className="ml-auto mr-auto" md="6">
-                <h4 className="title text-center">My Posts</h4>
+            <h4 className="title text-center">{user.first_name} Posts</h4>
                 <div className="nav-align-center">
                   <Nav
                     className="nav-pills-info nav-pills-just-icons"
@@ -186,6 +199,27 @@ function ProfilePage(props) {
                 <TabPane tabId="pills1">
                   <Col className="ml-auto mr-auto" md="10">
                     <Row className="collections">
+
+                      
+                  {
+                    user_posts.map(post => 
+                      <Col md="6">
+                      <img
+                        alt="..."
+                        className="img-raised"
+                        src={post.image}
+                      ></img>
+                      {/* <img
+                        alt="..."
+                        className="img-raised"
+                        src={require("../../assets/img/bg3.jpg")}
+                      ></img> */}
+                    </Col>
+                      
+                      )
+                    }
+
+{/* 
                       <Col md="6">
                         <img
                           alt="..."
@@ -209,7 +243,7 @@ function ProfilePage(props) {
                           className="img-raised"
                           src={require("../../assets/img/bg7.jpg")}
                         ></img>
-                      </Col>
+                      </Col> */}
                     </Row>
                   </Col>
                 </TabPane>

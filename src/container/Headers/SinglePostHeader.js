@@ -1,4 +1,9 @@
 import React, {useState} from "react";
+// import {
+//   NavLink
+// } from "reactstrap";
+
+import { Link, NavLink } from "react-router-dom";
 
 // reactstrap components
 import { Container } from "reactstrap";
@@ -41,9 +46,15 @@ function SinglePostHeader(props) {
 
         ></div>
         <Container>
+          
+          <NavLink tag={Link} to={{pathname:"/myprofile",
+                                      search:`?id=${props.author}`}} >
           <div className="photo-container">
-            <img alt="..." src={props.image}></img>
+          <img alt="..." src={props.image}></img>
           </div>
+                </NavLink>
+            
+         
         </Container>
       </div>
     </>
