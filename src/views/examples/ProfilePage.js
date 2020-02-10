@@ -52,14 +52,20 @@ function ProfilePage(props) {
   const[user_posts, setUserPosts] = useState([]);
   const[my_profile, isMyProfile] = useState(false);
 
+  const[user_image, setUserImage] = useState("");
+  const[cover_pic, setCoverpic] = useState("");
+  const[about_user, setAboutUser] = useState("");
+
+
+
   
   
   useEffect(()  => {
-    console.log("PRORRRRRRRRRRRRRRRRRRRRRRR",props.location.search)
+    // console.log("PRORRRRRRRRRRRRRRRRRRRRRRR",props.location.search)
     const parts = props.location.search.split('=', 2);
     const user_id  = parts[1];
 
-    console.log("token and id",localStorage.token, localStorage.user_id)
+    // console.log("token and id",localStorage.token, localStorage.user_id)
 
     if (user_id === localStorage.user_id){
 
@@ -79,9 +85,12 @@ function ProfilePage(props) {
       // const user_info = await axios.get(`http://127.0.0.1:8000/info/user/${localStorage.user_id}`);
       setUser(user_info.data)
       setUserPosts(user_info.data.blog_posts)
+      setUserImage(user_info.data.user_profile.image)
+      setAboutUser(user_info.data.user_profile.about_me)
+      setCoverpic(user_info.data.user_profile.cover_pic)
   
 
-      console.log("setuserrrrrrrrrrrrrrr...", user_info.data)
+      // console.log("setuserrrrrrrrrrrrrrr...", user_info.data)
 
     };
 
@@ -105,7 +114,8 @@ function ProfilePage(props) {
     <>
       {/* <ExamplesNavbar /> */}
       <div className="wrapper">
-        <ProfilePageHeader {...user} my_profile={my_profile}/>
+        <ProfilePageHeader {...user} my_profile={my_profile} about_user ={about_user}
+        cover_pic={cover_pic} user_image={user_image} />
         <div className="section">
           <Container>
             <div className="button-container">
@@ -203,7 +213,7 @@ function ProfilePage(props) {
                       
                   {
                     user_posts.map(post => 
-                      <Col md="6">
+                      <Col md="6" key={post.id}>
                       <img
                         alt="..."
                         className="img-raised"

@@ -12,20 +12,14 @@ import axios from 'axios';
 
 function ProfilePageHeader(props) {
   let pageHeader = React.createRef();
-
- 
-
-  const[noOfPosts, setnoOfPosts] = useState(0)
-  const [email, setEmail] = React.useState("");
-
-
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [middleFocus, setmiddleFocus] = React.useState(false);
-  const [title, setTitle] = React.useState("");
+  const [email, setEmail] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const [rating, setRating] = React.useState("");
-  const [place, setPlace] = React.useState("");
+  const [user_name, setUsername] = React.useState("");
+  const [first_name, setFirstName] = React.useState("");
   const [emailFocus, setEmailFocus] = React.useState(false);
+
   const {
     className
   } = props;
@@ -39,19 +33,22 @@ function ProfilePageHeader(props) {
 
   const submitHandler = e => {
    console.log("submit handler chalaaaaa")
-      let url = 'http://127.0.0.1:8000/api/create/';
-      // console.log("eeeeeeeeeeeeeeeeeeeeeeee", e, "ibfdijbfdskjbofb", title,"image",  fileInput.current.files[0] , "des",description, 
-      // "place",place,"rating", rating)
-      e.preventDefault();
+      let url = `http://127.0.0.1:8000/info/user/${localStorage.user_id}/`
+      console.log("eeeeeeeeeeeeeeeeeeeeeeee",email, user_name, first_name, description)
       let form_data = new FormData();
       // console.log('placeeeeeeeeeee ',place_is, fileInput)
       // form_data.append('image', fileInput.current.files[0], fileInput.current.files[0].name);
-      form_data.append('title', title);
-      form_data.append('description', description);
-      form_data.append('place', place);
-      form_data.append('rating', rating);
+      // form_data.append('email', email);
+      form_data.append('first_name', first_name);
+      // form_data.append('username', user_name);
+      // form_data.append('about_me', description);
     
-          axios.post(url, form_data, {
+      // axios.put(url, {
+      //   'first_name':first_name
+      // })
+      // .then(res => console.log(res))
+      // .catch(err=>console.log(err))
+          axios.put(url, form_data, {
             headers: {
             'content-type': 'multipart/form-data'
             }
@@ -60,21 +57,14 @@ function ProfilePageHeader(props) {
               console.log("SUCCESS", res);
             })
             .catch(err => console.log(err))
-    
-
 
     e.preventDefault();
   }
 
-
-  
-
-
-
   React.useEffect(() => {
+    // console.log("PROFILE PAGE HEADER ", props)
 
-    console.log("PROFILE PAGE HEADER ", props)
-    if (window.innerWidth > 991) {
+    if (window.innerWidth > 1000) {
       const updateScroll = () => {
         let windowScrollTop = window.pageYOffset / 3;
         pageHeader.current.style.transform =
@@ -95,13 +85,13 @@ function ProfilePageHeader(props) {
         <div
           className="page-header-image"
           style={{
-            backgroundImage: "url(" + require("../../assets/img/bg5.jpg") + ")"
+            backgroundImage: `url(${props.cover_pic})`,
           }}
           ref={pageHeader}
         ></div>
         <Container>
           <div className="photo-container">
-            <img alt="..." src={require("../../assets/img/julie.jpg")}></img>
+            <img alt="..." src={props.user_image}></img>
           </div>
         <h3 className="title">{props.first_name}</h3>
 
@@ -142,7 +132,7 @@ function ProfilePageHeader(props) {
                         <Col className="text-center ml-auto mr-auto" md="10" lg="10">
 
                         <div className="photo-container">
-                          <img alt="..." src={require("../../assets/img/julie.jpg")}></img>
+                          <img alt="..." src={props.user_image}></img>
                         </div>
                         <br/>
                         <br/>
@@ -159,7 +149,9 @@ function ProfilePageHeader(props) {
                           </InputGroupAddon>
                           <Input 
                           placeholder="Name..." type="text" onFocus={() => setFirstFocus(true)}
-                            onBlur={() => setFirstFocus(false)} value={title} onChange={e => setTitle(e.target.value)}
+                            onBlur={() => setFirstFocus(false)} 
+                            defaultValue={props.first_name}
+                          onChange={e => setFirstName(e.target.value)}
                           >
                           </Input>
                         
@@ -186,8 +178,8 @@ function ProfilePageHeader(props) {
                             <Input
                               placeholder="Username..." type="text" onFocus={() => setmiddleFocus(true)}
                               onBlur={() => setmiddleFocus(false)} 
-                              value={place} 
-                              onChange={e => setPlace(e.target.value)}
+                              defaultValue={props.username} 
+                              onChange={e => setUsername(e.target.value)}
                             >
                             </Input>
                           </InputGroup>
@@ -207,14 +199,14 @@ function ProfilePageHeader(props) {
                       type="email"
                       onFocus={() => setEmailFocus(true)}
                       onBlur={() => setEmailFocus(false)}
-                      value={email}
+                      defaultValue={props.email}
                       onChange={e => setEmail(e.target.value)}
                     ></Input>
                   </InputGroup>
 
                           <div className="textarea-container">
                             <Input cols="80" name="description" placeholder="About me..." rows="4" type="textarea"
-                              value={description} onChange={e => setDescription(e.target.value)}
+                              defaultValue={props.about_user} onChange={e => setDescription(e.target.value)}
                             ></Input>
                           </div>       
                   
