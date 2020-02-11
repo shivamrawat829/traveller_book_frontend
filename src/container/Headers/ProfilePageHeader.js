@@ -41,14 +41,14 @@ function ProfilePageHeader(props) {
       // form_data.append('email', email);
       form_data.append('first_name', first_name);
       // form_data.append('username', user_name);
-      // form_data.append('about_me', description);
+      form_data.append('about_me', description);
     
       // axios.put(url, {
       //   'first_name':first_name
       // })
       // .then(res => console.log(res))
       // .catch(err=>console.log(err))
-          axios.put(url, form_data, {
+          axios.patch(url, form_data, {
             headers: {
             'content-type': 'multipart/form-data'
             }

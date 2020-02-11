@@ -46,41 +46,59 @@ import { Badge, Button, Row, Col,ModalHeader,
     
 const useForceUpdate = () => useState()[1];
 
+var id_global = 0
+
 const _defaultPlace = [
   {
-    place1: "dfsdfs",
-    description1: "sdfsdf",
+    place1: null,
+    description1: null,
     place_pic: null,
+    id:id_global
   },
-  {
-    place1: "12345",
-    description1: "67890",
-    place_pic: null,
-  },
-
 ];
 
 
 function Index(props) {
+
+ 
+  
+
+
 
   const [place_is, setPlacenew] = useState(_defaultPlace);
 
   const handlePlaceChange = event => {
     const _tempplace = [...place_is];
     console.log("2342342423423", event.target, event.target.name)
+    console.log('...place_is',...place_is)
     _tempplace[event.target.dataset.id][event.target.name] = event.target.value;
     setPlacenew(_tempplace);
     console.log("rgfdgdfg", _tempplace)
   };
 
+
+  const handlePlaceImageChange = event => {
+    const _tempimage = [...place_is];
+    console.log("2342342423423", event.target, event.target.name)
+    console.log('...place_is',...place_is)
+    _tempimage[event.target.dataset.id][event.target.name] = event.target.files[0]
+    setPlacenew(_tempimage);
+    console.log("rgfdgdfg", _tempimage)
+  };
+
+
+
+
   const addNewPlace = () => {
-    setPlacenew(prevPlace => [...prevPlace, { place1: "", description1: "", place_pic:[] }]);
+    id_global = id_global + 1
+    setPlacenew(prevPlace => [...prevPlace, { place1: "", description1: "", place_pic:[] ,id : id_global}]);
   };
 
   function handleRemove(i) {
     const values = [...place_is];
     values.splice(i, 1);
     setPlacenew(values);
+    console.log('setPlacenew handleRemove',values)
   }
 
   const forceUpdate = useForceUpdate();
@@ -121,18 +139,24 @@ function Index(props) {
     }
 
     else{
-      let url = 'http://127.0.0.1:8000/api/create/';
+      let url = 'http://127.0.0.1:8000/api/posts/create/';
       // console.log("eeeeeeeeeeeeeeeeeeeeeeee", e, "ibfdijbfdskjbofb", title,"image",  fileInput.current.files[0] , "des",description, 
       // "place",place,"rating", rating)
       e.preventDefault();
       let form_data = new FormData();
-      console.log('placeeeeeeeeeee ',place_is, fileInput)
-      form_data.append('image', fileInput.current.files[0], fileInput.current.files[0].name);
+      console.log('placeeeeeeeeeee ',fileInput)
+      console.log('places are',place_is)
+      // console.log('placeeeeeeeeeee22222 ',fileInput.current.files)
+      if (fileInput.current.files.length > 0){
+        form_data.append('image', fileInput.current.files[0], fileInput.current.files[0].place11111111);
+      }
+      
       form_data.append('title', title);
       form_data.append('description', description);
       form_data.append('place', place);
       form_data.append('rating', rating);
     
+      console.log('form data',form_data)
           axios.post(url, form_data, {
             headers: {
             'content-type': 'multipart/form-data'
@@ -140,6 +164,34 @@ function Index(props) {
           })
             .then(res => {
               console.log("SUCCESS", res);
+                            if (res && place_is){
+                              let url2 = 'http://127.0.0.1:8000/api/places/create/';
+                              for (var i = 0; i<place_is.length;i++){
+                                let form_data2 = new FormData();
+                                // console.log('placeeeeeeeeeee ',fileInput)
+                                // console.log('places are',place_is)
+                                // // console.log('placeeeeeeeeeee22222 ',fileInput.current.files)
+                                if (place_is[i].place_pic){
+                                  console.log('place_is[i].place_pic',place_is[i].place_pic)
+                                  console.log('place_is[i].place_pic.name',place_is[i].place_pic.name)
+                                  form_data2.append('image', place_is[i].place_pic, place_is[i].place_pic.name);
+                                }
+                                
+                                form_data2.append('place', place_is[i].place1);
+                                form_data2.append('description', place_is[i].description1);
+                                form_data2.append('post_id', res.data.id);
+                                
+                              axios.post(url2, form_data2, {
+                                headers: {
+                                // 'content-type': 'multipart/form-data'
+                                }
+                              })
+                                .then(res2 => {
+                                  console.log("SUCCESS2", res2);
+                                })
+                                .catch(err => console.log(err))
+                              }
+                            }
             })
             .catch(err => console.log(err))
     }
@@ -235,10 +287,11 @@ function Index(props) {
                           
                         </InputGroup>
                         <h6 style={{color:'red',}}>{error}</h6>
-                        <InputGroup>
+                        <InputGroup className={"input-lg"}>
                     {/* <Label for="exampleCustomFileBrowser">File Browser with Custom Label</Label> */}
                     {/* <CustomInput  type="file"  ref={fileInput} onChange={forceUpdate}  label="Choose Cover Pic...!" /> */}
-                    <input type="file" ref={fileInput} onChange={forceUpdate}/> 
+                    <input type="file" ref={fileInput} className={"form-control"} onChange={forceUpdate}/> 
+                    
                   </InputGroup>
 
                         <br/>
@@ -294,9 +347,12 @@ function Index(props) {
                                 </Badge>
                                 </a>
 
-                              {place_is.map((item, index) => {
+                              {place_is.map((item, id) => {
+
+                                      console.log('item',item)
+                                      console.log('idddddd',item.id)
                                       return (
-                                        <div key={index}>
+                                        <div key={item.id}>
                                          
 
                                           {/* <input type="file" ref={fileInput} onChange={forceUpdate}/> */}
@@ -311,7 +367,7 @@ function Index(props) {
                                                 </InputGroupAddon>
                                                   <Input
                                                     placeholder="Place..." type="text" 
-                                                    data-id={index}
+                                                    data-id={item.id}
                                                     defaultValue ={item.place1}
                                                     onChange={handlePlaceChange}
                                                     name="place1"
@@ -330,7 +386,7 @@ function Index(props) {
                                                     </InputGroupText>
                                                     </InputGroupAddon>
                                                     <Input
-                                                      data-id={index}
+                                                      data-id={item.id}
                                                       placeholder="Description..."
                                                       defaultValue={item.description1}
                                                       onChange={handlePlaceChange}
@@ -339,14 +395,24 @@ function Index(props) {
                                                     </Input>
                                                 </InputGroup>
 
-                                                <InputGroup>
-                                              <CustomInput onChange={handlePlaceChange} data-id={index}
-                                               name="place_pic" defaultValue={item.place_pic} type="file" 
-                                                label="Choose Picture of the Place...!" />
-                                            </InputGroup>
+                                                {/* <InputGroup> */}
+
+                                            
+                                                <InputGroup className={"input-lg"}>
+              
+                                                  <input type="file" name="place_pic" label="Choose Picture of the Place...!"  data-id={item.id} className={"form-control"} onChange={handlePlaceImageChange}/> 
+                                                  
+                                                </InputGroup>
+
+
+
+                                              {/* <CustomInput onChange={handlePlaceImageChange} data-id={index}
+                                               name="place_pic"  type="file" 
+                                                label="Choose Picture of the Place...!" /> */}
+                                            {/* </InputGroup> */}
 
                                                
-                                                <Button onClick={() => handleRemove(index)} color="danger">Remove</Button>
+                                                <Button onClick={() => handleRemove(item.id)} color="danger">Remove</Button>
                                         </div>
                                       );
                                     })}
