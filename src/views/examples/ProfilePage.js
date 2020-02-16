@@ -1,6 +1,6 @@
 import React, {useEffect,useState} from "react";
 import axios from 'axios';
-import {withRouter} from "react-router-dom";
+import {withRouter,NavLink as NewNav} from "react-router-dom";
 
 // reactstrap components
 import {
@@ -13,7 +13,6 @@ import {
   Container,
   Row,
   Col,
-  UncontrolledTooltip
 } from "reactstrap";
 
 import { connect } from 'react-redux';
@@ -28,8 +27,6 @@ import DefaultFooter from "../../container/Footers/DefaultFooter";
 
 
 const mapStateToProps = (state) => {
-  console.log("profile page is authenticate", state)
-  
   return {
   loading: state.loading,
   error: state.error,
@@ -214,11 +211,29 @@ function ProfilePage(props) {
                   {
                     user_posts.map(post => 
                       <Col md="6" key={post.id}>
-                      <img
+
+                      <NewNav  to={{pathname:"/user-post",
+                                      search:`?id=${post.id}`,
+                                      hash:`#${post.place}`,
+                                  state:{
+                                      post_id:post.id
+                                  }}}>
+                        
+                          <img
+                              alt="..."
+                              className="img-raised"
+                              src={post.image}    
+                              key = {post.id}>
+                          </img>
+                        
+                      </NewNav>
+
+                      
+                      {/* <img
                         alt="..."
                         className="img-raised"
                         src={post.image}
-                      ></img>
+                      ></img> */}
                       {/* <img
                         alt="..."
                         className="img-raised"

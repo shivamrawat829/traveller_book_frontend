@@ -192,10 +192,12 @@ function IndexNavbar(props) {
               {
                     props.isAuthenticated ?
                     <NavItem>
-                    <NavLink href = 'myprofile'>
+                    <NavLink tag={Link} to={{pathname:"/myprofile",
+                          search:`?id=${localStorage.user_id}`}}>
                       <i className="now-ui-icons ui-1_settings-gear-63"></i>
                       <p>Settings</p>
                     </NavLink>
+
                   </NavItem>
               :
              

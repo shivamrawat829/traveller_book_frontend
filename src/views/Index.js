@@ -22,7 +22,7 @@ import * as actions from '../store/actions/auth';
 import { Badge, Button, Row, Col,ModalHeader,
    ModalBody,Label,
      UncontrolledTooltip, Modal, FormGroup, InputGroupText, Input, InputGroup
-      , InputGroupAddon, CustomInput} from "reactstrap";
+      , InputGroupAddon, CustomInput, Spinner} from "reactstrap";
 
 
      const mapStateToProps = (state) => {
@@ -59,35 +59,18 @@ const _defaultPlace = [
 
 
 function Index(props) {
-
- 
-  
-
-
-
   const [place_is, setPlacenew] = useState(_defaultPlace);
-
   const handlePlaceChange = event => {
     const _tempplace = [...place_is];
-    console.log("2342342423423", event.target, event.target.name)
-    console.log('...place_is',...place_is)
     _tempplace[event.target.dataset.id][event.target.name] = event.target.value;
     setPlacenew(_tempplace);
-    console.log("rgfdgdfg", _tempplace)
   };
-
 
   const handlePlaceImageChange = event => {
     const _tempimage = [...place_is];
-    console.log("2342342423423", event.target, event.target.name)
-    console.log('...place_is',...place_is)
     _tempimage[event.target.dataset.id][event.target.name] = event.target.files[0]
     setPlacenew(_tempimage);
-    console.log("rgfdgdfg", _tempimage)
   };
-
-
-
 
   const addNewPlace = () => {
     id_global = id_global + 1
@@ -98,13 +81,14 @@ function Index(props) {
     const values = [...place_is];
     values.splice(i, 1);
     setPlacenew(values);
-    console.log('setPlacenew handleRemove',values)
   }
 
   const forceUpdate = useForceUpdate();
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
   const [middleFocus, setmiddleFocus] = React.useState(false);
+  const [middleFocusPlaces, setmiddleFocusPlaces] = React.useState(false);
+
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [rating, setRating] = React.useState("");
@@ -115,6 +99,9 @@ function Index(props) {
 
   const[error, setError] = React.useState('')
   const[journey_error, setJourneyError] = React.useState('')
+
+  const[is_uploading, setIsUploading]=React.useState(false) 
+
   // const[setError] = React.useState('')
   const settingTitleError = (event) =>{
     // console.log("error", event)
@@ -140,12 +127,11 @@ function Index(props) {
 
     else{
       let url = 'http://127.0.0.1:8000/api/posts/create/';
-      // console.log("eeeeeeeeeeeeeeeeeeeeeeee", e, "ibfdijbfdskjbofb", title,"image",  fileInput.current.files[0] , "des",description, 
-      // "place",place,"rating", rating)
-      e.preventDefault();
       let form_data = new FormData();
-      console.log('placeeeeeeeeeee ',fileInput)
-      console.log('places are',place_is)
+      setIsUploading(true)
+      console.log("is uploading111111111111111111111", is_uploading);
+      // console.log('placeeeeeeeeeee ',fileInput)
+      // console.log('places are',place_is)
       // console.log('placeeeeeeeeeee22222 ',fileInput.current.files)
       if (fileInput.current.files.length > 0){
         form_data.append('image', fileInput.current.files[0], fileInput.current.files[0].place11111111);
@@ -172,8 +158,8 @@ function Index(props) {
                                 // console.log('places are',place_is)
                                 // // console.log('placeeeeeeeeeee22222 ',fileInput.current.files)
                                 if (place_is[i].place_pic){
-                                  console.log('place_is[i].place_pic',place_is[i].place_pic)
-                                  console.log('place_is[i].place_pic.name',place_is[i].place_pic.name)
+                                  // console.log('place_is[i].place_pic',place_is[i].place_pic)
+                                  // console.log('place_is[i].place_pic.name',place_is[i].place_pic.name)
                                   form_data2.append('image', place_is[i].place_pic, place_is[i].place_pic.name);
                                 }
                                 
@@ -188,6 +174,8 @@ function Index(props) {
                               })
                                 .then(res2 => {
                                   console.log("SUCCESS2", res2);
+                                  setIsUploading(false)
+                                  console.log("is uploading2222222222222222", is_uploading);
                                 })
                                 .catch(err => console.log(err))
                               }
@@ -195,14 +183,7 @@ function Index(props) {
             })
             .catch(err => console.log(err))
     }
-
-
-    e.preventDefault();
   }
-
-
-  
-
 
   React.useEffect(() => {
 
@@ -223,7 +204,7 @@ function Index(props) {
     
       <IndexNavbar {...props}/>
       <div className="wrapper">
-        <IndexHeader />
+        <IndexHeader is_uploading={is_uploading} />
         <div className="main">
           {/* <Images /> */}
           {/* <BasicElements /> */}
@@ -259,7 +240,7 @@ function Index(props) {
             <></>
           }
 
-        
+       
               <Modal isOpen={modal} toggle={toggle} className={className}>
               <ModalHeader toggle={toggle}>Upload a Post...</ModalHeader>
                 <ModalBody>
@@ -270,7 +251,7 @@ function Index(props) {
                         <Col className="text-center ml-auto mr-auto" md="10" lg="10">
                         <InputGroup
                           className={
-                            "input-lg" + (firstFocus ? " input-group-focus" : "")
+                            "input-md" + (firstFocus ? " input-group-focus" : "")
                           }
                         >
                           <InputGroupAddon addonType="prepend">
@@ -287,7 +268,7 @@ function Index(props) {
                           
                         </InputGroup>
                         <h6 style={{color:'red',}}>{error}</h6>
-                        <InputGroup className={"input-lg"}>
+                        <InputGroup className={"input-md"}>
                     {/* <Label for="exampleCustomFileBrowser">File Browser with Custom Label</Label> */}
                     {/* <CustomInput  type="file"  ref={fileInput} onChange={forceUpdate}  label="Choose Cover Pic...!" /> */}
                     <input type="file" ref={fileInput} className={"form-control"} onChange={forceUpdate}/> 
@@ -297,7 +278,7 @@ function Index(props) {
                         <br/>
                         <InputGroup
                           className={
-                            "input-lg" + (middleFocus ? " input-group-focus" : "")
+                            "input-md" + (middleFocus ? " input-group-focus" : "")
                           }
                         >
                           <InputGroupAddon addonType="prepend">
@@ -306,7 +287,8 @@ function Index(props) {
                             </InputGroupText>
                           </InputGroupAddon>
                             <Input
-                              placeholder="Place..." type="text" onFocus={() => setmiddleFocus(true)}
+                              placeholder="Place..." type="text" 
+                              onFocus={() => setmiddleFocus(true)}
                               onBlur={() => setmiddleFocus(false)} 
                               value={place} 
                               onChange={e => setPlace(e.target.value)}
@@ -316,7 +298,7 @@ function Index(props) {
                           
 
                           <Label for="exampleSelect">Rating</Label>
-                            <Input className='input-lg' value={rating} onChange={e => setRating(e.target.value)} 
+                            <Input className='input-md' value={rating} onChange={e => setRating(e.target.value)} 
                             type="number" name="select" id="exampleSelect">
                               {/* <option>1</option>
                               <option>2</option>
@@ -331,7 +313,7 @@ function Index(props) {
                               value={description} onChange={e => setDescription(e.target.value)}
                             ></Input>
                           </div>       
-                            <FormGroup className='input-lg'>
+                            {/* <FormGroup className='input-md'>
                               <Datetime
                                 timeFormat={false}
                                 inputProps={{ placeholder: "Journey Date" }}
@@ -339,7 +321,7 @@ function Index(props) {
                               onChange={e => setJourney(e.target.value)}
 
                               />
-                            </FormGroup>
+                            </FormGroup> */}
                               <h6>{journey_error}</h6>
                               <a   href='#'>
                               <Badge onClick={addNewPlace} color="info" className="mr-1">
@@ -349,8 +331,8 @@ function Index(props) {
 
                               {place_is.map((item, id) => {
 
-                                      console.log('item',item)
-                                      console.log('idddddd',item.id)
+                                      // console.log('item',item)
+                                      // console.log('idddddd',item.id)
                                       return (
                                         <div key={item.id}>
                                          
@@ -358,7 +340,9 @@ function Index(props) {
                                           {/* <input type="file" ref={fileInput} onChange={forceUpdate}/> */}
                                               <br/>
                                               <InputGroup
-                                                className="input-lg"
+                                                className={
+                                                  "input-md" + (middleFocusPlaces ? " input-group-focus" : "")
+                                                }
                                               >
                                                 <InputGroupAddon addonType="prepend">
                                                   <InputGroupText>
@@ -371,13 +355,17 @@ function Index(props) {
                                                     defaultValue ={item.place1}
                                                     onChange={handlePlaceChange}
                                                     name="place1"
+                                                    onFocus={() => setmiddleFocusPlaces(true)}
+                                                    onBlur={() => setmiddleFocusPlaces(false)} 
                                                     // onChange={e => handleChange(idx, e)}
                                                   >
                                                   </Input>
                                                 </InputGroup>
+
+
                                                 <InputGroup
                                                   className={
-                                                    "input-lg" + (lastFocus ? " input-group-focus" : "")
+                                                    "input-md" + (lastFocus ? " input-group-focus" : "")
                                                   }
                                                 >
                                                   <InputGroupAddon addonType="prepend">
@@ -398,7 +386,7 @@ function Index(props) {
                                                 {/* <InputGroup> */}
 
                                             
-                                                <InputGroup className={"input-lg"}>
+                                                <InputGroup className={"input-md"}>
               
                                                   <input type="file" name="place_pic" label="Choose Picture of the Place...!"  data-id={item.id} className={"form-control"} onChange={handlePlaceImageChange}/> 
                                                   
@@ -422,10 +410,6 @@ function Index(props) {
                               :
                               <br/>
                             }
-
-
-                            
-
                  
                             <div className="send-button">
                               <Button id='popover1' block className="btn-round" color="info" size="lg">Submit</Button>
@@ -440,6 +424,7 @@ function Index(props) {
                   <Button color="secondary" onClick={toggle}>Cancel</Button>
               </ModalFooter> */}
             </Modal>
+            
 
       </div>
     </>

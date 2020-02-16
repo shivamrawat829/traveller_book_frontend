@@ -2,13 +2,17 @@
 import React from "react";
 
 // reactstrap components
-import { Container } from "reactstrap";
+import { Container, Alert } from "reactstrap";
+
 // core components
 
-function IndexHeader() {
+function IndexHeader(props) {
   let pageHeader = React.createRef();
+  const [alert1, setAlert1] = React.useState(true);
+  const [alert2, setAlert2] = React.useState(true);
 
   React.useEffect(() => {
+    console.log("is uploading inbdexxxxxxxxxxxxxx",props.is_uploading)
     if (window.innerWidth > 991) {
       const updateScroll = () => {
         let windowScrollTop = window.pageYOffset / 3;
@@ -33,6 +37,48 @@ function IndexHeader() {
           ref={pageHeader}
         ></div>
         <Container>
+
+        <div className="section section-notifications">
+
+        {props.is_uploading ? 
+      <Alert color="info" isOpen={alert2}>
+      <Container>
+        <div className="alert-icon">
+          <i className="now-ui-icons travel_info"></i>
+        </div>
+      We are Uploading Your Post!!! Meanwhile you can sit Relax...
+        <button
+          type="button"
+          className="close"
+          onClick={() => setAlert2(false)}
+        >
+          <span aria-hidden="true">
+            <i className="now-ui-icons ui-1_simple-remove"></i>
+          </span>
+        </button>
+      </Container>
+    </Alert>
+    :
+    <Alert color="success" isOpen={alert1}>
+          <Container>
+            <div className="alert-icon">
+              <i className="now-ui-icons ui-2_like"></i>
+            </div>
+            Your Post is Uploaded Successfully...
+            <button
+              type="button"
+              className="close"
+              onClick={() => setAlert1(false)}
+            >
+              <span aria-hidden="true">
+                <i className="now-ui-icons ui-1_simple-remove"></i>
+              </span>
+            </button>
+          </Container>
+        </Alert>
+
+      }
+        </div>
           <div className="content-center brand">
             <img
               alt="..."

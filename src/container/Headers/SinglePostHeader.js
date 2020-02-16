@@ -15,7 +15,7 @@ function SinglePostHeader(props) {
 
   React.useEffect(() => {
 
-    console.log("this time", props)
+    // console.log("this time", props)
    
 
     if (window.innerWidth > 991) {
