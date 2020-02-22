@@ -194,6 +194,7 @@ function LoginPage(props) {
                     <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="primary" />
                        : 
                        <>
+                      <Link>Forgot Password or Username?</Link>
                       <Button block className="btn-round" color="info" size="md">Login</Button> 
                       <Button block className="btn-round btn-white" color="default" to="/signup" outline size="md" tag={Link}>
                         Don't Have an Account? Create one now...

@@ -186,7 +186,7 @@ function Index(props) {
   }
 
   React.useEffect(() => {
-
+    // console.log("propssssssssssssssssssssssindexxxxxxxxxxxxxxxxxx", props)
     
     document.body.classList.add("index-page");
     document.body.classList.add("sidebar-collapse");

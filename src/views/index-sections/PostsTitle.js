@@ -15,7 +15,12 @@ import {
   Nav,
   FormGroup,
   Label,
-  Input,
+  Input, 
+  Card,
+  CardImg,
+  CardBody,
+  CardTitle,
+  CardText,Button
 } from "reactstrap";
 import {
   NavLink as NewNav
@@ -188,7 +193,28 @@ class PostsTitle extends React.Component {
                               key = {post.id}>
                           </img>
                         
-                      </NewNav>
+                
+
+{/* 
+                      <Card style={{ width: "20rem" }}>
+                    <CardImg alt="..." src={post.image} top></CardImg>
+                    <CardBody>
+                      <CardTitle tag="h4">{post.title}</CardTitle>
+                      <CardText>
+                        {post.description}
+                      </CardText>
+                      <Button
+                        color="primary"
+                        href="#pablo"
+                        onClick={e => e.preventDefault()}
+                      >
+                        Go somewhere
+                      </Button>
+                    </CardBody>
+                  </Card> */}
+                        </NewNav>
+
+
                       </Col>)
                   }
                  
