@@ -155,15 +155,15 @@ class PostsTitle extends React.Component {
                    {/* md={{ size: 6, offset: 4 }} */}
                   <Col sm="12" className="text-center" >
                 
-                        <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="primary" />
-                        <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="secondary" />
-                        <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="success" />
-                        <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="danger" />
-                        <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="warning" />
+                        {/* <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="primary" /> */}
+                        {/* <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="secondary" /> */}
+                        {/* <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="success" /> */}
+                        {/* <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="danger" /> */}
+                        {/* <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="warning" /> */}
                         <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="info" />
                         {/* <Spinner type="grow" color="light" /> */}
-                        <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="dark" />
-                        <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="primary" />
+                        {/* <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="dark" /> */}
+                        {/* <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="primary" /> */}
                   </Col>
                         </Row>:
                          <InfiniteScroll
@@ -190,13 +190,14 @@ class PostsTitle extends React.Component {
                               alt="..."
                               className="img-raised"
                               src={post.image}    
-                              key = {post.id}>
+                              // key = {post.id}
+                              >
                           </img>
                         
                 
 
-{/* 
-                      <Card style={{ width: "20rem" }}>
+                    {/* 
+                    <Card style={{ width: "20rem" }}>
                     <CardImg alt="..." src={post.image} top></CardImg>
                     <CardBody>
                       <CardTitle tag="h4">{post.title}</CardTitle>
