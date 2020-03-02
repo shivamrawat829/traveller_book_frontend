@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 // reactstrap components
+import Search from "./search_input.js";
 import {
   Button,
   Collapse,
@@ -57,6 +58,8 @@ function IndexNavbar(props) {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
 
+  
+
 
   const [url, setUrl] = useState(
     'http://127.0.0.1:8000/info/user',
@@ -65,7 +68,7 @@ function IndexNavbar(props) {
   
 
   React.useEffect(() => {
-    console.log("prpsssssss in navbar", props)
+    console.log("prpsssssss in navbar", Search.state)
     const updateNavbarColor = () => {
       if (
         document.documentElement.scrollTop > 399 ||
@@ -280,7 +283,8 @@ function IndexNavbar(props) {
 
             <Form className="form-inline ml-auto" data-background-color="">
               <FormGroup className="has-white">
-                <Input placeholder="Search" type="text"></Input>
+                 {/* <Input placeholder="Search" type="text"></Input> */}
+                 <Search className="form-control"/>
               </FormGroup>
             </Form>
 
