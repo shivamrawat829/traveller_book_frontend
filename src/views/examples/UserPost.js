@@ -19,6 +19,7 @@ import DefaultFooter from "../../container/Footers/DefaultFooter.js";
 function UserPosts(props) {
   const[post, setUserPost] = useState([]);
   const[places, setUserPlaces] = useState([]);
+  const[user_image, setUserImage] = useState("");
 
   useEffect(()  => {
     console.log("user postsss",props)
@@ -26,7 +27,12 @@ function UserPosts(props) {
     const the_num  = parts[1];
     const fetchUsers = async () => {
       const res = await axios.get(`http://127.0.1:8000/api/posts/${the_num}`);
-      console.log("userssssssssssssss...", res.data)
+      console.log("user postsssssssssss...", res.data)
+
+      const user_info = await axios.get(`http://127.0.0.1:8000/info/user/${res.data.author}`);
+      setUserImage(user_info.data.user_profile.image)
+      console.log("setuserrrrrrrrrrrrrrr112344444444444444444441...", user_info.data)
+      
       setUserPost(res.data)
       setUserPlaces(res.data.places)
     };
@@ -51,7 +57,7 @@ function UserPosts(props) {
     <>
       <SinglePostNavbar />
       <div className="wrapper">
-        <SinglePostHeader {...post}/>
+        <SinglePostHeader {...post} profile_pic={user_image}/>
         <div className="section">
           <Container>
            

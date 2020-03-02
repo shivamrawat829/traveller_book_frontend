@@ -109,7 +109,7 @@ function ProfilePage(props) {
 
   return (
     <>
-      {/* <ExamplesNavbar /> */}
+      <ExamplesNavbar />
       <div className="wrapper">
         <ProfilePageHeader {...user} my_profile={my_profile} about_user ={about_user}
         cover_pic={cover_pic} user_image={user_image} />

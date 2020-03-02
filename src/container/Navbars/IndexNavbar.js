@@ -59,7 +59,7 @@ function IndexNavbar(props) {
 
 
   const [url, setUrl] = useState(
-    'http://127.0.1:8000/api/get_user_data/',
+    'http://127.0.0.1:8000/info/user',
   );
 
   

@@ -1,7 +1,9 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 // import {
 //   NavLink
 // } from "reactstrap";
+
+import axios from 'axios';
 
 import { Link, NavLink } from "react-router-dom";
 
@@ -12,11 +14,9 @@ import { Container } from "reactstrap";
 
 function SinglePostHeader(props) {
   let pageHeader = React.createRef();
-
   React.useEffect(() => {
 
-    // console.log("this time", props)
-   
+    console.log("this time", props)
 
     if (window.innerWidth > 991) {
       const updateScroll = () => {
@@ -50,7 +50,7 @@ function SinglePostHeader(props) {
           <NavLink tag={Link} to={{pathname:"/myprofile",
                                       search:`?id=${props.author}`}} >
           <div className="photo-container">
-          <img alt="..." src={props.image}></img>
+          <img alt="..." src={props.profile_pic}></img>
           </div>
                 </NavLink>
             

@@ -16,11 +16,6 @@ import {
   FormGroup,
   Label,
   Input, 
-  Card,
-  CardImg,
-  CardBody,
-  CardTitle,
-  CardText,Button
 } from "reactstrap";
 import {
   NavLink as NewNav
@@ -49,7 +44,8 @@ class PostsTitle extends React.Component {
         this.setState({ isLoading: true });
         
         const parts = this.props.location.search.split('=', 2);
-        const the_num  = parts[1];
+        // const the_num  = parts[1];
+        const the_num  = 1
         setTimeout(() => {
           // axios.get(`http://127.0.1:8000/api/posts1?count=${the_num}&start=${this.state.start}`).then(
             axios.get(`http://127.0.1:8000/api/posts/${this.state.start}/${the_num}`).then(
@@ -94,11 +90,11 @@ class PostsTitle extends React.Component {
       <div className="wrapper">
         <div className="section">
           <Container>
-            <h3 className="title">See Most Popular Posts...</h3>
+            {/* <h3 className="title">See Most Popular Posts...</h3>
             <h5 className="description">
             You will Love it
-            </h5>
-            <Row>
+            </h5> */}
+            {/* <Row>
             <Col  md={{ size: 4, offset: 4 }} >
               <Navbar className="bg-info" expand="lg" >
                 <Container >
@@ -147,7 +143,7 @@ class PostsTitle extends React.Component {
               </Navbar>
             </Col>
 
-            </Row>
+            </Row> */}
             <Row>
                 <Col className="ml-auto mr-auto" md="12">
                 {this.state.isLoading?

@@ -14,6 +14,8 @@ import * as actions from '../../store/actions/auth';
 import ExamplesNavbar from "../../container/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "../../container/Footers/TransparentFooter.js";
 
+import axios from 'axios';
+
 const mapStateToProps = (state) => {
   
   return {
@@ -37,6 +39,8 @@ function LoginPage(props) {
   const [password, setPassword] = React.useState("");
   const[error, setError] = React.useState('')
   const [lastFocus, setLastFocus] = React.useState(false);
+  const [sent_email, setSentEmail] = React.useState("");
+  const [sent_email_bool, setSentEmailBool] = React.useState(false);
   // const[setError] = React.useState('')
   const settingError = (event) =>{
     setError("Password or Email cannot be Empty...");
@@ -83,6 +87,25 @@ function LoginPage(props) {
       // props.history.push('index');
       e.preventDefault();
     }
+  }
+
+  const forgot_password_func = () =>{
+
+    console.log("forgotpassclicked");
+    setSentEmailBool(true)
+    setSentEmail("We Have Sent an Email to your email id.Please follow the link to change your password..")
+    axios.post('http://127.0.0.1:8000/api/password_reset/', {
+      email: email
+  })
+  .then(res => {
+      console.log("resssssssss", res)
+      props.history.push('/');
+  })
+  .catch(err => {
+      console.log(err)
+  })
+
+
   }
 
   return (
@@ -194,7 +217,9 @@ function LoginPage(props) {
                     <Spinner style={{ width: '2rem', height: '2rem' }} type="grow" color="primary" />
                        : 
                        <>
-                      <Link>Forgot Password or Username?</Link>
+
+                    {sent_email_bool ?<h6>{sent_email}</h6>:<Link onClick={forgot_password_func}>Forgot Password or Username?</Link>}
+                      
                       <Button block className="btn-round" color="info" size="md">Login</Button> 
                       <Button block className="btn-round btn-white" color="default" to="/signup" outline size="md" tag={Link}>
                         Don't Have an Account? Create one now...
@@ -208,7 +233,7 @@ function LoginPage(props) {
             </Col>
           </Container>
         </div>
-        <TransparentFooter />
+        {/* <TransparentFooter /> */}
       </div>
     </>
   );

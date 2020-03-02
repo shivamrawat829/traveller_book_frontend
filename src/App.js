@@ -17,6 +17,7 @@ import ProfilePage from './views/examples/ProfilePage';
 import Index from "./views/Index.js";
 import NucleoIcons from "./views/NucleoIcons.js";
 import LoginPage from "./views/examples/LoginPage.js";
+import ResetPassword from './views/examples/ResetPassowrd';
 import LandingPage from "./views/examples/LandingPage.js";
 import AddPosts from './views/examples/AddPosts';
 
@@ -59,6 +60,7 @@ render(){
           render={props => <LandingPage {...props} />}
         />
         <Route path="/login" render={props => <LoginPage {...props} />} />
+        <Route path="/api/password_reset" render={props => <ResetPassword {...props}/>} />
         <Route path="/signup" render={props => <SignUp {...props} />} />
         <Route path="/add-posts" render={props => <AddPosts {...props} />} />
         <Route path="/demo" render={props => <Demo {...props} />} />

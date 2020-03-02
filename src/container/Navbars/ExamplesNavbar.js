@@ -10,8 +10,28 @@ import {
   Container,
   UncontrolledTooltip
 } from "reactstrap";
+import {withRouter, NavLink as NV} from "react-router-dom";
 
-function ExamplesNavbar() {
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/auth';
+
+const mapStateToProps = (state) => {
+  console.log("is authenticated", state.token)
+  return {
+      loading: state.loading,
+  error: state.error,
+  isAuthenticated: state.token !== null
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+  onAuth: (username, password) => dispatch(actions.authLogin(username, password)) ,
+  logout: () => dispatch(actions.logout()) 
+  }
+}
+
+function ExamplesNavbar(props) {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   React.useEffect(() => {
@@ -118,12 +138,26 @@ function ExamplesNavbar() {
                   Home Page
                 </NavLink>
               </NavItem>
+
+              {
+                props.isAuthenticated ?
+            
+              <NavItem>
+                    <NavLink onClick={props.logout} tag={Link}  to='/login'>
+                      <i className="now-ui-icons media-1_button-power"></i>
+                      <p>Logout</p>
+                    </NavLink>
+                  </NavItem>
+                  :
+                  <></>
+              }
+
               {/* <NavItem>
                 <NavLink href="https://github.com/creativetimofficial/now-ui-kit-react/issues?ref=creativetim">
                   Have an issue?
                 </NavLink>
               </NavItem> */}
-              <NavItem>
+              {/* <NavItem>
                 <NavLink
                   href="https://twitter.com/shivamrawat829"
                   target="_blank"
@@ -161,7 +195,7 @@ function ExamplesNavbar() {
                 <UncontrolledTooltip target="#instagram-tooltip">
                   Follow us on Instagram
                 </UncontrolledTooltip>
-              </NavItem>
+              </NavItem> */}
             </Nav>
           </Collapse>
         </Container>
@@ -169,5 +203,4 @@ function ExamplesNavbar() {
     </>
   );
 }
-
-export default ExamplesNavbar;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ExamplesNavbar));

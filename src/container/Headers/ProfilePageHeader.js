@@ -100,11 +100,9 @@ function ProfilePageHeader(props) {
         </Button> :
         <></>}
         
-        
-
-            
         <p className="category">{props.username}</p>
-        <p className="email">{props.email}</p>
+        {props.my_profile? <p className="email">{props.email}</p> : <></>}
+        
           <div className="content">
             <div className="social-description">
               <h2>26</h2>
