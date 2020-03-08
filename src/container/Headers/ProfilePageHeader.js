@@ -34,14 +34,32 @@ function ProfilePageHeader(props) {
   const submitHandler = e => {
    console.log("submit handler chalaaaaa")
       let url = `http://127.0.0.1:8000/info/user/${localStorage.user_id}/`
+      console.log("props waleeeeeeeeeeeeeeee", props)
       console.log("eeeeeeeeeeeeeeeeeeeeeeee",email, user_name, first_name, description)
       let form_data = new FormData();
       // console.log('placeeeeeeeeeee ',place_is, fileInput)
       // form_data.append('image', fileInput.current.files[0], fileInput.current.files[0].name);
       // form_data.append('email', email);
+      if (user_name){
+        form_data.append('username', user_name);
+      }
+      else{
+        form_data.append('username', props.username);
+      }
       form_data.append('first_name', first_name);
-      // form_data.append('username', user_name);
-      form_data.append('about_me', description);
+      
+      if (description)
+      {
+        form_data.append('user_profile.about_me', description);
+      }
+      else{
+        form_data.append('user_profile.about_me', props.about_user);
+      }
+      
+      if (email){
+        form_data.append('email', email);
+      }
+      
     
       // axios.put(url, {
       //   'first_name':first_name
@@ -67,8 +85,13 @@ function ProfilePageHeader(props) {
     if (window.innerWidth > 1000) {
       const updateScroll = () => {
         let windowScrollTop = window.pageYOffset / 3;
-        pageHeader.current.style.transform =
+        console.log("page heaaderrrrrrrrr", pageHeader)
+        if (pageHeader.current !== null)
+        {
+          pageHeader.current.style.transform =
           "translate3d(0," + windowScrollTop + "px,0)";
+        }
+        
       };
       window.addEventListener("scroll", updateScroll);
       return function cleanup() {

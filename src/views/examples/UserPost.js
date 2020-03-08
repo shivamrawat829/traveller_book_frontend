@@ -6,6 +6,9 @@ import {
   Container,
   Row,
   Col,
+  FormGroup,
+  Button,
+  Input
 } from "reactstrap";
 
 
@@ -20,6 +23,44 @@ function UserPosts(props) {
   const[post, setUserPost] = useState([]);
   const[places, setUserPlaces] = useState([]);
   const[user_image, setUserImage] = useState("");
+  const[comment, setComment] = useState("");
+  const[comments, setallComments] = useState([])
+
+
+   const submitComment = e => {
+    axios.post('http://127.0.0.1:8000/api/comments/create/', {
+      comment: comment,
+      comment_by:localStorage.user_id,
+      post: post.id
+  })
+  .then(res => {
+      console.log("delkioooooooooooooooooo", res)
+   
+  })
+  .catch(err => {
+      console.log(err)
+  })
+
+
+    console.log("chalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+  }
+
+  React.useEffect(() => {
+    console.log("prpsssssss 0000000000 navbar", props)
+    const fetchData = async () => {
+      try {
+        console.log("prpsssssss 1111111in navbar", props)
+        const result = await axios('http://127.0.0.1:8000/api/comments');
+        console.log("result haiiiiiiiiiiiiiiiiiiiii",  result)
+       setallComments(result.data)
+      } catch (error) {
+      }
+    };
+    fetchData();
+  }, [submitComment]);
+
+  
+
 
   useEffect(()  => {
     console.log("user postsss",props)
@@ -112,70 +153,26 @@ function UserPosts(props) {
 
                   
                   </Col>
-               
-{/*               
-                  <Col className="ml-auto mr-auto" md="10">
-                    <Row className="collections">
-                      <Col md="6">
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("../../assets/img/bg6.jpg")}
-                        ></img>
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("../../assets/img/bg11.jpg")}
-                        ></img>
-                      </Col>
-                      <Col md="6">
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("../../assets/img/bg7.jpg")}
-                        ></img>
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("../../assets/img/bg8.jpg")}
-                        ></img>
-                      </Col>
-                    </Row>
-                  </Col>
-               
-                  <Col className="ml-auto mr-auto" md="10">
-                    <Row className="collections">
-                      <Col md="6">
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("../../assets/img/bg3.jpg")}
-                        ></img>
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("../../assets/img/bg8.jpg")}
-                        ></img>
-                      </Col>
-                      <Col md="6">
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("../../assets/img/bg7.jpg")}
-                        ></img>
-                        <img
-                          alt="..."
-                          className="img-raised"
-                          src={require("../../assets/img/bg6.jpg")}
-                        ></img>
-                      </Col>
-                    </Row>
-                  </Col> */}
               
             </Row>
+            {
+                    comments.map(comment_is => 
+                    <h6 key={comment_is.id}>{comment_is.comment}</h6>
+                    )}
+
+            <FormGroup>
+                {/* <Label for="exampleText">Text Area</Label> */}
+                <Input type="textarea" name="text"
+                value={comment}
+                onChange={e => setComment(e.target.value)}
+                 id="exampleText" placeholder='Post a Comment...'/>
+              </FormGroup>
+              <Button onClick={() => submitComment()} className="btn-round" color="info" size="md">
+                Post
+              </Button>
           </Container>
         </div>
-        <DefaultFooter />
+        {/* <DefaultFooter /> */}
       </div>
     </>
   );

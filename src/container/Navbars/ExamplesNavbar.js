@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/auth';
 
 const mapStateToProps = (state) => {
-  console.log("is authenticated", state.token)
+  // console.log("is authenticated", state.token)
   return {
       loading: state.loading,
   error: state.error,
