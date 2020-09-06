@@ -16,18 +16,20 @@ function SinglePostHeader(props) {
   let pageHeader = React.createRef();
   React.useEffect(() => {
 
-    console.log("this time", props)
+    console.log("this pageHeaderpageHeaderpageHeaderpageHeader", pageHeader)
 
     if (window.innerWidth > 991) {
-      const updateScroll = () => {
-        let windowScrollTop = window.pageYOffset / 3;
-        pageHeader.current.style.transform =
-          "translate3d(0," + windowScrollTop + "px,0)";
-      };
-      window.addEventListener("scroll", updateScroll);
-      return function cleanup() {
-        window.removeEventListener("scroll", updateScroll);
-      };
+      // if (pageHeader.current !== null){
+      //   const updateScroll = () => {
+      //     let windowScrollTop = window.pageYOffset / 3;
+      //     pageHeader.current.style.transform =
+      //       "translate3d(0," + windowScrollTop + "px,0)";
+      //   };
+      //   window.addEventListener("scroll", updateScroll);
+      //   return function cleanup() {
+      //     window.removeEventListener("scroll", updateScroll);
+      //   };
+      // }
     }
   });
   return (

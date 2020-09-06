@@ -22,7 +22,7 @@ import * as actions from '../store/actions/auth';
 import { Badge, Button, Row, Col,ModalHeader,
    ModalBody,Label,
      UncontrolledTooltip, Modal, FormGroup, InputGroupText, Input, InputGroup
-      , InputGroupAddon, CustomInput, Spinner} from "reactstrap";
+      , InputGroupAddon, CustomInput, Spinner, FormFeedback} from "reactstrap";
 
 
      const mapStateToProps = (state) => {
@@ -99,6 +99,9 @@ function Index(props) {
 
   const[error, setError] = React.useState('')
   const[journey_error, setJourneyError] = React.useState('')
+  const[invalid_place, setInvalidPlace] = React.useState('')
+  const[invalid_title, setInvalidTitle] = React.useState('')
+  const[invalid_description, setInvalidDescription] = React.useState('')
 
   const[is_uploading, setIsUploading]=React.useState(false) 
 
@@ -106,10 +109,10 @@ function Index(props) {
   const settingTitleError = (event) =>{
     // console.log("error", event)
     setError("Title Must not be Empty...");
+    setInvalidTitle("Title Must not be Empty");
   };
 
   const {
-    buttonLabel,
     className
   } = props;
  
@@ -120,13 +123,25 @@ function Index(props) {
   const submitHandler = e => {
     if (title.length === 0)
     {
+      settingTitleError(e)
+      setInvalidTitle("Title Must not be Empty");
 
-      settingTitleError();
+    }
+    else if (place.length === 0)
+    {
+
+      setInvalidPlace("Place Must not be Empty");
+
+    }
+    else if (description.length === 0)
+    {
+
+      setInvalidDescription("Description Must not be Empty");
 
     }
 
     else{
-      let url = 'http://127.0.0.1:8000/api/posts/create/';
+      let url = 'http://192.168.100.6:8000/api/posts/create/';
       let form_data = new FormData();
       setIsUploading(true)
       console.log("is uploading111111111111111111111", is_uploading);
@@ -151,7 +166,7 @@ function Index(props) {
             .then(res => {
               console.log("SUCCESS", res);
                             if (res && place_is){
-                              let url2 = 'http://127.0.0.1:8000/api/places/create/';
+                              let url2 = 'http://192.168.100.6:8000/api/places/create/';
                               for (var i = 0; i<place_is.length;i++){
                                 let form_data2 = new FormData();
                                 // console.log('placeeeeeeeeeee ',fileInput)
@@ -183,6 +198,7 @@ function Index(props) {
             })
             .catch(err => console.log(err))
     }
+    e.preventDefault();
   }
 
   React.useEffect(() => {
@@ -249,22 +265,24 @@ function Index(props) {
 
                       <Row>
                         <Col className="text-center ml-auto mr-auto" md="10" lg="10">
+
                         <InputGroup
                           className={
                             "input-md" + (firstFocus ? " input-group-focus" : "")
                           }
                         >
-                          <InputGroupAddon addonType="prepend">
+                          <InputGroupAddon  addonType="prepend">
                             <InputGroupText>
                               <i className="now-ui-icons location_pin"></i>
                             </InputGroupText>
                           </InputGroupAddon>
-                          <Input 
+                          <Input
                           placeholder="Title For the Post..." type="text" onFocus={() => setFirstFocus(true)}
                             onBlur={() => setFirstFocus(false)} value={title} onChange={e => setTitle(e.target.value)}
                           >
                           </Input>
-                        
+                        {/* <FormFeedback>danger{invalid_title}</FormFeedback> */}
+                      
                           
                         </InputGroup>
                         <h6 style={{color:'red',}}>{error}</h6>
@@ -294,6 +312,7 @@ function Index(props) {
                               onChange={e => setPlace(e.target.value)}
                             >
                             </Input>
+                            <FormFeedback>{invalid_place}</FormFeedback>
                           </InputGroup>
                           
 
@@ -312,6 +331,7 @@ function Index(props) {
                             <Input cols="80" name="description" placeholder="Description..." rows="4" type="textarea"
                               value={description} onChange={e => setDescription(e.target.value)}
                             ></Input>
+                            <FormFeedback>{invalid_description}</FormFeedback>
                           </div>       
                             {/* <FormGroup className='input-md'>
                               <Datetime

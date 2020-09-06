@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink as N, withRouter } from "react-router-dom";
 // reactstrap components
 import {
   Collapse,
@@ -8,11 +8,27 @@ import {
   NavLink,
   Nav,
   Container,
+  Modal,
+  Button
 } from "reactstrap";
+import axios from 'axios';
 
-function SinglePageNavbar() {
+function SinglePageNavbar(props) {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
+  const [modalLive, setModalLive] = React.useState(false);
+
+  const deletePost = e => {
+    console.log("chalaaaaaaaaaaaaaaaaaaaaaa", props)
+    axios.delete(`http://192.168.100.6:8000/api/posts/${props.post_id}/delete/`, {
+  })
+  .then(res => {
+      props.history.push('/');
+  })
+  .catch(err => {
+      console.log(err)
+  })
+  }
   React.useEffect(() => {
     const updateNavbarColor = () => {
       if (
@@ -69,14 +85,63 @@ function SinglePageNavbar() {
           >
             <Nav navbar>
               <NavItem>
-                <NavLink to="/" tag={Link}>
+                <N to="/" tag={Link}>
                   Home Page
-                </NavLink>
-              </NavItem>     
+                </N>
+              </NavItem>  
+              <NavItem>
+              <Button
+              className='nav-link'
+                color="danger"
+                type="button"
+                onClick={() => setModalLive(true)}
+              >
+                Delete Post
+              </Button>
+              </NavItem>
+
             </Nav>
           </Collapse>
         </Container>
       </Navbar>
+
+      <Modal toggle={() => setModalLive(false)} isOpen={modalLive}>
+        <div className="modal-header">
+          <h5 className="modal-title" id="exampleModalLiveLabel">
+            Delete Post
+          </h5>
+          <button
+            aria-label="Close"
+            className="close"
+            type="button"
+            onClick={() => setModalLive(false)}
+          >
+            <span aria-hidden={true}>×</span>
+          </button>
+        </div>
+        <div className="modal-body">
+          <p>Are you sure you want to delete this post...</p>
+        </div>
+        <div className="modal-footer">
+          <Button
+            color="secondary"
+            type="button"
+            onClick={() => setModalLive(false)}
+          >
+            Close
+          </Button>
+          <Button
+            color="danger"
+            type="button"
+            // onClick={() => setModalLive(false)}
+            onClick={() => deletePost()}
+          >
+           Delete
+          </Button>
+        </div>
+      </Modal>
+
+
     </>
   );
 }

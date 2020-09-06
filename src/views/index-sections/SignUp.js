@@ -22,6 +22,7 @@ import {
 // authentication related
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/auth';
+import axios from 'axios';
 
 // core components
 const mapStateToProps = (state) => {
@@ -45,11 +46,26 @@ function SignUp(props) {
   const [password, setPassword] = React.useState("");
   const [username, setUsername] = React.useState("");
   const [confirm_password, setConfirmPassword] = React.useState("");
-
   const [do_not_match_error, setPasswordDoNotMatch] = React.useState(false);
   const [min_len_error, setMinimumLengthError] = React.useState(false);
   const[loading, setLoading] = React.useState(false)
 
+  const googleLogin = e => {
+
+    console.log("fgoogle login")
+    axios.get('http://192.168.100.6:8000/accounts/google/login/', {
+      // comment: comment,
+      // comment_by:localStorage.user_id,
+      // post: post.id
+  })
+  .then(res => {
+      console.log("delkioooooooooooooooooo", res)
+   
+  })
+  .catch(err => {
+      console.log(err)
+  })
+  }
 
   const googlesignin = async (e) => {
      
@@ -90,6 +106,8 @@ function SignUp(props) {
   }
   
 
+
+  
   return (
     <>
       <div
@@ -134,7 +152,8 @@ function SignUp(props) {
                       href="#"
                       size="lg"
                       // onClick={() => demo.googleSDK()}
-                      ref={demo.googleLoginBtn}
+                      // ref={demo.googleLoginBtn}
+                      onClick={() => googleLogin()}
                     >
                       <i className="fab fa-google-plus"></i>
                     </Button>

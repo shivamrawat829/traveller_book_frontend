@@ -41,10 +41,20 @@ export const checkAuthTimeout = expirationTime => {
 export const authLogin = (username, password) => {
     return dispatch => {
         dispatch(authStart());
-        axios.post('http://127.0.0.1:8000/info/api-token-auth/', {
-            username: username,
-            password: password
-        })
+
+        let form_data = new FormData();
+        form_data.append('username', username);
+        form_data.append('password', password);
+      
+        axios.post('http://192.168.100.6:8000/user/login/?type=normal', form_data, {
+            headers: {
+            'content-type': 'multipart/form-data'
+            }
+          })
+        // axios.post('http://192.168.100.6:8000/user/login/?type=normal/', {
+        //     username: username,
+        //     password: password
+        // })
         .then(res => {
             console.log("id isssssssssssssssssss", res)
             const token = res.data.key;
@@ -58,6 +68,7 @@ export const authLogin = (username, password) => {
         })
         .catch(err => {
             dispatch(authFail(err))
+            return true
         })
     }
 }
@@ -65,7 +76,7 @@ export const authLogin = (username, password) => {
 export const authSignup = (username, email, password1, password2) => {
     return dispatch => {
         dispatch(authStart());
-        axios.post('http://127.0.0.1:8000/rest-auth/registration/', {
+        axios.post('http://192.168.100.6:8000/rest-auth/registration/', {
             username: username,
             email: email,
             password1: password1,

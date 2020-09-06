@@ -1,5 +1,6 @@
 import React, {useEffect,useState} from "react";
 import axios from 'axios';
+import { Link, NavLink, withRouter } from "react-router-dom";
 
 // reactstrap components
 import {
@@ -8,9 +9,17 @@ import {
   Col,
   FormGroup,
   Button,
-  Input
+  Input, 
+  Popover,
+  PopoverHeader, 
+  PopoverBody,
+  Alert,
+  Card,
+  CardBody,
+  Modal 
 } from "reactstrap";
-
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/auth';
 
 
 // core components
@@ -19,7 +28,24 @@ import SinglePostNavbar from "../../container/Navbars/SinglePostNavbar";
 import SinglePostHeader from "../../container/Headers/SinglePostHeader";
 import DefaultFooter from "../../container/Footers/DefaultFooter.js";
 
+const mapStateToProps = (state) => {
+  return {
+  loading: state.loading,
+  error: state.error,
+  isAuthenticated: state.token !== null
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+  onAuth: (username, password) => dispatch(actions.authLogin(username, password)) ,
+  logout: () => dispatch(actions.logout()) 
+  }
+}
+
+
 function UserPosts(props) {
+
   const[post, setUserPost] = useState([]);
   const[places, setUserPlaces] = useState([]);
   const[user_image, setUserImage] = useState("");
@@ -27,37 +53,33 @@ function UserPosts(props) {
   const[comments, setallComments] = useState([])
 
 
+ 
+
    const submitComment = e => {
-    axios.post('http://127.0.0.1:8000/api/comments/create/', {
+    axios.post('http://192.168.100.6:8000/api/comments/create/', {
       comment: comment,
       comment_by:localStorage.user_id,
       post: post.id
   })
   .then(res => {
-      console.log("delkioooooooooooooooooo", res)
    
   })
   .catch(err => {
       console.log(err)
   })
-
-
-    console.log("chalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
   }
 
   React.useEffect(() => {
-    console.log("prpsssssss 0000000000 navbar", props)
     const fetchData = async () => {
       try {
-        console.log("prpsssssss 1111111in navbar", props)
-        const result = await axios('http://127.0.0.1:8000/api/comments');
+        const result = await axios(`http://192.168.100.6:8000/api/comments1/${post.id}`);
         console.log("result haiiiiiiiiiiiiiiiiiiiii",  result)
        setallComments(result.data)
       } catch (error) {
       }
     };
     fetchData();
-  }, [submitComment]);
+  }, []);
 
   
 
@@ -67,12 +89,14 @@ function UserPosts(props) {
     const parts = props.location.search.split('=', 2);
     const the_num  = parts[1];
     const fetchUsers = async () => {
-      const res = await axios.get(`http://127.0.1:8000/api/posts/${the_num}`);
+      const res = await axios.get(`http://192.168.100.6:8000/api/posts/${the_num}`);
       console.log("user postsssssssssss...", res.data)
 
-      const user_info = await axios.get(`http://127.0.0.1:8000/info/user/${res.data.author}`);
-      setUserImage(user_info.data.user_profile.image)
-      console.log("setuserrrrrrrrrrrrrrr112344444444444444444441...", user_info.data)
+      const user_info = await axios.get(`http://192.168.100.6:8000/retrieve-profile/${res.data.author}/`);
+      console.log("setuserrrrrrrrrrrrrrr112344444444444444444441...", user_info,res.data.author )
+
+      setUserImage(user_info.data.detail.profile.profile_pic)
+      
       
       setUserPost(res.data)
       setUserPlaces(res.data.places)
@@ -96,13 +120,15 @@ function UserPosts(props) {
 
   return (
     <>
-      <SinglePostNavbar />
+      <SinglePostNavbar post_id ={post.id}/>
       <div className="wrapper">
         <SinglePostHeader {...post} profile_pic={user_image}/>
         <div className="section">
-          <Container>
-           
-           
+          <Container> 
+
+          
+      
+
             <Row>
               <Col className="ml-auto mr-auto" md="6">
                 <h4 className="title text-center">{post.title}</h4> 
@@ -155,11 +181,37 @@ function UserPosts(props) {
                   </Col>
               
             </Row>
-            {
-                    comments.map(comment_is => 
-                    <h6 key={comment_is.id}>{comment_is.comment}</h6>
-                    )}
+            {comments.length>0?comments.map(comment_is => 
+                    <>
+                  <Card>
+                  <CardBody>
+                    <blockquote className="blockquote blockquote-info mb-0">
+                      <p>
+                        {comment_is.comment}
+                      </p>
+                      <footer className="blockquote-footer">
+                        {/* Someone famous in <cite title="Source Title">Source Title</cite> */}
+                        {/* {comment_is.username} */}
 
+                        <NavLink tag={Link} to={{pathname:"/myprofile",
+                                      search:`?id=${comment_is.comment_by}`}} >
+                        {comment_is.username}
+                              </NavLink>
+
+
+                      </footer>
+                    </blockquote>
+                  </CardBody>
+                </Card>
+
+                    
+                </>
+
+                    ):<></>}
+           
+           {
+                props.isAuthenticated ?
+                <>
             <FormGroup>
                 {/* <Label for="exampleText">Text Area</Label> */}
                 <Input type="textarea" name="text"
@@ -167,9 +219,12 @@ function UserPosts(props) {
                 onChange={e => setComment(e.target.value)}
                  id="exampleText" placeholder='Post a Comment...'/>
               </FormGroup>
-              <Button onClick={() => submitComment()} className="btn-round" color="info" size="md">
+              <Button  onClick={() => submitComment()} className="btn-round" color="info" size="md">
                 Post
               </Button>
+              </>
+              : <></>}
+
           </Container>
         </div>
         {/* <DefaultFooter /> */}
@@ -178,4 +233,5 @@ function UserPosts(props) {
   );
 }
 
-export default UserPosts;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserPosts));
+

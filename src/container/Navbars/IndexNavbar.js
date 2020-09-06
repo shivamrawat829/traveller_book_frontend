@@ -62,7 +62,7 @@ function IndexNavbar(props) {
 
 
   const [url, setUrl] = useState(
-    'http://127.0.0.1:8000/info/user',
+    'http://192.168.100.6:8000/retrieve-profile/1/',
   );
 
   

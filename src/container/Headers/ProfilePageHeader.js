@@ -33,7 +33,7 @@ function ProfilePageHeader(props) {
 
   const submitHandler = e => {
    console.log("submit handler chalaaaaa")
-      let url = `http://127.0.0.1:8000/info/user/${localStorage.user_id}/`
+      let url = `http://192.168.100.6:8000/retrieve-profile/${localStorage.user_id}/`
       console.log("props waleeeeeeeeeeeeeeee", props)
       console.log("eeeeeeeeeeeeeeeeeeeeeeee",email, user_name, first_name, description)
       let form_data = new FormData();

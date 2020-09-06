@@ -82,6 +82,7 @@ function LoginPage(props) {
       setLoading(true)
       setTimeout(() => {
       const data =  props.onAuth(email, password);
+      console.log("errr", data)
       setLoading(false)
       }, 2000);
       // props.history.push('index');
@@ -94,7 +95,7 @@ function LoginPage(props) {
     console.log("forgotpassclicked");
     setSentEmailBool(true)
     setSentEmail("We Have Sent an Email to your email id.Please follow the link to change your password..")
-    axios.post('http://127.0.0.1:8000/api/password_reset/', {
+    axios.post('http://192.168.100.6:8000/api/password_reset/', {
       email: email
   })
   .then(res => {
@@ -104,8 +105,6 @@ function LoginPage(props) {
   .catch(err => {
       console.log(err)
   })
-
-
   }
 
   return (

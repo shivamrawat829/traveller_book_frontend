@@ -76,8 +76,8 @@ function ProfilePage(props) {
 
     const fetchUsers = async () => {
       // setLoading(true);
-      // console.log("loading ....")
-      const user_info = await axios.get(`http://127.0.0.1:8000/info/user/${user_id}`);
+      console.log("loading ....")
+      const user_info = await axios.get(`http://192.168.100.6:8000/retrieve-profile/${user_id}/`);
 
       // const user_info = await axios.get(`http://127.0.0.1:8000/info/user/${localStorage.user_id}`);
       setUser(user_info.data)

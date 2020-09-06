@@ -45,10 +45,11 @@ class PostsTitle extends React.Component {
         
         const parts = this.props.location.search.split('=', 2);
         // const the_num  = parts[1];
-        const the_num  = 1
+        const the_num  = 10
         setTimeout(() => {
           // axios.get(`http://127.0.1:8000/api/posts1?count=${the_num}&start=${this.state.start}`).then(
-            axios.get(`http://127.0.1:8000/api/posts/${this.state.start}/${the_num}`).then(
+            // axios.get(`http://192.168.100.6:8000/api/posts/${this.state.start}/${the_num}`).then(
+              axios.get(`http://192.168.100.6:8000/api/posts`).then(
             res =>{
               this.setState({ isLoading: false });
             console.log("tdataaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", res.data)
@@ -63,7 +64,8 @@ class PostsTitle extends React.Component {
       fetchImages = () => {
         // const { count, start } = this.state;
         const parts = this.props.location.search.split('=', 2);
-        const the_num  = parts[1];
+        // const the_num  = parts[1];
+        const the_num  = 10;
         this.setState({ start: this.state.start + parseInt(the_num) });
         console.log("fetch images called", this.state.start, the_num)
         axios

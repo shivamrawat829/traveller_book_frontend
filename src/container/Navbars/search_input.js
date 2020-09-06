@@ -67,7 +67,7 @@ var places = [
 
     componentDidMount() {
                     console.log('this is cmd')
-                    fetch('http://127.0.0.1:8000/api/places/', {
+                    fetch('http://192.168.100.6:8000/api/places/', {
                     method: 'GET',
                     headers: {
                                 // 'Content-Type': 'application/json',

@@ -10,6 +10,7 @@ function LandingPageHeader() {
 
   React.useEffect(() => {
     if (window.innerWidth > 991) {
+      if (pageHeader.current){
       const updateScroll = () => {
         let windowScrollTop = window.pageYOffset / 3;
         pageHeader.current.style.transform =
@@ -20,6 +21,7 @@ function LandingPageHeader() {
         window.removeEventListener("scroll", updateScroll);
       };
     }
+  }
   });
   return (
     <>
